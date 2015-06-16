@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Community
 {
-    private List<Community> neighbours;
+    private List<Connection> neighbours;
     private List<IAgent> agents;
 
 }
