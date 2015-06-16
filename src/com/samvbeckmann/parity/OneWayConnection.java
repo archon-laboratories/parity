@@ -5,7 +5,7 @@ package com.samvbeckmann.parity;
  *
  * @author Sam Beckmann
  */
-public class Connection
+public class OneWayConnection
 {
     private Community community;
     private int possibleInteractions;

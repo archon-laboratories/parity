@@ -1,5 +1,6 @@
 package com.samvbeckmann.parity;
 
+import java.util.List;
 import java.util.Random;
 
 /**
