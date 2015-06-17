@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Sam Beckmann
  */
-public class InteractionHelper
+public final class InteractionHelper
 {
     public static List<TwoWayConnection> getConnectionsFromPopulation(Population p)
     {

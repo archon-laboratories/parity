@@ -1,10 +1,10 @@
 package com.samvbeckmann.parity;
 
-import java.util.List;
 import java.util.Random;
 
 /**
- * parity, class made on 6/15/2015.
+ * A sample implementation of {@link IAgent}.
+ * Use / extend this, or make your own.
  *
  * @author Sam Beckmann
  */
@@ -18,9 +18,9 @@ public class BasicAgent implements IAgent
         this(.5);
     }
 
-    public BasicAgent(double startOpinion)
+    public BasicAgent(double startingOpinion)
     {
-        this.opinion = startOpinion;
+        this.opinion = startingOpinion;
     }
 
     public Choices interaction(States state)

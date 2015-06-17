@@ -1,7 +1,9 @@
 package com.samvbeckmann.parity;
 
 /**
- * parity, class made on 6/15/2015.
+ * Defines an agent, which makes a decision when involved in an interaction,
+ * and has an opinion.
+ * A sample implementation can be found at {@link BasicAgent}.
  *
  * @author Sam Beckmann
  */
