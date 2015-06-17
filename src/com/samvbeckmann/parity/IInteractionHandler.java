@@ -20,7 +20,7 @@ public interface IInteractionHandler
      * @return A map, where the object and key are two agents that will
      *         interact in this timestep.
      */
-    Map determineInteractions(Population p);
+    Map<IAgent, IAgent> determineInteractions(Population p);
 
     /**
      * Gives feedback to the column player based on its choice.

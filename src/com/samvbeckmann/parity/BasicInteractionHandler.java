@@ -17,7 +17,7 @@ public class BasicInteractionHandler implements IInteractionHandler
     public static final int POSITIVE_REWARD = 1;
     public static final int NEGATIVE_REWARD = -1;
 
-    public Map determineInteractions(Population p)
+    public Map<IAgent, IAgent> determineInteractions(Population p)
     {
         List<TwoWayConnection> connections = InteractionHelper.getConnectionsFromPopulation(p);
         Map<IAgent, IAgent> map = new TreeMap<>();

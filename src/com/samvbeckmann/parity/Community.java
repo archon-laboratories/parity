@@ -2,6 +2,7 @@ package com.samvbeckmann.parity;
 
 import com.samvbeckmann.parity.utilities.IndexHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -71,5 +72,25 @@ public class Community
     public int getNumberAvailable()
     {
         return availability.size();
+    }
+
+    public double getAverageOpinion()
+    {
+        double total = 0;
+        for (IAgent agent : agents)
+        {
+            total += agent.getOpinion();
+        }
+        return total / agents.size();
+    }
+
+    public List<Double> getOpinions()
+    {
+        List<Double> opinions = new ArrayList<>();
+        for (IAgent agent : agents)
+        {
+            opinions.add(agent.getOpinion());
+        }
+        return opinions;
     }
 }
