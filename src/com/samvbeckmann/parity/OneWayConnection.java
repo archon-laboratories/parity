@@ -2,6 +2,7 @@ package com.samvbeckmann.parity;
 
 /**
  * Defines a connection possible by a community
+ * Should only be used by {@link Community}
  *
  * @author Sam Beckmann
  */

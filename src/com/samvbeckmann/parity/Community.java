@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Defines a Community, which consists of agents and connections
+ * Defines a Community, which consists of {@link IAgent} and {@link OneWayConnection}
  * to other communities
  *
  * @author Sam Beckmann
@@ -19,6 +19,7 @@ public class Community
     private List<Integer> availability;
     private Random rnd = new Random();
 
+    // TODO make constructor
 
     public List<OneWayConnection> getNeighbours()
     {

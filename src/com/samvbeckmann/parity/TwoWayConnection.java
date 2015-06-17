@@ -1,7 +1,8 @@
 package com.samvbeckmann.parity;
 
 /**
- * parity, class made on 6/16/2015.
+ * Defines a connection between two communities.
+ * Should only be used by an {@link IInteractionHandler}
  *
  * @author Sam Beckmann
  */
@@ -14,7 +15,7 @@ public class TwoWayConnection
     public TwoWayConnection(Community com1, Community com2, int possibleInteractions)
     {
         this.community1 = com1;
-        this.community1 = com2;
+        this.community2 = com2;
         this.possibleInteractions = possibleInteractions;
     }
 

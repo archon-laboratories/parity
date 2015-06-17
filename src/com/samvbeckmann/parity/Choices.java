@@ -1,7 +1,7 @@
 package com.samvbeckmann.parity;
 
 /**
- * parity, class made on 6/16/2015.
+ * Enum of the choices available to an {@link IAgent} in an interaction
  *
  * @author Sam Beckmann
  */

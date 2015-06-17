@@ -24,6 +24,8 @@ public interface IAgent
 
     /**
      * Updates the agents opinion after an interaction.
+     * Positive feedback is positive reinforcement,
+     * negative feedback is negative reinforcement.
      *
      * @param feedback Determines if the agent is positively or negatively
      *                 reinforced for their choice in an interaction
