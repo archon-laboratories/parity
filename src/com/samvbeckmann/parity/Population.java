@@ -1,7 +1,5 @@
 package com.samvbeckmann.parity;
 
-import java.util.List;
-
 /**
  * parity, class made on 6/16/2015.
  *
@@ -9,5 +7,10 @@ import java.util.List;
  */
 public class Population
 {
-    public List<Community> communities;
+    public Community[] communities;
+
+    public Population(Community[] communities)
+    {
+        this.communities = communities;
+    }
 }

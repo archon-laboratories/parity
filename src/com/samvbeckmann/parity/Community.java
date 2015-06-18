@@ -9,8 +9,11 @@ import java.util.List;
  */
 public class Community
 {
+    private int xPos;
+    private int yPos;
+
     private List<OneWayConnection> neighbours;
-    private List<IAgent> agents;
+    private AbstractAgent[] agents;
 
     public List<OneWayConnection> getNeighbours()
     {
@@ -19,12 +22,42 @@ public class Community
 
     public OneWayConnection getConnectionByCommunity(Community community)
     {
-        for(OneWayConnection neighbour : neighbours)
+        for (OneWayConnection neighbour : neighbours)
         {
             if (neighbour.getCommunity().equals(community))
                 return neighbour;
         }
 
         return null;
+    }
+
+    public AbstractAgent[] getAgents()
+    {
+        return agents;
+    }
+
+    void setAgents(AbstractAgent[] agents)
+    {
+        this.agents = agents;
+    }
+
+    public int getX()
+    {
+        return xPos;
+    }
+
+    public int getY()
+    {
+        return yPos;
+    }
+
+    void setX(int xPos)
+    {
+        this.xPos = xPos;
+    }
+
+    void setY(int yPos)
+    {
+        this.yPos = yPos;
     }
 }

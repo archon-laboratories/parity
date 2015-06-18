@@ -1,17 +1,12 @@
 package com.samvbeckmann.parity;
 
-import java.util.List;
-import java.util.Random;
-
 /**
  * parity, class made on 6/15/2015.
  *
  * @author Sam Beckmann
  */
-public class BasicAgent implements IAgent
+public class BasicAgent extends AbstractAgent
 {
-    private double opinion;
-    private Random rnd = new Random();
 
     public BasicAgent()
     {
@@ -26,11 +21,6 @@ public class BasicAgent implements IAgent
     public Choices interaction(States state)
     {
         return rnd.nextDouble() > opinion ? Choices.LEFT : Choices.RIGHT;
-    }
-
-    public double getOpinion()
-    {
-        return opinion;
     }
 
     public void updateOpinion(int feedback)
