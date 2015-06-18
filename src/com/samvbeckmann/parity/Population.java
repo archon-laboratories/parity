@@ -1,7 +1,5 @@
 package com.samvbeckmann.parity;
 
-import java.util.List;
-
 /**
  * Defines a population, consisting of multiple {@link Community} objects.
  *
@@ -9,8 +7,13 @@ import java.util.List;
  */
 public class Population
 {
-    public List<Community> communities;
+    public Community[] communities;
 
+    public Population(Community[] communities)
+    {
+        this.communities = communities;
+    }
+    
     public double getAverageOpinion()
     {
         double total = 0;

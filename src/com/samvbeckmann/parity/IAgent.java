@@ -1,9 +1,7 @@
 package com.samvbeckmann.parity;
 
 /**
- * Defines an agent, which makes a decision when involved in an interaction,
- * and has an opinion.
- * A sample implementation can be found at {@link BasicAgent}.
+ * parity, class made on 6/15/2015.
  *
  * @author Sam Beckmann
  */
@@ -24,8 +22,6 @@ public interface IAgent
 
     /**
      * Updates the agents opinion after an interaction.
-     * Positive feedback is positive reinforcement,
-     * negative feedback is negative reinforcement.
      *
      * @param feedback Determines if the agent is positively or negatively
      *                 reinforced for their choice in an interaction

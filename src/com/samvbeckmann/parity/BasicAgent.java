@@ -8,10 +8,8 @@ import java.util.Random;
  *
  * @author Sam Beckmann
  */
-public class BasicAgent implements IAgent
+public class BasicAgent extends AbstractAgent
 {
-    private double opinion;
-    private Random rnd = new Random();
 
     public BasicAgent()
     {
@@ -27,12 +25,7 @@ public class BasicAgent implements IAgent
     {
         return rnd.nextDouble() > opinion ? Choices.LEFT : Choices.RIGHT;
     }
-
-    public double getOpinion()
-    {
-        return opinion;
-    }
-
+    
     public void updateOpinion(int feedback)
     {
 
