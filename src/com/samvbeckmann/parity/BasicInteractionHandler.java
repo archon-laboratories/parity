@@ -17,17 +17,17 @@ public class BasicInteractionHandler implements IInteractionHandler
     public static final int POSITIVE_REWARD = 1;
     public static final int NEGATIVE_REWARD = -1;
 
-    public Map<IAgent, IAgent> determineInteractions(Population p)
+    public Map<AbstractAgent, AbstractAgent> determineInteractions(Population p)
     {
         List<TwoWayConnection> connections = InteractionHelper.getConnectionsFromPopulation(p);
-        Map<IAgent, IAgent> map = new TreeMap<>();
+        Map<AbstractAgent, AbstractAgent> map = new TreeMap<>();
 
         for (TwoWayConnection con : connections)
         {
             for (int i = 0; i < con.getPossibleInteractions(); i++)
             {
-                IAgent agent1 = con.getCommunity1().markRandomAgentForInteraction();
-                IAgent agent2 = con.getCommunity2().markRandomAgentForInteraction();
+                AbstractAgent agent1 = con.getCommunity1().markRandomAgentForInteraction();
+                AbstractAgent agent2 = con.getCommunity2().markRandomAgentForInteraction();
                 if (agent1 != null && agent2 != null)
                 {
                     map.put(agent1, agent2);
@@ -42,8 +42,8 @@ public class BasicInteractionHandler implements IInteractionHandler
         {
             while (community.getNumberAvailable() >= 2)
             {
-                IAgent agent1 = community.markRandomAgentForInteraction();
-                IAgent agent2 = community.markRandomAgentForInteraction();
+                AbstractAgent agent1 = community.markRandomAgentForInteraction();
+                AbstractAgent agent2 = community.markRandomAgentForInteraction();
                 if (agent1 != null && agent2 != null)
                 {
                     map.put(agent1, agent2);

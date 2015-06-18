@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Defines a Community, which consists of {@link IAgent} and {@link OneWayConnection}
+ * Defines a Community, which consists of {@link AbstractAgent} and {@link OneWayConnection}
  * to other communities
  *
  * @author Sam Beckmann
@@ -72,35 +72,32 @@ public class Community
 
     public int getCommunitySize()
     {
-        return agents.size();
+        return agents.length;
     }
 
-    public IAgent markAgentForInteraction(IAgent agent)
+    public AbstractAgent markAgentForInteraction(int index)
     {
-        int index = agents.indexOf(agent);
         if (availability.contains(index))
         {
+            //noinspection SuspiciousMethodCalls
             availability.remove((Object) index);
-            return agent;
+            return agents[index];
         } else return null;
-
     }
 
-    public IAgent markAgentForInteraction(int index)
-    {
-        IAgent agent = agents.get(index);
-        return markAgentForInteraction(agent);
-    }
-
-    public IAgent markRandomAgentForInteraction()
+    public AbstractAgent markRandomAgentForInteraction()
     {
         int index = rnd.nextInt(availability.size());
         return markAgentForInteraction(availability.get(index));
     }
 
+    /**
+     * Makes all agents available for interaction at the next timestep.
+     * Called once per timestep, after all interactions have been completed.
+     */
     public void resetAvailability()
     {
-        availability = IndexHelper.generateIndices(agents.size());
+        availability = IndexHelper.generateIndices(agents.length);
     }
 
     public int getNumberAvailable()
@@ -111,17 +108,17 @@ public class Community
     public double getAverageOpinion()
     {
         double total = 0;
-        for (IAgent agent : agents)
+        for (AbstractAgent agent : agents)
         {
             total += agent.getOpinion();
         }
-        return total / agents.size();
+        return total / agents.length;
     }
 
     public List<Double> getOpinions()
     {
         List<Double> opinions = new ArrayList<>();
-        for (IAgent agent : agents)
+        for (AbstractAgent agent : agents)
         {
             opinions.add(agent.getOpinion());
         }

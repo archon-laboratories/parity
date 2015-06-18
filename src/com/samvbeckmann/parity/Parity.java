@@ -14,9 +14,9 @@ public class Parity
 
     private static void performInteractions(IInteractionHandler handler, Population population)
     {
-        Map<IAgent, IAgent> interactions = handler.determineInteractions(population);
+        Map<AbstractAgent, AbstractAgent> interactions = handler.determineInteractions(population);
 
-        for (Map.Entry<IAgent, IAgent> entry : interactions.entrySet())
+        for (Map.Entry<AbstractAgent, AbstractAgent> entry : interactions.entrySet())
         {
             Choices column = entry.getKey().interaction(States.COLUMN);
             Choices row = entry.getValue().interaction(States.ROW);

@@ -1,5 +1,7 @@
 package com.samvbeckmann.parity;
 
+import java.util.List;
+
 /**
  * Defines a population, consisting of multiple {@link Community} objects.
  *
