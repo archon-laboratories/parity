@@ -2,7 +2,6 @@ package com.samvbeckmann.parity;
 
 import com.samvbeckmann.parity.utilities.IndexHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -17,14 +16,14 @@ public class Community
     private int xPos;
     private int yPos;
 
-    private List<OneWayConnection> neighbours;
+    private OneWayConnection[] neighbours;
     private AbstractAgent[] agents;
     private List<Integer> availability;
     private Random rnd = new Random();
 
     // TODO make constructor
 
-    public List<OneWayConnection> getNeighbours()
+    public OneWayConnection[] getNeighbours()
     {
         return neighbours;
     }
@@ -115,12 +114,12 @@ public class Community
         return total / agents.length;
     }
 
-    public List<Double> getOpinions()
+    public double[] getOpinions()
     {
-        List<Double> opinions = new ArrayList<>();
-        for (AbstractAgent agent : agents)
+        double[] opinions = new double[agents.length];
+        for (int i = 0; i < agents.length; i++)
         {
-            opinions.add(agent.getOpinion());
+            opinions[i] = agents[i].getOpinion();
         }
         return opinions;
     }
