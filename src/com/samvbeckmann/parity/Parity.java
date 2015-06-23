@@ -1,5 +1,7 @@
 package com.samvbeckmann.parity;
 
+import com.google.gson.Gson;
+
 import java.util.Map;
 
 /**
@@ -9,7 +11,19 @@ public class Parity
 {
     public static void main(String[] args)
     {
+        Community test = new Community();
+        Community beta = new Community();
+        OneWayConnection tB = new OneWayConnection();
+        tB.setCommunity(beta);
 
+        test.setNeighbours(new OneWayConnection[]{tB});
+
+        BasicAgent[] agentList = {new BasicAgent(.3), new BasicAgent(.4), new BasicAgent()};
+        test.setAgents(agentList);
+
+        Dataset run = new Dataset("datasets/demo.json");
+
+        System.out.println(new Gson().toJson(test));
     }
 
     private static void performInteractions(IInteractionHandler handler, Population population)

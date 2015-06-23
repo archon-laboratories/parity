@@ -3,7 +3,7 @@ package com.samvbeckmann.parity;
 import java.util.Random;
 
 /**
- * A sample implementation of {@link IAgent}.
+ * A sample implementation of {@link AbstractAgent}.
  * Use / extend this, or make your own.
  *
  * @author Sam Beckmann
@@ -23,7 +23,7 @@ public class BasicAgent extends AbstractAgent
 
     public Choices interaction(States state)
     {
-        return rnd.nextDouble() > opinion ? Choices.LEFT : Choices.RIGHT;
+        return Population.rnd.nextDouble() > opinion ? Choices.LEFT : Choices.RIGHT;
     }
     
     public void updateOpinion(int feedback)

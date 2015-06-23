@@ -13,7 +13,6 @@ public abstract class AbstractAgent
 
     int xPos;
     int yPos;
-    static Random rnd = new Random();
 
     /**
      * Defines how an Agent responds in an interaction.
@@ -31,6 +30,10 @@ public abstract class AbstractAgent
         return opinion;
     }
 
+    /**
+     * Sets the Agent's opinion. For use in agent creation; not intended for use by an interaction handler.
+     * @param opinion
+     */
     protected void setOpinion(double opinion)
     {
         this.opinion = opinion;

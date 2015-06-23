@@ -5,7 +5,6 @@ import com.google.gson.stream.JsonReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -13,13 +12,8 @@ import java.util.Scanner;
  */
 public class Dataset
 {
-    // TODO Connections
     int numTrials;
-    int maxTravel;
-
-    String agentClassPath;
-
-    private ArrayList<ArrayList<Integer>> priorities;
+    int opinionCount;
 
     Community[] communities;
 
@@ -49,96 +43,144 @@ public class Dataset
             String name = reader.nextName();
             switch (name)
             {
-                case "numIterations":
-                    numTrials = reader.nextInt();
-                    break;
-
                 case "population":
                     parsePopulation(reader);
-                    prepareCommunities();
                     break;
 
-                case "agentFile":
-                    agentClassPath = reader.nextString();
-                    break;
-
-                case "communities":
-                    parseCommunities(reader);
-                    break;
+                default:
+                    System.out.println("Tag " + name + " not found!");
             }
         }
         reader.endObject();
         reader.close();
     }
 
+    private AbstractAgent[] parseAgents(JsonReader reader, int agentCount) throws IOException
+    {
+        AbstractAgent[] agents = new AbstractAgent[agentCount];
+        int count = 0;
+
+        reader.beginArray();
+        while (reader.hasNext()) // Agents array
+        {
+            if (reader.peek() == null)
+            {
+                reader.skipValue();
+                continue;
+            }
+
+            reader.beginObject();
+            if (!(reader.nextName().equals("sourceFile")))
+                System.exit(3);
+
+            agents[count] = getAgent(reader.nextString());
+            while (reader.hasNext()) {
+                String name = reader.nextName();
+                switch (name) {
+                    case "xPos":
+                        agents[count].setX(reader.nextInt());
+                        break;
+
+                    case "yPos":
+                        agents[count].setY(reader.nextInt());
+                        break;
+
+                    case "opinions":
+                        reader.beginArray();
+                        agents[count].setOpinion(reader.nextDouble());
+                        reader.endArray();
+                }
+            }
+            count++;
+            reader.endObject();
+        }
+
+        reader.endArray();
+
+        return agents;
+    }
+
     private void parseCommunities(JsonReader reader) throws IOException
     {
         int count = 0;
         communities[count] = new Community();
-        Community currentCommunity;
         reader.beginArray();
 
         while (reader.hasNext()) // List of communities
         {
-            currentCommunity = communities[count];
-            int x = 0;
-            int y = 0;
-            ArrayList<AbstractAgent> agents = new ArrayList<>();
-
             if (reader.peek() == null)
-                reader.skipValue();
-            else
             {
-                reader.beginArray();
-                while (reader.hasNext()) // List of agents in one x
-                {
-                    if (reader.peek() == null)
-                        reader.skipValue();
-                    else
-                    {
-                        reader.beginArray();
-                        while (reader.hasNext())
-                        { // Actual agent
-                            if (reader.peek() == null)
-                                reader.skipValue();
-                            else
-                            {
-                                AbstractAgent curAgent = getAgent(agentClassPath);
-                                assert curAgent != null;
-                                agents.add(curAgent);
-                                curAgent.setX(x);
-                                curAgent.setY(y);
-                                curAgent.setOpinion(reader.nextDouble());
-                            }
-                            y++;
-                        }
-                        reader.endArray();
-                        x++;
-                    }
-                }
-                reader.endArray();
+                reader.skipValue();
+                continue;
             }
-            AbstractAgent[] actualAgents = new AbstractAgent[agents.size()];
-            actualAgents = agents.toArray(actualAgents);
-            currentCommunity.setAgents(actualAgents);
+
+            parseCommunity(reader);
         }
         reader.endArray();
     }
 
-    private void prepareCommunities()
+    private void parseCommunity(JsonReader reader) throws IOException
     {
-        ArrayList<Community> tempCommunities = new ArrayList<>();
-        // Initialize the array with the exact number of entries.
-        for (int i = 0; i < priorities.size(); i++)
-            for (int j = 0; j < priorities.get(i).size(); j++)
-            {
-                Community curCommunity = new Community();
-                tempCommunities.add(curCommunity);
-                curCommunity.setX(i);
-                curCommunity.setY(j);
-            }
+        reader.beginObject();
 
-        communities = tempCommunities.toArray(communities);
+        int id_ = -1;
+        int numNeighbors = 0;
+        int agentCount = 0;
+        while (reader.hasNext())
+        {
+            String name = reader.nextName();
+
+            switch (name)
+            {
+                case "id":
+                    id_ = reader.nextInt();
+                    break;
+
+                case "numNeighbors":
+                    numNeighbors = reader.nextInt();
+                    break;
+
+                case "neighbors":
+                    communities[id_].setNeighbours(parseNeighbors(reader, numNeighbors));
+                    break;
+
+                case "agentCount":
+                    agentCount = reader.nextInt();
+                    break;
+
+                case "agents":
+                    communities[id_].setAgents(parseAgents(reader, agentCount));
+                    break;
+
+                default:
+                    System.err.println("Community property " + name + " not found!");
+
+            }
+        }
+        reader.endObject();
+    }
+
+    private OneWayConnection[] parseNeighbors(JsonReader reader, int numNeighbors) throws IOException
+    {
+        int neighborCount = 0;
+        OneWayConnection[] neighbors = new OneWayConnection[numNeighbors];
+
+        reader.beginArray();
+        while (reader.hasNext())
+        {
+            if (reader.peek() == null)
+            {
+                reader.skipValue();
+                continue;
+            }
+            OneWayConnection connect = new OneWayConnection();
+            connect.setCommunity(communities[reader.nextInt()]);
+            neighbors[neighborCount] = connect;
+            neighborCount++;
+        }
+        reader.endArray();
+
+        return neighbors;
     }
 
     private void parsePopulation(JsonReader reader) throws IOException
@@ -149,39 +191,33 @@ public class Dataset
             String name = reader.nextName();
             switch (name)
             {
-                case "topography":
-                    parseTopography(reader);
+                case "numIterations":
+                    numTrials = reader.nextInt();
                     break;
 
-                case "maxTravelDistance":
-                    maxTravel = reader.nextInt();
+                case "numberCommunities":
+                    int numCommunities = reader.nextInt();
+                    communities = new Community[numCommunities];
+                    for (int i = 0; i < numCommunities; i++)
+                    {
+                        communities[i] = new Community();
+                    }
+                    break;
+
+                case "opinionCount":
+                    opinionCount = reader.nextInt();
+                    break;
+
+                case "communities":
+                    parseCommunities(reader);
+                    break;
+
+                default:
+                    System.out.println("JSON tag " + name + " in \"population\" not found!");
                     break;
             }
         }
         reader.endObject();
-    }
-
-    private void parseTopography(JsonReader reader) throws IOException
-    {
-        reader.beginArray();
-        priorities = new ArrayList<>();
-        while (reader.hasNext())
-        {
-            if (reader.peek() == null)
-                reader.skipValue();
-            else
-            {
-                priorities.add(new ArrayList<Integer>());
-                reader.beginArray();
-                while (reader.hasNext())
-                    if (reader.peek() == null)
-                        reader.skipValue();
-                    else
-                        priorities.get(priorities.size() - 1).add(reader.nextInt());
-                reader.endArray();
-            }
-        }
-        reader.endArray();
     }
 
     public Dataset(String filename)

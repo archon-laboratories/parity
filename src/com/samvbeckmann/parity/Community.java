@@ -13,13 +13,9 @@ import java.util.Random;
  */
 public class Community
 {
-    private int xPos;
-    private int yPos;
-
     private OneWayConnection[] neighbours;
     private AbstractAgent[] agents;
     private List<Integer> availability;
-    private Random rnd = new Random();
 
     // TODO make constructor
 
@@ -49,25 +45,7 @@ public class Community
         this.agents = agents;
     }
 
-    public int getX()
-    {
-        return xPos;
-    }
-
-    public int getY()
-    {
-        return yPos;
-    }
-
-    void setX(int xPos)
-    {
-        this.xPos = xPos;
-    }
-
-    void setY(int yPos)
-    {
-        this.yPos = yPos;
-    }
+    void setNeighbours(OneWayConnection [] neighbours) { this.neighbours = neighbours;}
 
     public int getCommunitySize()
     {
@@ -86,7 +64,7 @@ public class Community
 
     public AbstractAgent markRandomAgentForInteraction()
     {
-        int index = rnd.nextInt(availability.size());
+        int index = Population.rnd.nextInt(availability.size());
         return markAgentForInteraction(availability.get(index));
     }
 
@@ -108,9 +86,7 @@ public class Community
     {
         double total = 0;
         for (AbstractAgent agent : agents)
-        {
             total += agent.getOpinion();
-        }
         return total / agents.length;
     }
 
