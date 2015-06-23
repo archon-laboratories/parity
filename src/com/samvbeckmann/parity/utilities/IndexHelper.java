@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Helper methods for generating and polling indices.
  *
- * @author Sam Beckmann
+ * @author Nate Beckemeyer & Sam Beckmann
  */
 public final class IndexHelper
 {

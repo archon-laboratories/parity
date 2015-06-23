@@ -7,7 +7,7 @@
       {
         "id": 0,
         "numNeighbors": 2,
-        "neighbors": [1, 2],
+        "neighbours": [1, 2],
         "agentCount": 4,
         "agents": [
           {
@@ -47,7 +47,7 @@
       {
         "id": 1,
         "numNeighbors": 2,
-        "neighbors": [0, 3],
+        "neighbours": [0, 3],
         "agentCount": 4,
         "agents": [
           {
@@ -87,7 +87,7 @@
       {
         "id": 2,
         "numNeighbors": 2,
-        "neighbors": [0, 3],
+        "neighbours": [0, 3],
         "agentCount": 4,
         "agents": [
           {
@@ -127,7 +127,7 @@
       {
         "id": 3,
         "numNeighbors": 2,
-        "neighbors": [1, 2],
+        "neighbours": [1, 2],
         "agentCount": 4,
         "agents": [
           {

@@ -1,9 +1,9 @@
 package com.samvbeckmann.parity;
 
 /**
- * Enum of the choices available to an {@link IAgent} in an interaction
+ * Enum of the choices available to an {@link AbstractAgent} in an interaction
  *
- * @author Sam Beckmann
+ * @author Nate Beckemeyer & Sam Beckmann
  */
 public enum Choices
 {

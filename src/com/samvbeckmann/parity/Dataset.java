@@ -17,8 +17,10 @@ public class Dataset
 
     Community[] communities;
 
+    JsonReader reader;
+
     /**
-     * Gets an object of an agent from its classpath
+     * Gets an instance of an agent from its classpath
      *
      * @param classPath The classpath of the agent
      * @return The corresponding agent
@@ -35,27 +37,14 @@ public class Dataset
         }
     }
 
-    private void parseInput(JsonReader reader) throws IOException
-    {
-        reader.beginObject();
-        while (reader.hasNext())
-        {
-            String name = reader.nextName();
-            switch (name)
-            {
-                case "population":
-                    parsePopulation(reader);
-                    break;
-
-                default:
-                    System.out.println("Tag " + name + " not found!");
-            }
-        }
-        reader.endObject();
-        reader.close();
-    }
-
-    private AbstractAgent[] parseAgents(JsonReader reader, int agentCount) throws IOException
+    /**
+     * Parses the agents of a community in the JSON file
+     *
+     * @param agentCount The number of agents in the community
+     * @return The agents of the community
+     * @throws IOException
+     */
+    private AbstractAgent[] parseAgents(int agentCount) throws IOException
     {
         AbstractAgent[] agents = new AbstractAgent[agentCount];
         int count = 0;
@@ -100,26 +89,40 @@ public class Dataset
         return agents;
     }
 
-    private void parseCommunities(JsonReader reader) throws IOException
+    /**
+     * Parses the neighbors of a community
+     * @param numNeighbors The number of neighbors
+     * @return The {@link OneWayConnection}s of the community
+     * @throws IOException
+     */
+    private OneWayConnection[] parseNeighbors(int numNeighbors) throws IOException
     {
-        int count = 0;
-        communities[count] = new Community();
-        reader.beginArray();
+        int neighborCount = 0;
+        OneWayConnection[] neighbours = new OneWayConnection[numNeighbors];
 
-        while (reader.hasNext()) // List of communities
+        reader.beginArray();
+        while (reader.hasNext())
         {
             if (reader.peek() == null)
             {
                 reader.skipValue();
                 continue;
             }
-
-            parseCommunity(reader);
+            OneWayConnection connect = new OneWayConnection();
+            connect.setCommunity(communities[reader.nextInt()]);
+            neighbours[neighborCount] = connect;
+            neighborCount++;
         }
         reader.endArray();
+
+        return neighbours;
     }
 
-    private void parseCommunity(JsonReader reader) throws IOException
+    /**
+     * Parses a single community in the JSON file
+     * @throws IOException
+     */
+    private void parseCommunity() throws IOException
     {
         reader.beginObject();
 
@@ -140,8 +143,8 @@ public class Dataset
                     numNeighbors = reader.nextInt();
                     break;
 
-                case "neighbors":
-                    communities[id_].setNeighbours(parseNeighbors(reader, numNeighbors));
+                case "neighbours":
+                    communities[id_].setNeighbours(parseNeighbors(numNeighbors));
                     break;
 
                 case "agentCount":
@@ -149,7 +152,7 @@ public class Dataset
                     break;
 
                 case "agents":
-                    communities[id_].setAgents(parseAgents(reader, agentCount));
+                    communities[id_].setAgents(parseAgents(agentCount));
                     break;
 
                 default:
@@ -160,30 +163,34 @@ public class Dataset
         reader.endObject();
     }
 
-    private OneWayConnection[] parseNeighbors(JsonReader reader, int numNeighbors) throws IOException
+    /**
+     * Parses the communities of the JSON file
+     * @throws IOException
+     */
+    private void parseCommunities() throws IOException
     {
-        int neighborCount = 0;
-        OneWayConnection[] neighbors = new OneWayConnection[numNeighbors];
-
+        int count = 0;
+        communities[count] = new Community();
         reader.beginArray();
-        while (reader.hasNext())
+
+        while (reader.hasNext()) // List of communities
         {
             if (reader.peek() == null)
             {
                 reader.skipValue();
                 continue;
             }
-            OneWayConnection connect = new OneWayConnection();
-            connect.setCommunity(communities[reader.nextInt()]);
-            neighbors[neighborCount] = connect;
-            neighborCount++;
+
+            parseCommunity();
         }
         reader.endArray();
-
-        return neighbors;
     }
 
-    private void parsePopulation(JsonReader reader) throws IOException
+    /**
+     * Parses the population tag of the JSON file
+     * @throws IOException
+     */
+    private void parsePopulation() throws IOException
     {
         reader.beginObject();
         while (reader.hasNext())
@@ -209,7 +216,7 @@ public class Dataset
                     break;
 
                 case "communities":
-                    parseCommunities(reader);
+                    parseCommunities();
                     break;
 
                 default:
@@ -218,6 +225,30 @@ public class Dataset
             }
         }
         reader.endObject();
+    }
+
+    /**
+     * Parses the outermost JSON file
+     * @throws IOException error parsing the file
+     */
+    private void parseInput() throws IOException
+    {
+        reader.beginObject();
+        while (reader.hasNext())
+        {
+            String name = reader.nextName();
+            switch (name)
+            {
+                case "population":
+                    parsePopulation();
+                    break;
+
+                default:
+                    System.out.println("Outermost tag " + name + " not found!");
+            }
+        }
+        reader.endObject();
+        reader.close();
     }
 
     public Dataset(String filename)
@@ -229,9 +260,11 @@ public class Dataset
         {
             try
             {
-                JsonReader reader = new JsonReader(new FileReader(filename));
+                reader = new JsonReader(new FileReader(filename));
                 fileFound = true;
-                parseInput(reader);
+                parseInput();
+                reader.close();
+                console.close();
             } catch (FileNotFoundException e)
             {
                 System.err.print("File " + filename + " not found. Please try another file: ");
@@ -242,7 +275,6 @@ public class Dataset
                 System.exit(1);
             }
         } while (!fileFound);
-        console.close();
     }
 
     public Population getDatasetPopulation()

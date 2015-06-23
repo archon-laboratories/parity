@@ -5,7 +5,7 @@ package com.samvbeckmann.parity;
  * An implementation needs to be chosen for each simulation.
  * A sample implementation can be found at {@link BasicCompletionCondition}
  *
- * @author Sam Beckmann
+ * @author Nate Beckemeyer & Sam Beckmann
  */
 public interface ICompletionCondition
 {

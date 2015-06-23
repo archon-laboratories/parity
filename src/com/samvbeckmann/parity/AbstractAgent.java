@@ -5,17 +5,27 @@ import java.util.Random;
 /**
  * parity, class made on 6/15/2015.
  *
- * @author Sam Beckmann
+ * @author Nate Beckemeyer & Sam Beckmann
  */
 public abstract class AbstractAgent
 {
+    /**
+     * The opinion of the agent.
+     */
     double opinion;
 
+    /**
+     * The xPos of the agent within its parent {@link Community}
+     */
     int xPos;
+
+    /**
+     * The yPos of the agent within its parent {@link Community}
+     */
     int yPos;
 
     /**
-     * Defines how an Agent responds in an interaction.
+     * Defines how an agent responds in an interaction.
      *
      * @param state The state of the agent in the interaction
      * @return A response to the interaction, in the form of a choice.
@@ -23,7 +33,7 @@ public abstract class AbstractAgent
     abstract Choices interaction(States state);
 
     /**
-     * @return Agent's opinion, range [0,1]
+     * @return agent's opinion, range [0,1]
      */
     public double getOpinion()
     {
@@ -31,7 +41,7 @@ public abstract class AbstractAgent
     }
 
     /**
-     * Sets the Agent's opinion. For use in agent creation; not intended for use by an interaction handler.
+     * Sets the agent's opinion. For use in agent creation; not intended for use by an interaction handler.
      * @param opinion
      */
     protected void setOpinion(double opinion)
@@ -40,7 +50,7 @@ public abstract class AbstractAgent
     }
 
     /**
-     * Updates the agents opinion after an interaction.
+     * Updates the agent's opinion after an interaction.
      *
      * @param feedback Determines if the agent is positively or negatively
      *                 reinforced for their choice in an interaction
@@ -48,7 +58,7 @@ public abstract class AbstractAgent
     public abstract void updateOpinion(int feedback);
 
     /**
-     * Gets the x coordinate of the agent within its community
+     * Gets the x coordinate of the agent within its {@link Community}
      */
     public int getX()
     {
@@ -56,16 +66,15 @@ public abstract class AbstractAgent
     }
 
     /**
-     * Gets the y coordinate of the agent within its community
+     * Gets the y coordinate of the agent within its {@link Community}
      */
     public int getY()
     {
         return yPos;
     }
 
-
     /**
-     * Sets the x coordinate of the agent within its community
+     * Sets the x coordinate of the agent within its {@link Community}
      *
      * @param xPos The x coordinate
      */
@@ -75,7 +84,7 @@ public abstract class AbstractAgent
     }
 
     /**
-     * Sets the y coordinate of the agent within its community
+     * Sets the y coordinate of the agent within its {@link Community}
      *
      * @param yPos The y coordinate
      */

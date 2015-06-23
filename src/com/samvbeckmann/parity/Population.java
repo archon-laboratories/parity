@@ -5,11 +5,18 @@ import java.util.Random;
 /**
  * Defines a population, consisting of multiple {@link Community} objects.
  *
- * @author Sam Beckmann
+ * @author Nate Beckemeyer & Sam Beckmann
  */
 public class Population
 {
+    /**
+     * The global static random generator for the population.
+     */
     public static Random rnd;
+
+    /**
+     * The communities in the population
+     */
     public Community[] communities;
 
     public Population()
@@ -23,6 +30,9 @@ public class Population
         this.communities = communities;
     }
 
+    /**
+     * @return The average opinion of the population
+     */
     public double getAverageOpinion()
     {
         double total = 0;
@@ -35,12 +45,15 @@ public class Population
         return total / this.getPopulationSize();
     }
 
+    /**
+     * @return The size of the population in terms of agents.
+     */
     public int getPopulationSize()
     {
         int total = 0;
         for (Community community : communities)
         {
-            total += community.getCommunitySize();
+            total += community.communitySize();
         }
         return total;
     }

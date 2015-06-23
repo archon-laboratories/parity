@@ -11,10 +11,15 @@ import java.util.List;
 /**
  * Helper methods for {@link com.samvbeckmann.parity.IInteractionHandler}
  *
- * @author Sam Beckmann
+ * @author Nate Beckemeyer & Sam Beckmann
  */
 public final class InteractionHelper
 {
+    /**
+     * Gets the two connections of a population
+     * @param p The population in which to get two-way connections
+     * @return A list of two-way connections
+     */
     public static List<TwoWayConnection> getConnectionsFromPopulation(Population p)
     {
         List<TwoWayConnection> connections = new ArrayList<>();

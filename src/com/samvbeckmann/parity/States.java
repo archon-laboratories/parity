@@ -1,9 +1,9 @@
 package com.samvbeckmann.parity;
 
 /**
- * Enum of possible states of an {@link IAgent} during an interaction
+ * Enum of possible states of an {@link AbstractAgent} during an interaction
  *
- * @author Sam Beckmann
+ * @author Nate Beckemeyer & Sam Beckmann
  */
 public enum States
 {

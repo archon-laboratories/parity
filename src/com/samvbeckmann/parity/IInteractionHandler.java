@@ -7,7 +7,7 @@ import java.util.Map;
  * and gives feedback to the agents based on their responses.
  * A sample implementation can be found at {@link BasicInteractionHandler}
  *
- * @author Sam Beckmann
+ * @author Nate Beckemeyer & Sam Beckmann
  */
 public interface IInteractionHandler
 {

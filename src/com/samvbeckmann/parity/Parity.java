@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import java.util.Map;
 
 /**
- * Created by SAM on 6/15/2015.
+ * Created by Nate Beckemeyer and Sam Beckmmann
  */
 public class Parity
 {
@@ -21,11 +21,19 @@ public class Parity
         BasicAgent[] agentList = {new BasicAgent(.3), new BasicAgent(.4), new BasicAgent()};
         test.setAgents(agentList);
 
-        Dataset run = new Dataset("datasets/demo.json");
+        Dataset primary = new Dataset("datasets/demo.json");
+        Population initial = primary.getDatasetPopulation();
+        performInteractions(new BasicInteractionHandler(), initial);
 
         System.out.println(new Gson().toJson(test));
     }
 
+    /**
+     * Performs the interactions for the population
+     *
+     * @param handler The interaction handler with which to handle the interactions
+     * @param population The population on which to run the data
+     */
     private static void performInteractions(IInteractionHandler handler, Population population)
     {
         Map<AbstractAgent, AbstractAgent> interactions = handler.determineInteractions(population);

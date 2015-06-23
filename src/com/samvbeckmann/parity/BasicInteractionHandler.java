@@ -10,13 +10,18 @@ import java.util.TreeMap;
  * A sample implementation of {@link IInteractionHandler}.
  * Use / extend this, or make your own.
  *
- * @author Sam Beckmann
+ * @author Nate Beckemeyer & Sam Beckmann
  */
 public class BasicInteractionHandler implements IInteractionHandler
 {
     public static final int POSITIVE_REWARD = 1;
     public static final int NEGATIVE_REWARD = -1;
 
+    /**
+     * @param p The population to find interactions for.
+     *
+     * @return A {@link Map} of interactions from agent to agent in the population.
+     */
     public Map<AbstractAgent, AbstractAgent> determineInteractions(Population p)
     {
         List<TwoWayConnection> connections = InteractionHelper.getConnectionsFromPopulation(p);
@@ -57,11 +62,24 @@ public class BasicInteractionHandler implements IInteractionHandler
         return map;
     }
 
+    /**
+     * @param columnPlayer The choice of the Column Player
+     * @param rowPlayer The choice of the Row Player
+     *
+     * @return If their actions align, reinforce the behavior. Else, discourage it.
+     */
     public int getColumnFeedback(Choices columnPlayer, Choices rowPlayer)
     {
         return columnPlayer == rowPlayer ? POSITIVE_REWARD : NEGATIVE_REWARD;
     }
 
+    /**
+     *
+     * @param columnPlayer The choice of the Column Player
+     * @param rowPlayer The choice of the Row Player
+     *
+     * @return If their actions align, reinforce the behavior. Else, discourage it.
+     */
     public int getRowFeedback(Choices columnPlayer, Choices rowPlayer)
     {
         return getColumnFeedback(columnPlayer, rowPlayer);
