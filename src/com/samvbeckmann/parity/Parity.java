@@ -31,7 +31,7 @@ public class Parity
     /**
      * Performs the interactions for the population
      *
-     * @param handler The interaction handler with which to handle the interactions
+     * @param handler    The interaction handler with which to handle the interactions
      * @param population The population on which to run the data
      */
     private static void performInteractions(IInteractionHandler handler, Population population)

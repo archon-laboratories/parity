@@ -19,7 +19,6 @@ public class BasicInteractionHandler implements IInteractionHandler
 
     /**
      * @param p The population to find interactions for.
-     *
      * @return A {@link Map} of interactions from agent to agent in the population.
      */
     public Map<AbstractAgent, AbstractAgent> determineInteractions(Population p)
@@ -43,7 +42,7 @@ public class BasicInteractionHandler implements IInteractionHandler
             }
         }
 
-        for (Community community : p.communities)
+        for (Community community : p.getCommunities())
         {
             while (community.getNumberAvailable() >= 2)
             {
@@ -64,8 +63,7 @@ public class BasicInteractionHandler implements IInteractionHandler
 
     /**
      * @param columnPlayer The choice of the Column Player
-     * @param rowPlayer The choice of the Row Player
-     *
+     * @param rowPlayer    The choice of the Row Player
      * @return If their actions align, reinforce the behavior. Else, discourage it.
      */
     public int getColumnFeedback(Choices columnPlayer, Choices rowPlayer)
@@ -74,10 +72,8 @@ public class BasicInteractionHandler implements IInteractionHandler
     }
 
     /**
-     *
      * @param columnPlayer The choice of the Column Player
-     * @param rowPlayer The choice of the Row Player
-     *
+     * @param rowPlayer    The choice of the Row Player
      * @return If their actions align, reinforce the behavior. Else, discourage it.
      */
     public int getRowFeedback(Choices columnPlayer, Choices rowPlayer)

@@ -17,17 +17,32 @@ public class Population
     /**
      * The communities in the population
      */
-    public Community[] communities;
+    private Community[] communities;
 
+    /**
+     * Default constructor
+     */
     public Population()
     {
         rnd = new Random();
     }
 
+    /**
+     *
+     * @param communities Communities in the population
+     */
     public Population(Community[] communities)
     {
         rnd = new Random();
         this.communities = communities;
+    }
+
+    /**
+     * @return Communities in the population
+     */
+    public Community[] getCommunities()
+    {
+        return communities;
     }
 
     /**

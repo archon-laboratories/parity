@@ -96,19 +96,20 @@ public class Community
     {
         if (availability.contains(index))
         {
-            //noinspection SuspiciousMethodCalls
-            availability.remove((Object) index);
+            availability.remove((Integer) index);
             return agents[index];
         } else return null;
     }
 
     /**
+     * Marks a random agent for interaction
+     *
      * @return The random agent marked for interaction
      */
     public AbstractAgent markRandomAgentForInteraction()
     {
         int index = Population.rnd.nextInt(availability.size());
-        return markAgentForInteraction(availability.get(index));
+        return markAgentForInteraction(availability.remove(index));
     }
 
     /**

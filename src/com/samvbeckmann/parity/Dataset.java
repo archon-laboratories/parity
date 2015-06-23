@@ -12,12 +12,12 @@ import java.util.Scanner;
  */
 public class Dataset
 {
-    int numTrials;
-    int opinionCount;
+    private int numTrials;
+    private int opinionCount;
 
-    Community[] communities;
+    private Community[] communities;
 
-    JsonReader reader;
+    private JsonReader reader;
 
     /**
      * Gets an instance of an agent from its classpath

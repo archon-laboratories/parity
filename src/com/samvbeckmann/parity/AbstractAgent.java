@@ -1,7 +1,5 @@
 package com.samvbeckmann.parity;
 
-import java.util.Random;
-
 /**
  * parity, class made on 6/15/2015.
  *
@@ -12,17 +10,17 @@ public abstract class AbstractAgent
     /**
      * The opinion of the agent.
      */
-    double opinion;
+    protected double opinion;
 
     /**
      * The xPos of the agent within its parent {@link Community}
      */
-    int xPos;
+    protected int xPos;
 
     /**
      * The yPos of the agent within its parent {@link Community}
      */
-    int yPos;
+    protected int yPos;
 
     /**
      * Defines how an agent responds in an interaction.
@@ -41,10 +39,12 @@ public abstract class AbstractAgent
     }
 
     /**
-     * Sets the agent's opinion. For use in agent creation; not intended for use by an interaction handler.
-     * @param opinion
+     * Sets the agent's opinion.
+     * For use in agent creation; not intended for use by an interaction handler.
+     *
+     * @param opinion The new opinion
      */
-    protected void setOpinion(double opinion)
+    void setOpinion(double opinion)
     {
         this.opinion = opinion;
     }

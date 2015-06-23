@@ -29,7 +29,7 @@ public class OneWayConnection
     /**
      * @param community The community to which the connection is directed
      */
-    public void setCommunity(Community community)
+    void setCommunity(Community community)
     {
         this.community = community;
     }
@@ -45,7 +45,7 @@ public class OneWayConnection
     /**
      * @param possibleInteractions The number of possible interactions for this connection
      */
-    public void setPossibleInteractions(int possibleInteractions)
+    void setPossibleInteractions(int possibleInteractions)
     {
         this.possibleInteractions = possibleInteractions;
     }
