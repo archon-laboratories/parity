@@ -24,7 +24,7 @@ public final class InteractionHelper
     {
         List<TwoWayConnection> connections = new ArrayList<>();
 
-        for (Community community : p.communities)
+        for (Community community : p.getCommunities())
         {
             for (OneWayConnection neighbour : community.getNeighbours())
             {
