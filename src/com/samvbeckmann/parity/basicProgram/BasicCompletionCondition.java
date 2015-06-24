@@ -1,4 +1,7 @@
-package com.samvbeckmann.parity;
+package com.samvbeckmann.parity.basicProgram;
+
+import com.samvbeckmann.parity.ICompletionCondition;
+import com.samvbeckmann.parity.Population;
 
 /**
  * Sample implementation of {@link ICompletionCondition}

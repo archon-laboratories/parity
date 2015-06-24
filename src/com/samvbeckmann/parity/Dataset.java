@@ -1,10 +1,13 @@
 package com.samvbeckmann.parity;
 
 import com.google.gson.stream.JsonReader;
+import com.samvbeckmann.parity.basicProgram.BasicCompletionCondition;
+import com.samvbeckmann.parity.basicProgram.BasicInteractionHandler;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -18,6 +21,48 @@ public class Dataset
     private Community[] communities;
 
     private JsonReader reader;
+
+    private IInteractionHandler interactionHandler;
+    private ICompletionCondition completionCondition;
+
+
+    /**
+     * Gets a completion condition from its classpath
+     *
+     * @param classPath The classpath of the completion condition class
+     * @return An instantiation of the corresponding completion condition
+     */
+    private ICompletionCondition getCondition(String classPath)
+    {
+        try
+        {
+            return (ICompletionCondition) Class.forName(classPath).newInstance();
+        } catch (Exception e)
+        {
+            System.err.println("Warning! Could not locate completion condition class " + classPath + "!" +
+                    "Using " + completionCondition.getClass() + " instead!");
+            return null;
+        }
+    }
+
+    /**
+     * Gets an interaction handler from its classpath
+     *
+     * @param classPath The classpath of the interaction handler class
+     * @return An instantiation of the corresponding handler
+     */
+    private IInteractionHandler getHandler(String classPath)
+    {
+        try
+        {
+            return (IInteractionHandler) Class.forName(classPath).newInstance();
+        } catch (Exception e)
+        {
+            System.err.println("Warning! Could not locate interaction handler class " + classPath + "!" +
+                    "Using " + interactionHandler.getClass() + " instead!");
+            return null;
+        }
+    }
 
     /**
      * Gets an instance of an agent from its classpath
@@ -63,9 +108,11 @@ public class Dataset
                 System.exit(3);
 
             agents[count] = getAgent(reader.nextString());
-            while (reader.hasNext()) {
+            while (reader.hasNext())
+            {
                 String name = reader.nextName();
-                switch (name) {
+                switch (name)
+                {
                     case "xPos":
                         agents[count].setX(reader.nextInt());
                         break;
@@ -75,9 +122,24 @@ public class Dataset
                         break;
 
                     case "opinions":
+                        ArrayList<Double> agentOpinions = new ArrayList<>(opinionCount);
                         reader.beginArray();
-                        agents[count].setOpinion(reader.nextDouble());
+                        while (reader.hasNext())
+                        {
+                            if (reader.peek() == null)
+                            {
+                                reader.skipValue();
+                                continue;
+                            }
+                            agentOpinions.add(reader.nextDouble());
+                        }
                         reader.endArray();
+                        agents[count].setOpinions(agentOpinions);
+                        break;
+
+                    default:
+                        System.out.println("Warning! Tag " + name + " not found in Agent!");
+                        break;
                 }
             }
             count++;
@@ -91,6 +153,7 @@ public class Dataset
 
     /**
      * Parses the neighbors of a community
+     *
      * @param numNeighbors The number of neighbors
      * @return The {@link OneWayConnection}s of the community
      * @throws IOException
@@ -109,7 +172,23 @@ public class Dataset
                 continue;
             }
             OneWayConnection connect = new OneWayConnection();
-            connect.setCommunity(communities[reader.nextInt()]);
+
+            reader.beginArray();
+            boolean counted = false;
+            while (reader.hasNext()) {
+                if (reader.peek() == null) {
+                    reader.skipValue();
+                    continue;
+                }
+                if (!counted) {
+                    connect.setPossibleInteractions(reader.nextInt());
+                    counted = true;
+                }
+                else {
+                    connect.setCommunity(communities[reader.nextInt()]);
+                }
+            }
+            reader.endArray();
             neighbours[neighborCount] = connect;
             neighborCount++;
         }
@@ -120,6 +199,7 @@ public class Dataset
 
     /**
      * Parses a single community in the JSON file
+     *
      * @throws IOException
      */
     private void parseCommunity() throws IOException
@@ -129,6 +209,8 @@ public class Dataset
         int id_ = -1;
         int numNeighbors = 0;
         int agentCount = 0;
+        int interactionsAvailable = -1;
+
         while (reader.hasNext())
         {
             String name = reader.nextName();
@@ -144,6 +226,7 @@ public class Dataset
                     break;
 
                 case "neighbours":
+                    assert interactionsAvailable >= 0;
                     communities[id_].setNeighbours(parseNeighbors(numNeighbors));
                     break;
 
@@ -157,14 +240,17 @@ public class Dataset
 
                 default:
                     System.err.println("Community property " + name + " not found!");
-
+                    reader.skipValue();
+                    break;
             }
         }
+        communities[id_].resetAvailability();
         reader.endObject();
     }
 
     /**
      * Parses the communities of the JSON file
+     *
      * @throws IOException
      */
     private void parseCommunities() throws IOException
@@ -188,6 +274,7 @@ public class Dataset
 
     /**
      * Parses the population tag of the JSON file
+     *
      * @throws IOException
      */
     private void parsePopulation() throws IOException
@@ -206,9 +293,15 @@ public class Dataset
                     int numCommunities = reader.nextInt();
                     communities = new Community[numCommunities];
                     for (int i = 0; i < numCommunities; i++)
-                    {
                         communities[i] = new Community();
-                    }
+                    break;
+
+                case "completionCondition":
+                    completionCondition = getCondition(reader.nextString());
+                    break;
+
+                case "interactionHandler":
+                    interactionHandler = getHandler(reader.nextString());
                     break;
 
                 case "opinionCount":
@@ -221,6 +314,7 @@ public class Dataset
 
                 default:
                     System.out.println("JSON tag " + name + " in \"population\" not found!");
+                    reader.skipValue();
                     break;
             }
         }
@@ -229,6 +323,7 @@ public class Dataset
 
     /**
      * Parses the outermost JSON file
+     *
      * @throws IOException error parsing the file
      */
     private void parseInput() throws IOException
@@ -251,8 +346,16 @@ public class Dataset
         reader.close();
     }
 
+    /**
+     * Converts the JSON dataset file to java variables, enabling the program to run.
+     *
+     * @param filename The name of the JSON file where the information is located.
+     */
     public Dataset(String filename)
     {
+        interactionHandler = new BasicInteractionHandler();
+        completionCondition = new BasicCompletionCondition();
+
         boolean fileFound = false;
         Scanner console = new Scanner(System.in);
 
@@ -277,13 +380,35 @@ public class Dataset
         } while (!fileFound);
     }
 
+    /**
+     * @return A population from the generated data
+     */
     public Population getDatasetPopulation()
     {
         return new Population(communities);
     }
 
+    /**
+     * @return The number of trials being run this dataset
+     */
     public int getNumTrials()
     {
         return numTrials;
+    }
+
+    /**
+     * @return The completion condition being used by the program
+     */
+    public ICompletionCondition getCompletionCondition()
+    {
+        return completionCondition;
+    }
+
+    /**
+     * @return The interaction handler for the population
+     */
+    public IInteractionHandler getInteractionHandler()
+    {
+        return interactionHandler;
     }
 }

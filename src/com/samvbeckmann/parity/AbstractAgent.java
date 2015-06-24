@@ -1,5 +1,10 @@
 package com.samvbeckmann.parity;
 
+import com.samvbeckmann.parity.basicProgram.Choices;
+import com.samvbeckmann.parity.basicProgram.States;
+
+import java.util.ArrayList;
+
 /**
  * parity, class made on 6/15/2015.
  *
@@ -10,7 +15,7 @@ public abstract class AbstractAgent
     /**
      * The opinion of the agent.
      */
-    protected double opinion;
+    protected double [] opinions;
 
     /**
      * The xPos of the agent within its parent {@link Community}
@@ -28,14 +33,14 @@ public abstract class AbstractAgent
      * @param state The state of the agent in the interaction
      * @return A response to the interaction, in the form of a choice.
      */
-    abstract Choices interaction(States state);
+    protected abstract Choices interaction(States state);
 
     /**
      * @return agent's opinion, range [0,1]
      */
     public double getOpinion()
     {
-        return opinion;
+        return opinions[0];
     }
 
     /**
@@ -44,9 +49,10 @@ public abstract class AbstractAgent
      *
      * @param opinion The new opinion
      */
-    void setOpinion(double opinion)
+    protected void setOpinion(double opinion)
     {
-        this.opinion = opinion;
+        opinions = new double[1];
+        opinions[0] = opinion;
     }
 
     /**
@@ -55,7 +61,7 @@ public abstract class AbstractAgent
      * @param feedback Determines if the agent is positively or negatively
      *                 reinforced for their choice in an interaction
      */
-    public abstract void updateOpinion(int feedback);
+    public abstract void updateOpinions(int feedback);
 
     /**
      * Gets the x coordinate of the agent within its {@link Community}
@@ -91,5 +97,13 @@ public abstract class AbstractAgent
     protected void setY(int yPos)
     {
         this.yPos = yPos;
+    }
+
+    protected void setOpinions(ArrayList<Double> agentOpinions)
+    {
+        opinions = new double[agentOpinions.size()];
+        int count = 0;
+        for (double val : agentOpinions)
+            opinions[count] = val;
     }
 }

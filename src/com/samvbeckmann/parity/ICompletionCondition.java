@@ -1,5 +1,7 @@
 package com.samvbeckmann.parity;
 
+import com.samvbeckmann.parity.basicProgram.BasicCompletionCondition;
+
 /**
  * Determines if the simulation has reached its end.
  * An implementation needs to be chosen for each simulation.

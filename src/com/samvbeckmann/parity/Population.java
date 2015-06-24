@@ -12,7 +12,7 @@ public class Population
     /**
      * The global static random generator for the population.
      */
-    public static Random rnd;
+    public static final Random rnd = new Random();
 
     /**
      * The communities in the population
@@ -20,20 +20,11 @@ public class Population
     private Community[] communities;
 
     /**
-     * Default constructor
-     */
-    public Population()
-    {
-        rnd = new Random();
-    }
-
-    /**
      *
      * @param communities Communities in the population
      */
     public Population(Community[] communities)
     {
-        rnd = new Random();
         this.communities = communities;
     }
 
@@ -52,12 +43,8 @@ public class Population
     {
         double total = 0;
         for (Community community : communities)
-        {
-            double[] opinions = community.getOpinions();
-            for (double opinion : opinions)
-                total += opinion;
-        }
-        return total / this.getPopulationSize();
+            total += community.getAverageOpinion();
+        return total / communities.length;
     }
 
     /**

@@ -28,8 +28,6 @@ public class Community
      */
     private List<Integer> availability;
 
-    // TODO make constructor
-
     /**
      * @return The community's neighbours
      */
@@ -92,11 +90,11 @@ public class Community
      * @param index The index of the agent to be marked
      * @return The agent at that index
      */
-    public AbstractAgent markAgentForInteraction(int index)
+    public AbstractAgent markAgentForInteraction(Integer index)
     {
         if (availability.contains(index))
         {
-            availability.remove((Integer) index);
+            availability.remove(index);
             return agents[index];
         } else return null;
     }
@@ -109,7 +107,7 @@ public class Community
     public AbstractAgent markRandomAgentForInteraction()
     {
         int index = Population.rnd.nextInt(availability.size());
-        return markAgentForInteraction(availability.remove(index));
+        return markAgentForInteraction(availability.get(index));
     }
 
     /**

@@ -1,5 +1,8 @@
 package com.samvbeckmann.parity;
 
+import com.samvbeckmann.parity.basicProgram.BasicInteractionHandler;
+import com.samvbeckmann.parity.basicProgram.Choices;
+
 import java.util.Map;
 
 /**
