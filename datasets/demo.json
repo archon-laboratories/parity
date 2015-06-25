@@ -1,6 +1,6 @@
 {
   "population": {
-    "numIterations": 1000,
+    "numIterations": 10000,
     "numberCommunities": 4,
     "completionCondition": "com.samvbeckmann.parity.basicProgram.BasicCompletionCondition",
     "interactionHandler": "com.samvbeckmann.parity.basicProgram.BasicInteractionHandler",

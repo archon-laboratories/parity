@@ -135,7 +135,7 @@ public class Community
         double total = 0;
         for (AbstractAgent agent : agents)
             total += agent.getOpinion();
-        return total / agents.length;
+        return total / ((double) agents.length);
     }
 
     /**

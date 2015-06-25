@@ -13,24 +13,24 @@ public class Parity
     public static void main(String[] args)
     {
 
+        long startTime = System.nanoTime();
         double average = 0;
+        Dataset primary = new Dataset("datasets/demo.json");
+        ICompletionCondition condition = primary.getCompletionCondition();
+        IInteractionHandler handler = primary.getInteractionHandler();
 
-        for (int i = 1; i <= 1000; i++)
+        for (int i = 1; i <= primary.getNumTrials(); i++)
         {
-
-            Dataset primary = new Dataset("datasets/demo.json");
-
-            Population initial = primary.getDatasetPopulation();
-            ICompletionCondition condition = primary.getCompletionCondition();
-
+            Population initial = primary.scrambleData();
 
             while (!condition.simulationComplete(initial))
-                performInteractions(primary.getInteractionHandler(), initial);
+                performInteractions(handler, initial);
+
             average += initial.getAverageOpinion();
         }
 
-
-        System.out.println("Simulation complete! Final opinion: " + average/1000);
+        System.out.println("Simulation complete! Final opinion: " + average/((double) primary.getNumTrials()));
+        System.out.println("Time to complete: " + (System.nanoTime() - startTime)/(Math.pow(10., 9)) + "s");
     }
 
     /**

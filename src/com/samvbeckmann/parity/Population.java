@@ -15,16 +15,29 @@ public class Population
     public static final Random rnd = new Random();
 
     /**
+     * The current time step of the program (the interaction handler is run once per timestep).
+     */
+    private int timestep;
+
+    /**
      * The communities in the population
      */
     private Community[] communities;
 
     /**
-     *
+     * Default constructor
+     */
+    public Population()
+    {
+        timestep = 0;
+    }
+
+    /**
      * @param communities Communities in the population
      */
     public Population(Community[] communities)
     {
+        timestep = 0;
         this.communities = communities;
     }
 
@@ -43,8 +56,10 @@ public class Population
     {
         double total = 0;
         for (Community community : communities)
-            total += community.getAverageOpinion();
-        return total / communities.length;
+            for (double opinion : community.getOpinions())
+                total += opinion;
+
+        return total / ((double) getPopulationSize());
     }
 
     /**
@@ -60,4 +75,11 @@ public class Population
         return total;
     }
 
+    /**
+     * @return The timestep of the current trial
+     */
+    public int getTimestep()
+    {
+        return timestep;
+    }
 }

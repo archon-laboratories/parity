@@ -16,5 +16,5 @@ public interface ICompletionCondition
      *
      * @return true if simulation should end, otherwise false
      */
-    boolean simulationComplete(Population p);
+    boolean simulationComplete(Population population);
 }

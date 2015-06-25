@@ -52,21 +52,24 @@ public class BasicAgent extends AbstractAgent
         {
             case 1:
                 if (prevChoice == Choices.RIGHT)
-                    opinions[0] = opinions[0] < 1. ? opinions[0] + .1 : opinions[0];
+                    opinions[0] = opinions[0] < 1. ? opinions[0] + .05 : opinions[0];
                 else // Only two choices in this basic example
-                    opinions[0] = opinions[0] > 0. ? opinions[0] - .1 : opinions[0];
+                    opinions[0] = opinions[0] > 0. ? opinions[0] - .05 : opinions[0];
                 break;
 
             case -1:
                 if (prevChoice == Choices.RIGHT)
-                    opinions[0] = opinions[0] > 0. ? opinions[0] - .1 : opinions[0];
+                    opinions[0] = opinions[0] > 0. ? opinions[0] - .05 : opinions[0];
                 else // Only two choices in this basic example
-                    opinions[0] = opinions[0] < 1. ? opinions[0] + .1 : opinions[0];
+                    opinions[0] = opinions[0] < 1. ? opinions[0] + .05 : opinions[0];
                 break;
 
             default:
                 System.err.println("Feedback " + feedback + " not found!");
                 break;
         }
+
+        // Just some clipping, for nice pretty numbers.
+        // opinions[0] = Math.round(opinions[0]*100)/100.;
     }
 }

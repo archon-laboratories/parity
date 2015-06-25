@@ -10,12 +10,12 @@ import java.util.ArrayList;
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */
-public abstract class AbstractAgent
+public abstract class AbstractAgent implements Cloneable
 {
     /**
      * The opinion of the agent.
      */
-    protected double [] opinions;
+    protected double[] opinions;
 
     /**
      * The xPos of the agent within its parent {@link Community}
@@ -26,6 +26,14 @@ public abstract class AbstractAgent
      * The yPos of the agent within its parent {@link Community}
      */
     protected int yPos;
+
+    /**
+     * @return the opinions of the agent
+     */
+    public double[] getOpinions()
+    {
+        return opinions;
+    }
 
     /**
      * Defines how an agent responds in an interaction.

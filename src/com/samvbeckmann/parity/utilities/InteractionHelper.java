@@ -17,7 +17,8 @@ public final class InteractionHelper
 {
 
     /**
-     * If a two-way connection does not exist, then add it in. Otherwise, don't.
+     * Returns true if a the two-way connection is unique, false if not.
+     * That is, if A to B is in the list, then don't add either B to A or A to B.
      *
      * @param connections The list to add potentially the new connection into.
      * @param main        The connection from the community to its neighbour.

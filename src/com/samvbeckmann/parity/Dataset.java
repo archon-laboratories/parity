@@ -3,11 +3,14 @@ package com.samvbeckmann.parity;
 import com.google.gson.stream.JsonReader;
 import com.samvbeckmann.parity.basicProgram.BasicCompletionCondition;
 import com.samvbeckmann.parity.basicProgram.BasicInteractionHandler;
+import com.samvbeckmann.parity.utilities.IndexHelper;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -24,6 +27,8 @@ public class Dataset
 
     private IInteractionHandler interactionHandler;
     private ICompletionCondition completionCondition;
+
+    private HashMap<AbstractAgent, ArrayList<Double>> initialAgentOpinions;
 
 
     /**
@@ -134,7 +139,8 @@ public class Dataset
                             agentOpinions.add(reader.nextDouble());
                         }
                         reader.endArray();
-                        agents[count].setOpinions(agentOpinions);
+                        initialAgentOpinions.put(agents[count], agentOpinions);
+                        agents[count].setOpinions(new ArrayList<>(agentOpinions));
                         break;
 
                     default:
@@ -175,16 +181,19 @@ public class Dataset
 
             reader.beginArray();
             boolean counted = false;
-            while (reader.hasNext()) {
-                if (reader.peek() == null) {
+            while (reader.hasNext())
+            {
+                if (reader.peek() == null)
+                {
                     reader.skipValue();
                     continue;
                 }
-                if (!counted) {
+                if (!counted)
+                {
                     connect.setPossibleInteractions(reader.nextInt());
                     counted = true;
-                }
-                else {
+                } else
+                {
                     connect.setCommunity(communities[reader.nextInt()]);
                 }
             }
@@ -355,6 +364,7 @@ public class Dataset
     {
         interactionHandler = new BasicInteractionHandler();
         completionCondition = new BasicCompletionCondition();
+        initialAgentOpinions = new HashMap<>();
 
         boolean fileFound = false;
         Scanner console = new Scanner(System.in);
@@ -385,6 +395,10 @@ public class Dataset
      */
     public Population getDatasetPopulation()
     {
+        for (Community current : communities)
+            for (AbstractAgent agent : current.getAgents())
+                agent.setOpinions(new ArrayList<>(initialAgentOpinions.get(agent)));
+
         return new Population(communities);
     }
 
@@ -410,5 +424,49 @@ public class Dataset
     public IInteractionHandler getInteractionHandler()
     {
         return interactionHandler;
+    }
+
+    /**
+     * Scrambles all of the communities in the population. Within each community, agent locations are also scrambled.
+     * This does nothing more than change the order in which communities are examined or read; if sloppy code will
+     * prefer the first community it finds (such as lower index), this method will change which community that is.
+     */
+    public Population scrambleData()
+    {
+        List<Integer> availability = IndexHelper.generateIndices(communities.length);
+
+        // Swap the communities randomly
+        while (availability.size() > 1)
+        {
+            int index1 = availability.remove(Population.rnd.nextInt(availability.size()));
+            int index2 = availability.remove(Population.rnd.nextInt(availability.size()));
+
+            Community temp = communities[index2];
+            communities[index2] = communities[index1];
+            communities[index1] = temp;
+
+        }
+
+        //Swap the agents within each community
+        for (Community current : communities)
+        {
+            availability = IndexHelper.generateIndices(current.communitySize());
+            while (availability.size() > 1)
+            {
+                int index1 = availability.remove(Population.rnd.nextInt(availability.size()));
+                int index2 = availability.remove(Population.rnd.nextInt(availability.size()));
+
+                AbstractAgent[] agents = current.getAgents();
+
+                AbstractAgent temp = agents[index2];
+                agents[index2] = agents[index1];
+                agents[index1] = temp;
+
+                current.setAgents(agents);
+
+            }
+        }
+
+        return getDatasetPopulation();
     }
 }
