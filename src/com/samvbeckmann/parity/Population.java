@@ -82,4 +82,11 @@ public class Population
     {
         return timestep;
     }
+
+    /**
+     * The method parity will use to increment the timestep
+     */
+    void incrementTimestep() {
+        timestep++;
+    }
 }
