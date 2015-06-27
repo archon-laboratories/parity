@@ -14,7 +14,8 @@ public class Parity
     {
 
         long startTime = System.nanoTime();
-        double average = 0;
+        double averageOpinion = 0;
+        double averageTimestep = 0;
         Dataset primary = new Dataset("datasets/demo.json");
         ICompletionCondition condition = primary.getCompletionCondition();
         IInteractionHandler handler = primary.getInteractionHandler();
@@ -24,13 +25,19 @@ public class Parity
             Population initial = primary.scrambleData();
 
             while (!condition.simulationComplete(initial))
+            {
                 performInteractions(handler, initial);
+                initial.incrementTimestep();
+            }
 
-            average += initial.getAverageOpinion();
+            averageOpinion += initial.getAverageOpinion();
+            averageTimestep += initial.getTimestep();
         }
 
-        System.out.println("Simulation complete! Final opinion: " + average/((double) primary.getNumTrials()));
-        System.out.println("Time to complete: " + (System.nanoTime() - startTime)/(Math.pow(10., 9)) + "s");
+        System.out.printf("Simulation complete! Statistics:\nFinal opinion: %f\nTimestep: %f\nTime to complete: %.5fs",
+                averageOpinion / ((double) primary.getNumTrials()),
+                averageTimestep / ((double) primary.getNumTrials()),
+                (System.nanoTime() - startTime) / (Math.pow(10., 9)));
     }
 
     /**

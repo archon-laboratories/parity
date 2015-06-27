@@ -19,6 +19,6 @@ public class BasicCompletionCondition implements ICompletionCondition
     {
         double netOpinion = population.getAverageOpinion();
 
-        return netOpinion < .01 || netOpinion > .99;
+        return netOpinion <= .05 || netOpinion >= .95 || population.getTimestep() > 100;
     }
 }
