@@ -456,14 +456,14 @@ public class Dataset
      */
     public Population shuffleData()
     {
-        new Shuffler<Community>().shuffleArray(communities);
+        communities = new Shuffler<Community>().copyRandom(communities);
 
         // Swap the agents within each community
         for (Community current : communities)
             current.setAgents(new Shuffler<AbstractAgent>().copyRandom(current.getAgents()));
 
         // Shuffle the connections in the population
-        new Shuffler<Connection>().shuffleArray(connections);
+        connections = new Shuffler<Connection>().copyRandom(connections);
 
         return getDatasetPopulation();
     }

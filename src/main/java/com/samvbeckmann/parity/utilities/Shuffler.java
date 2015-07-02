@@ -9,11 +9,6 @@ import java.util.List;
  */
 public final class Shuffler<E>
 {
-    public void shuffleArray(E[] toShuffle)
-    {
-        toShuffle = copyRandom(toShuffle);
-    }
-
     public E[] copyRandom(E[] toShuffle)
     {
         List<Integer> availability = IndexHelper.generateIndices(toShuffle.length);
