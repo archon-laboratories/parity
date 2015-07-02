@@ -27,11 +27,11 @@ public final class InteractionHelper
     {
         for (Connection current : found)
         {
-            if (current.getOtherCommunity() == toCheck.getOtherCommunity()
+            if (current.getNeighbourCommunity() == toCheck.getNeighbourCommunity()
                     && current.getThisCommunity() == toCheck.getThisCommunity())
                 return false;
-            if (current.getOtherCommunity() == toCheck.getThisCommunity()
-                    && current.getThisCommunity() == toCheck.getOtherCommunity())
+            if (current.getNeighbourCommunity() == toCheck.getThisCommunity()
+                    && current.getThisCommunity() == toCheck.getNeighbourCommunity())
                 return false;
         }
         return true;

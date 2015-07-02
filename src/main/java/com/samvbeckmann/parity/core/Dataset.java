@@ -397,9 +397,9 @@ public class Dataset
         {
             ArrayList<Connection> newNeighbours = new ArrayList<>();
             for (Connection neighbour : comm.getNeighbours())
-                if (neighbour.getOtherCommunity().getConnectionByCommunity(comm) != null)
+                if (neighbour.getNeighbourCommunity().getConnectionByCommunity(comm) != null)
                 {
-                    Connection connection = new Connection(comm, neighbour.getOtherCommunity(),
+                    Connection connection = new Connection(comm, neighbour.getNeighbourCommunity(),
                             neighbour.getPossibleInteractions());
                     newNeighbours.add(connection);
                 }

@@ -55,7 +55,7 @@ public class Community
     {
         for (Connection neighbour : neighbours)
         {
-            if (neighbour.getOtherCommunity().equals(community))
+            if (neighbour.getNeighbourCommunity().equals(community))
                 return neighbour;
         }
 

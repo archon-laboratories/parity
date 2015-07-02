@@ -1,7 +1,6 @@
 package com.samvbeckmann.parity.demoProgram;
 
 import com.samvbeckmann.parity.core.*;
-import com.samvbeckmann.parity.utilities.InteractionHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class BasicInteractionHandler implements IInteractionHandler
             for (int i = 0; i < con.getPossibleInteractions(); i++)
             {
                 AbstractAgent agent1 = con.getThisCommunity().markRandomAgentForInteraction();
-                AbstractAgent agent2 = con.getOtherCommunity().markRandomAgentForInteraction();
+                AbstractAgent agent2 = con.getNeighbourCommunity().markRandomAgentForInteraction();
 
                 if (agent1 != null && agent2 != null)
                     map.put(agent1, agent2);
