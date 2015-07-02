@@ -1,7 +1,7 @@
 package main.java.com.samvbeckmann.parity;
 
 import main.java.com.samvbeckmann.parity.demoProgram.BasicInteractionHandler;
-import com.samvbeckmann.parity.demoProgram.BasicChoices;
+import main.java.com.samvbeckmann.parity.demoProgram.BasicChoices;
 
 import java.util.Map;
 

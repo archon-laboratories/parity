@@ -1,14 +1,15 @@
 package main.java.com.samvbeckmann.parity.utilities;
 
-import com.samvbeckmann.parity.Community;
-import com.samvbeckmann.parity.Connection;
-import com.samvbeckmann.parity.Population;
+import main.java.com.samvbeckmann.parity.Community;
+import main.java.com.samvbeckmann.parity.Connection;
+import main.java.com.samvbeckmann.parity.Population;
+import main.java.com.samvbeckmann.parity.IInteractionHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper methods for {@link com.samvbeckmann.parity.IInteractionHandler}
+ * Helper methods for {@link IInteractionHandler}
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */

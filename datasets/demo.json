@@ -2,8 +2,8 @@
   "population": {
     "numIterations": 10000,
     "numberCommunities": 4,
-    "completionCondition": "com.samvbeckmann.parity.demoProgram.BasicCompletionCondition",
-    "interactionHandler": "com.samvbeckmann.parity.demoProgram.BasicInteractionHandler",
+    "completionCondition": "main.java.com.samvbeckmann.parity.demoProgram.BasicCompletionCondition",
+    "interactionHandler": "main.java.com.samvbeckmann.parity.demoProgram.BasicInteractionHandler",
     "opinionCount": 1,
     "communities": [
       {
@@ -26,7 +26,7 @@
         "agentCount": 4,
         "agents": [
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 0,
             "opinions": [
@@ -34,7 +34,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 0,
             "opinions": [
@@ -42,7 +42,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 1,
             "opinions": [
@@ -50,7 +50,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 1,
             "opinions": [
@@ -75,7 +75,7 @@
         "agentCount": 4,
         "agents": [
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 0,
             "opinions": [
@@ -83,7 +83,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 0,
             "opinions": [
@@ -91,7 +91,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 1,
             "opinions": [
@@ -99,7 +99,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 1,
             "opinions": [
@@ -124,7 +124,7 @@
         "agentCount": 4,
         "agents": [
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 0,
             "opinions": [
@@ -132,7 +132,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 0,
             "opinions": [
@@ -140,7 +140,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 1,
             "opinions": [
@@ -148,7 +148,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 1,
             "opinions": [
@@ -173,7 +173,7 @@
         "agentCount": 4,
         "agents": [
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 0,
             "opinions": [
@@ -181,7 +181,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 0,
             "opinions": [
@@ -189,7 +189,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 1,
             "opinions": [
@@ -197,7 +197,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
+            "sourceFile": "main.java.com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 1,
             "opinions": [

@@ -1,9 +1,9 @@
-package com.samvbeckmann.parity.view;
+package main.java.com.samvbeckmann.parity.view;
 
-import com.samvbeckmann.parity.MainApp;
-import com.samvbeckmann.parity.model.AgentModel;
-import com.samvbeckmann.parity.reference.Messages;
-import com.samvbeckmann.parity.utilities.ModelHelper;
+import main.java.com.samvbeckmann.parity.MainApp;
+import main.java.com.samvbeckmann.parity.model.AgentModel;
+import main.java.com.samvbeckmann.parity.reference.Messages;
+import main.java.com.samvbeckmann.parity.utilities.ModelHelper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

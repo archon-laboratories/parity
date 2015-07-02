@@ -3,8 +3,8 @@ package main.java.com.samvbeckmann.parity;
 import main.java.com.samvbeckmann.parity.model.AgentModel;
 import main.java.com.samvbeckmann.parity.reference.Names;
 import main.java.com.samvbeckmann.parity.reference.Reference;
-import com.samvbeckmann.parity.view.AgentAddDialogController;
-import com.samvbeckmann.parity.view.CommunityViewController;
+import main.java.com.samvbeckmann.parity.view.AgentAddDialogController;
+import main.java.com.samvbeckmann.parity.view.CommunityViewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -72,7 +72,7 @@ public class MainApp extends Application
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(Names.FXMLPaths.ROOT_LAYOUT));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -90,7 +90,7 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(Names.FXMLPaths.AGENT_VIEW));
-            BorderPane communityView = (BorderPane) loader.load();
+            BorderPane communityView = loader.load();
 
             SplitPane split = (SplitPane) rootLayout.getCenter();
             split.getItems().add(communityView);
@@ -109,7 +109,7 @@ public class MainApp extends Application
         {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(Names.FXMLPaths.CONFIGURATION_VIEW));
-            BorderPane configurationSettings = (BorderPane) loader.load();
+            BorderPane configurationSettings = loader.load();
 
             SplitPane split = (SplitPane) rootLayout.getCenter();
             split.getItems().add(configurationSettings);
@@ -126,7 +126,7 @@ public class MainApp extends Application
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(Names.FXMLPaths.AGENT_ADD_DIALOGUE));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
 
             // Create the dialogue Stage.
             Stage dialogueStage = new Stage();
