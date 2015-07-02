@@ -1,4 +1,4 @@
-package main.java.com.samvbeckmann.parity;
+package com.samvbeckmann.parity;
 
 /**
  * Defines a connection between two communities.

@@ -1,6 +1,6 @@
-package main.java.com.samvbeckmann.parity;
+package com.samvbeckmann.parity;
 
-import main.java.com.samvbeckmann.parity.utilities.IndexHelper;
+import com.samvbeckmann.parity.utilities.IndexHelper;
 
 import java.util.List;
 

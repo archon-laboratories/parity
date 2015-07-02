@@ -1,8 +1,8 @@
-package main.java.com.samvbeckmann.parity.demoProgram;
+package com.samvbeckmann.parity.demoProgram;
 
-import main.java.com.samvbeckmann.parity.Connection;
-import main.java.com.samvbeckmann.parity.*;
-import main.java.com.samvbeckmann.parity.utilities.InteractionHelper;
+import com.samvbeckmann.parity.Connection;
+import com.samvbeckmann.parity.*;
+import com.samvbeckmann.parity.utilities.InteractionHelper;
 
 import java.util.HashMap;
 import java.util.List;

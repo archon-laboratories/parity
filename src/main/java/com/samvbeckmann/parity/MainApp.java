@@ -1,10 +1,10 @@
-package main.java.com.samvbeckmann.parity;
+package com.samvbeckmann.parity;
 
-import main.java.com.samvbeckmann.parity.model.AgentModel;
-import main.java.com.samvbeckmann.parity.reference.Names;
-import main.java.com.samvbeckmann.parity.reference.Reference;
-import main.java.com.samvbeckmann.parity.view.AgentAddDialogController;
-import main.java.com.samvbeckmann.parity.view.CommunityViewController;
+import com.samvbeckmann.parity.model.AgentModel;
+import com.samvbeckmann.parity.reference.Names;
+import com.samvbeckmann.parity.reference.Reference;
+import com.samvbeckmann.parity.view.AgentAddDialogController;
+import com.samvbeckmann.parity.view.CommunityViewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

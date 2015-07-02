@@ -1,6 +1,6 @@
-package main.java.com.samvbeckmann.parity;
+package com.samvbeckmann.parity;
 
-import main.java.com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
+import com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
 
 /**
  * Determines if the simulation has reached its end.

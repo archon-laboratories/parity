@@ -1,6 +1,6 @@
-package main.java.com.samvbeckmann.parity.utilities;
+package com.samvbeckmann.parity.utilities;
 
-import main.java.com.samvbeckmann.parity.model.AgentModel;
+import com.samvbeckmann.parity.model.AgentModel;
 
 /**
  * parity, class made on 2015-06-26

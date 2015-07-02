@@ -1,7 +1,7 @@
-package main.java.com.samvbeckmann.parity.demoProgram;
+package com.samvbeckmann.parity.demoProgram;
 
-import main.java.com.samvbeckmann.parity.AbstractAgent;
-import main.java.com.samvbeckmann.parity.Population;
+import com.samvbeckmann.parity.AbstractAgent;
+import com.samvbeckmann.parity.Population;
 
 /**
  * A sample implementation of {@link AbstractAgent}. For this example, we will treat 1 is right, 0 as left.

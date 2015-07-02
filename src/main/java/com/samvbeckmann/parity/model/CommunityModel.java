@@ -1,4 +1,4 @@
-package main.java.com.samvbeckmann.parity.model;
+package com.samvbeckmann.parity.model;
 
 import javafx.collections.ObservableList;
 

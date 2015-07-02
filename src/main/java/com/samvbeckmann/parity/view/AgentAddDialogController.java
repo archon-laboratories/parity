@@ -1,6 +1,6 @@
-package main.java.com.samvbeckmann.parity.view;
+package com.samvbeckmann.parity.view;
 
-import main.java.com.samvbeckmann.parity.model.AgentModel;
+import com.samvbeckmann.parity.model.AgentModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;

@@ -1,7 +1,7 @@
-package main.java.com.samvbeckmann.parity;
+package com.samvbeckmann.parity;
 
-import main.java.com.samvbeckmann.parity.demoProgram.BasicChoices;
-import main.java.com.samvbeckmann.parity.demoProgram.BasicStates;
+import com.samvbeckmann.parity.demoProgram.BasicChoices;
+import com.samvbeckmann.parity.demoProgram.BasicStates;
 
 import java.util.ArrayList;
 

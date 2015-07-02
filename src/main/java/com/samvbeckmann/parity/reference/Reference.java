@@ -1,4 +1,4 @@
-package main.java.com.samvbeckmann.parity.reference;
+package com.samvbeckmann.parity.reference;
 
 /**
  * parity, class made on 2015-06-26

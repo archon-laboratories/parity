@@ -1,9 +1,9 @@
-package main.java.com.samvbeckmann.parity.utilities;
+package com.samvbeckmann.parity.utilities;
 
-import main.java.com.samvbeckmann.parity.Community;
-import main.java.com.samvbeckmann.parity.Connection;
-import main.java.com.samvbeckmann.parity.Population;
-import main.java.com.samvbeckmann.parity.IInteractionHandler;
+import com.samvbeckmann.parity.Community;
+import com.samvbeckmann.parity.Connection;
+import com.samvbeckmann.parity.Population;
+import com.samvbeckmann.parity.IInteractionHandler;
 
 import java.util.ArrayList;
 import java.util.List;

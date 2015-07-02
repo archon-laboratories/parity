@@ -1,6 +1,6 @@
-package main.java.com.samvbeckmann.parity.utilities;
+package com.samvbeckmann.parity.utilities;
 
-import main.java.com.samvbeckmann.parity.Population;
+import com.samvbeckmann.parity.Population;
 
 import java.util.List;
 

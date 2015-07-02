@@ -1,7 +1,7 @@
-package main.java.com.samvbeckmann.parity.demoProgram;
+package com.samvbeckmann.parity.demoProgram;
 
-import main.java.com.samvbeckmann.parity.ICompletionCondition;
-import main.java.com.samvbeckmann.parity.Population;
+import com.samvbeckmann.parity.ICompletionCondition;
+import com.samvbeckmann.parity.Population;
 
 /**
  * Sample implementation of {@link ICompletionCondition}

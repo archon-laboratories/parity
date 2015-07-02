@@ -1,4 +1,4 @@
-package main.java.com.samvbeckmann.parity.utilities;
+package com.samvbeckmann.parity.utilities;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
-package main.java.com.samvbeckmann.parity;
+package com.samvbeckmann.parity;
 
 import com.google.gson.stream.JsonReader;
-import main.java.com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
-import main.java.com.samvbeckmann.parity.demoProgram.BasicInteractionHandler;
-import main.java.com.samvbeckmann.parity.utilities.InteractionHelper;
-import main.java.com.samvbeckmann.parity.utilities.Shuffler;
+import com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
+import com.samvbeckmann.parity.demoProgram.BasicInteractionHandler;
+import com.samvbeckmann.parity.utilities.InteractionHelper;
+import com.samvbeckmann.parity.utilities.Shuffler;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
