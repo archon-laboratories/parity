@@ -1,4 +1,4 @@
-package com.samvbeckmann.parity;
+package com.samvbeckmann.parity.core;
 
 import java.util.Random;
 
@@ -84,14 +84,16 @@ public class Population
     /**
      * The method parity will use to increment the timestep
      */
-    void incrementTimestep() {
+    void incrementTimestep()
+    {
         timestep++;
     }
 
     /**
      * Returns all of the unique connections in the population
      */
-    public Connection[] getConnections() {
+    public Connection[] getConnections()
+    {
         return connections;
     }
 

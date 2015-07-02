@@ -31,14 +31,14 @@ public class AgentModel
         return classpath.get();
     }
 
-    public StringProperty classpathProperty()
-    {
-        return classpath;
-    }
-
     public void setClasspath(String classpath)
     {
         this.classpath.set(classpath);
+    }
+
+    public StringProperty classpathProperty()
+    {
+        return classpath;
     }
 
     public double getOpinion()
@@ -46,13 +46,13 @@ public class AgentModel
         return opinion.get();
     }
 
-    public DoubleProperty opinionProperty()
-    {
-        return opinion;
-    }
-
     public void setOpinion(double opinion)
     {
         this.opinion.set(opinion);
+    }
+
+    public DoubleProperty opinionProperty()
+    {
+        return opinion;
     }
 }

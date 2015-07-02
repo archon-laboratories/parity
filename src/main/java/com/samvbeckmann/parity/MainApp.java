@@ -44,6 +44,11 @@ public class MainApp extends Application
         communityData.add(new AgentModel("Q-Learner", 0.0));
     }
 
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+
     public ObservableList<AgentModel> getCommunityData()
     {
         return communityData;
@@ -158,11 +163,6 @@ public class MainApp extends Application
     public Stage getPrimaryStage()
     {
         return primaryStage;
-    }
-
-    public static void main(String[] args)
-    {
-        launch(args);
     }
 
 

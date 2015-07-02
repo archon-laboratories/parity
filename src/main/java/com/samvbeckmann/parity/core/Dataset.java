@@ -1,4 +1,4 @@
-package com.samvbeckmann.parity;
+package com.samvbeckmann.parity.core;
 
 import com.google.gson.stream.JsonReader;
 import com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
@@ -18,19 +18,52 @@ import java.util.Scanner;
  */
 public class Dataset
 {
+    private final HashMap<AbstractAgent, ArrayList<Double>> initialAgentOpinions;
     private int numTrials;
     private int opinionCount;
-
     private Community[] communities;
-
     private JsonReader reader;
-
     private IInteractionHandler interactionHandler;
     private ICompletionCondition completionCondition;
-
-    private final HashMap<AbstractAgent, ArrayList<Double>> initialAgentOpinions;
     private Connection[] connections;
 
+
+    /**
+     * Converts the JSON dataset file to java variables, enabling the program to run.
+     *
+     * @param filename The name of the JSON file where the information is located.
+     */
+    public Dataset(String filename)
+    {
+        interactionHandler = new BasicInteractionHandler();
+        completionCondition = new BasicCompletionCondition();
+        initialAgentOpinions = new HashMap<>();
+
+        boolean fileFound = false;
+        Scanner console = new Scanner(System.in);
+
+        do
+        {
+            try
+            {
+                reader = new JsonReader(new FileReader(filename));
+                fileFound = true;
+                parseInput();
+                reader.close();
+                console.close();
+            } catch (FileNotFoundException e)
+            {
+                System.err.print("File " + filename + " not found. Please try another file: ");
+                filename = console.next();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+                System.exit(1);
+            }
+        } while (!fileFound);
+
+        removeOneWayNeighbours();
+    }
 
     /**
      * Gets a completion condition from its classpath
@@ -356,43 +389,6 @@ public class Dataset
         }
         reader.endObject();
         reader.close();
-    }
-
-    /**
-     * Converts the JSON dataset file to java variables, enabling the program to run.
-     *
-     * @param filename The name of the JSON file where the information is located.
-     */
-    public Dataset(String filename)
-    {
-        interactionHandler = new BasicInteractionHandler();
-        completionCondition = new BasicCompletionCondition();
-        initialAgentOpinions = new HashMap<>();
-
-        boolean fileFound = false;
-        Scanner console = new Scanner(System.in);
-
-        do
-        {
-            try
-            {
-                reader = new JsonReader(new FileReader(filename));
-                fileFound = true;
-                parseInput();
-                reader.close();
-                console.close();
-            } catch (FileNotFoundException e)
-            {
-                System.err.print("File " + filename + " not found. Please try another file: ");
-                filename = console.next();
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-                System.exit(1);
-            }
-        } while (!fileFound);
-
-        removeOneWayNeighbours();
     }
 
     private void removeOneWayNeighbours()

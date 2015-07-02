@@ -13,8 +13,7 @@ public final class IndexHelper
     /**
      * Creates a list of indices of the length specified.
      *
-     * @param bound   The bound of indices to be used.
-     *
+     * @param bound The bound of indices to be used.
      * @return An ArrayList consecutive integers of the length given.
      */
     public static List<Integer> generateIndices(int bound)

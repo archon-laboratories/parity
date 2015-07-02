@@ -1,4 +1,4 @@
-package com.samvbeckmann.parity;
+package com.samvbeckmann.parity.core;
 
 import com.samvbeckmann.parity.demoProgram.BasicChoices;
 import com.samvbeckmann.parity.demoProgram.BasicStates;
@@ -16,7 +16,7 @@ public class Parity
         long startTime = System.nanoTime();
         double averageOpinion = 0;
         double averageTimestep = 0;
-        Dataset primary = new Dataset("datasets/demo.json");
+        Dataset primary = new Dataset("src/main/datasets/demo.json");
         ICompletionCondition condition = primary.getCompletionCondition();
         IInteractionHandler handler = primary.getInteractionHandler();
 

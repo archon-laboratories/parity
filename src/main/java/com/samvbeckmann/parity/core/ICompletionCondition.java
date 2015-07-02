@@ -1,4 +1,4 @@
-package com.samvbeckmann.parity;
+package com.samvbeckmann.parity.core;
 
 import com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
 

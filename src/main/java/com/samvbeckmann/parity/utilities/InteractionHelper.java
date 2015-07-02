@@ -1,9 +1,9 @@
 package com.samvbeckmann.parity.utilities;
 
-import com.samvbeckmann.parity.Community;
-import com.samvbeckmann.parity.Connection;
-import com.samvbeckmann.parity.Population;
-import com.samvbeckmann.parity.IInteractionHandler;
+import com.samvbeckmann.parity.core.Community;
+import com.samvbeckmann.parity.core.Connection;
+import com.samvbeckmann.parity.core.IInteractionHandler;
+import com.samvbeckmann.parity.core.Population;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +18,15 @@ public final class InteractionHelper
 
     /**
      * Checks if a two way connection is unique, or if it's already in the arraylist found in some form.
-     * @param found The list of Connection objects that have already been found
+     *
+     * @param found   The list of Connection objects that have already been found
      * @param toCheck The Connection to check
      * @return False if toCheck is in found, true otherwise
      */
-    private static boolean isUnique(List<Connection> found, Connection toCheck) {
-        for (Connection current : found) {
+    private static boolean isUnique(List<Connection> found, Connection toCheck)
+    {
+        for (Connection current : found)
+        {
             if (current.getOtherCommunity() == toCheck.getOtherCommunity()
                     && current.getThisCommunity() == toCheck.getThisCommunity())
                 return false;

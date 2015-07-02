@@ -1,7 +1,7 @@
-package com.samvbeckmann.parity;
+package com.samvbeckmann.parity.core;
 
-import com.samvbeckmann.parity.demoProgram.BasicInteractionHandler;
 import com.samvbeckmann.parity.demoProgram.BasicChoices;
+import com.samvbeckmann.parity.demoProgram.BasicInteractionHandler;
 
 import java.util.Map;
 
@@ -19,9 +19,8 @@ public interface IInteractionHandler
      * Called once per timestep.
      *
      * @param p The population to find interactions for.
-     *
      * @return A map, where the object and key are two agents that will
-     *         interact in this timestep.
+     * interact in this timestep.
      */
     Map<AbstractAgent, AbstractAgent> determineInteractions(Population p);
 
@@ -32,8 +31,7 @@ public interface IInteractionHandler
      * this is left to the discretion of the agent.
      *
      * @param columnPlayer The choice of the Column Player
-     * @param rowPlayer The choice of the Row Player
-     *
+     * @param rowPlayer    The choice of the Row Player
      * @return the feedback the agent will receive
      */
     int getColumnFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer);
@@ -45,8 +43,7 @@ public interface IInteractionHandler
      * this is left to the discretion of the agent.
      *
      * @param columnPlayer The choice of the Column Player
-     * @param rowPlayer The choice of the Row Player
-     *
+     * @param rowPlayer    The choice of the Row Player
      * @return the feedback the agent will receive
      */
     int getRowFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer);

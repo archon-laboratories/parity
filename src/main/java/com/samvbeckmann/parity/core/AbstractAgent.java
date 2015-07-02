@@ -1,4 +1,4 @@
-package com.samvbeckmann.parity;
+package com.samvbeckmann.parity.core;
 
 import com.samvbeckmann.parity.demoProgram.BasicChoices;
 import com.samvbeckmann.parity.demoProgram.BasicStates;
@@ -33,6 +33,14 @@ public abstract class AbstractAgent implements Cloneable
     public double[] getOpinions()
     {
         return opinions;
+    }
+
+    protected void setOpinions(ArrayList<Double> agentOpinions)
+    {
+        opinions = new double[agentOpinions.size()];
+        int count = 0;
+        for (double val : agentOpinions)
+            opinions[count] = val;
     }
 
     /**
@@ -80,14 +88,6 @@ public abstract class AbstractAgent implements Cloneable
     }
 
     /**
-     * Gets the y coordinate of the agent within its {@link Community}
-     */
-    public int getY()
-    {
-        return yPos;
-    }
-
-    /**
      * Sets the x coordinate of the agent within its {@link Community}
      *
      * @param xPos The x coordinate
@@ -98,6 +98,14 @@ public abstract class AbstractAgent implements Cloneable
     }
 
     /**
+     * Gets the y coordinate of the agent within its {@link Community}
+     */
+    public int getY()
+    {
+        return yPos;
+    }
+
+    /**
      * Sets the y coordinate of the agent within its {@link Community}
      *
      * @param yPos The y coordinate
@@ -105,13 +113,5 @@ public abstract class AbstractAgent implements Cloneable
     protected void setY(int yPos)
     {
         this.yPos = yPos;
-    }
-
-    protected void setOpinions(ArrayList<Double> agentOpinions)
-    {
-        opinions = new double[agentOpinions.size()];
-        int count = 0;
-        for (double val : agentOpinions)
-            opinions[count] = val;
     }
 }

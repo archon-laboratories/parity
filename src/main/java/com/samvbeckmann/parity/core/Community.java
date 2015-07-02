@@ -1,4 +1,4 @@
-package com.samvbeckmann.parity;
+package com.samvbeckmann.parity.core;
 
 import com.samvbeckmann.parity.utilities.IndexHelper;
 
@@ -36,6 +36,16 @@ public class Community
     }
 
     /**
+     * Sets the neighbours of the community
+     *
+     * @param neighbours The {@link Connection}s of the community
+     */
+    void setNeighbours(Connection[] neighbours)
+    {
+        this.neighbours = neighbours;
+    }
+
+    /**
      * Checks a community to see if it's in the array of neighbors
      *
      * @param community The community being looked for
@@ -62,18 +72,13 @@ public class Community
 
     /**
      * Sets the {@link AbstractAgent}s living in the community
+     *
      * @param agents The {@link AbstractAgent}s living in the community
      */
     void setAgents(AbstractAgent[] agents)
     {
         this.agents = agents;
     }
-
-    /**
-     * Sets the neighbours of the community
-     * @param neighbours The {@link Connection}s of the community
-     */
-    void setNeighbours(Connection[] neighbours) { this.neighbours = neighbours;}
 
     /**
      * @return The number of agents in the community

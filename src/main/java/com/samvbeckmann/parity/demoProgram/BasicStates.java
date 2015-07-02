@@ -1,6 +1,6 @@
 package com.samvbeckmann.parity.demoProgram;
 
-import com.samvbeckmann.parity.AbstractAgent;
+import com.samvbeckmann.parity.core.AbstractAgent;
 
 /**
  * Enum of possible states of an {@link AbstractAgent} during an interaction

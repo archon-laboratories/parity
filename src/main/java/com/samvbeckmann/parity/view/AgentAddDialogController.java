@@ -54,7 +54,7 @@ public class AgentAddDialogController
     {
         if (isInputValid())
         {
-            for(int i = 0; i < Integer.parseInt(numberAddField.getText()); i++)
+            for (int i = 0; i < Integer.parseInt(numberAddField.getText()); i++)
             {
                 agents.add(new AgentModel("Basic Agent", Double.parseDouble(opinionField.getText())));
 
