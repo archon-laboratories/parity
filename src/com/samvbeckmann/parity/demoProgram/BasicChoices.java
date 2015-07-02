@@ -1,4 +1,4 @@
-package com.samvbeckmann.parity.basicProgram;
+package com.samvbeckmann.parity.demoProgram;
 
 import com.samvbeckmann.parity.AbstractAgent;
 
@@ -7,7 +7,7 @@ import com.samvbeckmann.parity.AbstractAgent;
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */
-public enum Choices
+public enum BasicChoices
 {
     RIGHT, LEFT
 }

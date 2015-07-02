@@ -1,9 +1,8 @@
 package com.samvbeckmann.parity.utilities;
 
 import com.samvbeckmann.parity.Community;
-import com.samvbeckmann.parity.OneWayConnection;
+import com.samvbeckmann.parity.Connection;
 import com.samvbeckmann.parity.Population;
-import com.samvbeckmann.parity.TwoWayConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +16,20 @@ public final class InteractionHelper
 {
 
     /**
-     * Returns true if a the two-way connection is unique, false if not.
-     * That is, if A to B is in the list, then don't add either B to A or A to B.
-     *
-     * @param connections The list to add potentially the new connection into.
-     * @param main        The connection from the community to its neighbour.
-     * @param reverse     The connection from the neighbor to the community.
+     * Checks if a two way connection is unique, or if it's already in the arraylist found in some form.
+     * @param found The list of Connection objects that have already been found
+     * @param toCheck The Connection to check
+     * @return False if toCheck is in found, true otherwise
      */
-    private static boolean canConnect(List<TwoWayConnection> connections, OneWayConnection main, OneWayConnection reverse)
-    {
-        for (TwoWayConnection conn : connections)
-            if ((conn.getCommunity1() == main.getCommunity() && conn.getCommunity2() == reverse.getCommunity()) ||
-                    (conn.getCommunity1() == reverse.getCommunity() && conn.getCommunity2() == main.getCommunity()))
+    private static boolean isUnique(List<Connection> found, Connection toCheck) {
+        for (Connection current : found) {
+            if (current.getOtherCommunity() == toCheck.getOtherCommunity()
+                    && current.getThisCommunity() == toCheck.getThisCommunity())
                 return false;
-
+            if (current.getOtherCommunity() == toCheck.getThisCommunity()
+                    && current.getThisCommunity() == toCheck.getOtherCommunity())
+                return false;
+        }
         return true;
     }
 
@@ -40,24 +39,15 @@ public final class InteractionHelper
      * @param currentPop The population in which to get two-way connections
      * @return A list of two-way connections
      */
-    public static List<TwoWayConnection> getConnectionsFromPopulation(Population currentPop)
+    public static Connection[] getConnectionsFromPopulation(Population currentPop)
     {
-        List<TwoWayConnection> connections = new ArrayList<>();
+        List<Connection> foundConnections = new ArrayList<>();
 
         for (Community community : currentPop.getCommunities())
-        {
-            for (OneWayConnection neighbour : community.getNeighbours())
-            {
-                OneWayConnection reverse = neighbour.getCommunity().getConnectionByCommunity(community);
+            for (Connection neighbour : community.getNeighbours()) // Get the connection
+                if (isUnique(foundConnections, neighbour))
+                    foundConnections.add(neighbour);
 
-                if (reverse != null && canConnect(connections, neighbour, reverse))
-                {
-                    int min = Math.min(neighbour.getPossibleInteractions(), reverse.getPossibleInteractions());
-                    TwoWayConnection twoWay = new TwoWayConnection(community, neighbour.getCommunity(), min);
-                    connections.add(twoWay);
-                }
-            }
-        }
-        return connections;
+        return foundConnections.toArray(new Connection[foundConnections.size()]);
     }
 }

@@ -3,10 +3,9 @@ package com.samvbeckmann.parity;
 import com.samvbeckmann.parity.utilities.IndexHelper;
 
 import java.util.List;
-import java.util.Random;
 
 /**
- * Defines a Community, which consists of {@link AbstractAgent} and {@link OneWayConnection}
+ * Defines a Community, which consists of {@link AbstractAgent} and {@link Connection}
  * to other communities
  *
  * @author Nate Beckemeyer & Sam Beckmann
@@ -14,9 +13,9 @@ import java.util.Random;
 public class Community
 {
     /**
-     * The {@link OneWayConnection} list of potential neighbours.
+     * The {@link Connection} list of potential neighbours.
      */
-    private OneWayConnection[] neighbours;
+    private Connection[] neighbours;
 
     /**
      * The {@link AbstractAgent}s living in the community
@@ -31,7 +30,7 @@ public class Community
     /**
      * @return The community's neighbours
      */
-    public OneWayConnection[] getNeighbours()
+    public Connection[] getNeighbours()
     {
         return neighbours;
     }
@@ -40,13 +39,13 @@ public class Community
      * Checks a community to see if it's in the array of neighbors
      *
      * @param community The community being looked for
-     * @return The OneWayConnection to that community, or null if there is none
+     * @return The Connection to that community, or null if there is none
      */
-    public OneWayConnection getConnectionByCommunity(Community community)
+    public Connection getConnectionByCommunity(Community community)
     {
-        for (OneWayConnection neighbour : neighbours)
+        for (Connection neighbour : neighbours)
         {
-            if (neighbour.getCommunity().equals(community))
+            if (neighbour.getOtherCommunity().equals(community))
                 return neighbour;
         }
 
@@ -72,9 +71,9 @@ public class Community
 
     /**
      * Sets the neighbours of the community
-     * @param neighbours The {@link OneWayConnection}s of the community
+     * @param neighbours The {@link Connection}s of the community
      */
-    void setNeighbours(OneWayConnection [] neighbours) { this.neighbours = neighbours;}
+    void setNeighbours(Connection[] neighbours) { this.neighbours = neighbours;}
 
     /**
      * @return The number of agents in the community

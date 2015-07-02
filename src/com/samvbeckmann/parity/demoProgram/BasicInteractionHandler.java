@@ -1,10 +1,8 @@
-package com.samvbeckmann.parity.basicProgram;
+package com.samvbeckmann.parity.demoProgram;
 
 import com.samvbeckmann.parity.*;
-import com.samvbeckmann.parity.utilities.InteractionHelper;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,14 +17,14 @@ public class BasicInteractionHandler implements IInteractionHandler
     public static final int NEGATIVE_REWARD = -1;
 
 
-    private void insertCrossCommunityInteractions(Map<AbstractAgent, AbstractAgent> map, List<TwoWayConnection> connections)
+    private void insertCrossCommunityInteractions(Map<AbstractAgent, AbstractAgent> map, Connection[] connections)
     {
-        for (TwoWayConnection con : connections)
+        for (Connection con : connections)
         {
             for (int i = 0; i < con.getPossibleInteractions(); i++)
             {
-                AbstractAgent agent1 = con.getCommunity1().markRandomAgentForInteraction();
-                AbstractAgent agent2 = con.getCommunity2().markRandomAgentForInteraction();
+                AbstractAgent agent1 = con.getThisCommunity().markRandomAgentForInteraction();
+                AbstractAgent agent2 = con.getOtherCommunity().markRandomAgentForInteraction();
 
                 if (agent1 != null && agent2 != null)
                     map.put(agent1, agent2);
@@ -45,9 +43,8 @@ public class BasicInteractionHandler implements IInteractionHandler
                 AbstractAgent agent1 = community.markRandomAgentForInteraction();
                 AbstractAgent agent2 = community.markRandomAgentForInteraction();
                 if (agent1 != null && agent2 != null)
-                {
                     map.put(agent1, agent2);
-                } else
+                else
                     System.err.println("Could not get agents to mark for interaction!");
             }
             community.resetAvailability();
@@ -60,10 +57,10 @@ public class BasicInteractionHandler implements IInteractionHandler
      */
     public Map<AbstractAgent, AbstractAgent> determineInteractions(Population currentPop)
     {
-        List<TwoWayConnection> connections = InteractionHelper.getConnectionsFromPopulation(currentPop);
+        Connection[] uniqueConnections = currentPop.getConnections();
         Map<AbstractAgent, AbstractAgent> map = new HashMap<>();
 
-        insertCrossCommunityInteractions(map, connections);
+        insertCrossCommunityInteractions(map, uniqueConnections);
         insertIntraCommunityInteractions(map, currentPop);
 
         return map;
@@ -74,7 +71,7 @@ public class BasicInteractionHandler implements IInteractionHandler
      * @param rowPlayer    The choice of the Row Player
      * @return If their actions align, reinforce the behavior (1). Else, discourage it. (-1)
      */
-    public int getColumnFeedback(Choices columnPlayer, Choices rowPlayer)
+    public int getColumnFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer)
     {
         return columnPlayer == rowPlayer ? POSITIVE_REWARD : NEGATIVE_REWARD;
     }
@@ -84,7 +81,7 @@ public class BasicInteractionHandler implements IInteractionHandler
      * @param rowPlayer    The choice of the Row Player
      * @return If their actions align, reinforce the behavior (1). Else, discourage it. (-1)
      */
-    public int getRowFeedback(Choices columnPlayer, Choices rowPlayer)
+    public int getRowFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer)
     {
         return getColumnFeedback(columnPlayer, rowPlayer);
     }

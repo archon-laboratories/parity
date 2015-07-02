@@ -1,16 +1,16 @@
 package com.samvbeckmann.parity;
 
 import com.google.gson.stream.JsonReader;
-import com.samvbeckmann.parity.basicProgram.BasicCompletionCondition;
-import com.samvbeckmann.parity.basicProgram.BasicInteractionHandler;
-import com.samvbeckmann.parity.utilities.IndexHelper;
+import com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
+import com.samvbeckmann.parity.demoProgram.BasicInteractionHandler;
+import com.samvbeckmann.parity.utilities.InteractionHelper;
+import com.samvbeckmann.parity.utilities.Shuffler;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -28,7 +28,8 @@ public class Dataset
     private IInteractionHandler interactionHandler;
     private ICompletionCondition completionCondition;
 
-    private HashMap<AbstractAgent, ArrayList<Double>> initialAgentOpinions;
+    private final HashMap<AbstractAgent, ArrayList<Double>> initialAgentOpinions;
+    private Connection[] connections;
 
 
     /**
@@ -161,13 +162,13 @@ public class Dataset
      * Parses the neighbors of a community
      *
      * @param numNeighbors The number of neighbors
-     * @return The {@link OneWayConnection}s of the community
+     * @return The {@link Connection}s of the community
      * @throws IOException
      */
-    private OneWayConnection[] parseNeighbors(int numNeighbors) throws IOException
+    private Connection[] parseNeighbors(int numNeighbors, int thisId_) throws IOException
     {
         int neighborCount = 0;
-        OneWayConnection[] neighbours = new OneWayConnection[numNeighbors];
+        Connection[] neighbours = new Connection[numNeighbors];
 
         reader.beginArray();
         while (reader.hasNext())
@@ -177,10 +178,11 @@ public class Dataset
                 reader.skipValue();
                 continue;
             }
-            OneWayConnection connect = new OneWayConnection();
-
             reader.beginArray();
             boolean counted = false;
+            int possibleInteractions = -1;
+            Community other = null;
+
             while (reader.hasNext())
             {
                 if (reader.peek() == null)
@@ -190,15 +192,15 @@ public class Dataset
                 }
                 if (!counted)
                 {
-                    connect.setPossibleInteractions(reader.nextInt());
+                    possibleInteractions = reader.nextInt();
                     counted = true;
                 } else
                 {
-                    connect.setCommunity(communities[reader.nextInt()]);
+                    other = communities[reader.nextInt()];
                 }
             }
             reader.endArray();
-            neighbours[neighborCount] = connect;
+            neighbours[neighborCount] = new Connection(communities[thisId_], other, possibleInteractions);
             neighborCount++;
         }
         reader.endArray();
@@ -220,6 +222,7 @@ public class Dataset
         int agentCount = 0;
         int interactionsAvailable = -1;
 
+
         while (reader.hasNext())
         {
             String name = reader.nextName();
@@ -236,7 +239,7 @@ public class Dataset
 
                 case "neighbours":
                     assert interactionsAvailable >= 0;
-                    communities[id_].setNeighbours(parseNeighbors(numNeighbors));
+                    communities[id_].setNeighbours(parseNeighbors(numNeighbors, id_));
                     break;
 
                 case "agentCount":
@@ -388,6 +391,25 @@ public class Dataset
                 System.exit(1);
             }
         } while (!fileFound);
+
+        removeOneWayNeighbours();
+    }
+
+    private void removeOneWayNeighbours()
+    {
+        for (Community comm : communities)
+        {
+            ArrayList<Connection> newNeighbours = new ArrayList<>();
+            for (Connection neighbour : comm.getNeighbours())
+                if (neighbour.getOtherCommunity().getConnectionByCommunity(comm) != null)
+                {
+                    Connection connection = new Connection(comm, neighbour.getOtherCommunity(),
+                            neighbour.getPossibleInteractions());
+                    newNeighbours.add(connection);
+                }
+            comm.setNeighbours(newNeighbours.toArray(new Connection[newNeighbours.size()]));
+        }
+        connections = InteractionHelper.getConnectionsFromPopulation(new Population(communities));
     }
 
     /**
@@ -399,7 +421,11 @@ public class Dataset
             for (AbstractAgent agent : current.getAgents())
                 agent.setOpinions(new ArrayList<>(initialAgentOpinions.get(agent)));
 
-        return new Population(communities);
+        Population created = new Population(communities);
+        created.setConnections(connections);
+
+        return created;
+
     }
 
     /**
@@ -427,45 +453,21 @@ public class Dataset
     }
 
     /**
-     * Scrambles all of the communities in the population. Within each community, agent locations are also scrambled.
+     * Shuffles the array of communities within the population. Within each community, agent locations are also shuffled.
+     * It also shuffles the order of the connections retrieved by the population.
      * This does nothing more than change the order in which communities are examined or read; if sloppy code will
      * prefer the first community it finds (such as lower index), this method will change which community that is.
      */
-    public Population scrambleData()
+    public Population shuffleData()
     {
-        List<Integer> availability = IndexHelper.generateIndices(communities.length);
+        new Shuffler<Community>().shuffleArray(communities);
 
-        // Swap the communities randomly
-        while (availability.size() > 1)
-        {
-            int index1 = availability.remove(Population.rnd.nextInt(availability.size()));
-            int index2 = availability.remove(Population.rnd.nextInt(availability.size()));
-
-            Community temp = communities[index2];
-            communities[index2] = communities[index1];
-            communities[index1] = temp;
-
-        }
-
-        //Swap the agents within each community
+        // Swap the agents within each community
         for (Community current : communities)
-        {
-            availability = IndexHelper.generateIndices(current.communitySize());
-            while (availability.size() > 1)
-            {
-                int index1 = availability.remove(Population.rnd.nextInt(availability.size()));
-                int index2 = availability.remove(Population.rnd.nextInt(availability.size()));
+            current.setAgents(new Shuffler<AbstractAgent>().copyRandom(current.getAgents()));
 
-                AbstractAgent[] agents = current.getAgents();
-
-                AbstractAgent temp = agents[index2];
-                agents[index2] = agents[index1];
-                agents[index1] = temp;
-
-                current.setAgents(agents);
-
-            }
-        }
+        // Shuffle the connections in the population
+        new Shuffler<Connection>().shuffleArray(connections);
 
         return getDatasetPopulation();
     }

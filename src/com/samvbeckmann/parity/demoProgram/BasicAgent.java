@@ -1,4 +1,4 @@
-package com.samvbeckmann.parity.basicProgram;
+package com.samvbeckmann.parity.demoProgram;
 
 import com.samvbeckmann.parity.AbstractAgent;
 import com.samvbeckmann.parity.Population;
@@ -12,7 +12,7 @@ import com.samvbeckmann.parity.Population;
 public class BasicAgent extends AbstractAgent
 {
 
-    Choices prevChoice;
+    BasicChoices prevChoice;
 
     public BasicAgent()
     {
@@ -31,12 +31,12 @@ public class BasicAgent extends AbstractAgent
      * @param state The state of the agent in the interaction
      * @return The choice that the agent makes in the interaction
      */
-    public Choices interaction(States state)
+    public BasicChoices interaction(BasicStates state)
     {
         if (Population.rnd.nextDouble() > getOpinion())
-            prevChoice = Choices.LEFT;
+            prevChoice = BasicChoices.LEFT;
         else
-            prevChoice = Choices.RIGHT;
+            prevChoice = BasicChoices.RIGHT;
 
         return prevChoice;
     }
@@ -51,14 +51,14 @@ public class BasicAgent extends AbstractAgent
         switch (feedback)
         {
             case 1:
-                if (prevChoice == Choices.RIGHT)
+                if (prevChoice == BasicChoices.RIGHT)
                     opinions[0] = opinions[0] < 1. ? opinions[0] + .05 : opinions[0];
                 else // Only two choices in this basic example
                     opinions[0] = opinions[0] > 0. ? opinions[0] - .05 : opinions[0];
                 break;
 
             case -1:
-                if (prevChoice == Choices.RIGHT)
+                if (prevChoice == BasicChoices.RIGHT)
                     opinions[0] = opinions[0] > 0. ? opinions[0] - .05 : opinions[0];
                 else // Only two choices in this basic example
                     opinions[0] = opinions[0] < 1. ? opinions[0] + .05 : opinions[0];

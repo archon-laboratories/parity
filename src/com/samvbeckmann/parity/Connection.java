@@ -6,44 +6,44 @@ package com.samvbeckmann.parity;
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */
-public class TwoWayConnection
+public class Connection
 {
     /**
      * {@link Community} (1) in the interaction
      */
-    private Community community1;
+    private final Community thisCommunity;
 
     /**
      * {@link Community} (2) in the interaction
      */
-    private Community community2;
+    private final Community otherCommunity;
 
     /**
      * The number of possible interactions in this two-way avenue
      */
-    private int possibleInteractions;
+    private final int possibleInteractions;
 
-    public TwoWayConnection(Community com1, Community com2, int possibleInteractions)
+    public Connection(Community com1, Community com2, int possibleInteractions)
     {
-        this.community1 = com1;
-        this.community2 = com2;
+        this.thisCommunity = com1;
+        this.otherCommunity = com2;
         this.possibleInteractions = possibleInteractions;
     }
 
     /**
-     * @return community 1
+     * @return this community
      */
-    public Community getCommunity1()
+    public Community getThisCommunity()
     {
-        return community1;
+        return thisCommunity;
     }
 
     /**
-     * @return community2
+     * @return other community
      */
-    public Community getCommunity2()
+    public Community getOtherCommunity()
     {
-        return community2;
+        return otherCommunity;
     }
 
     /**

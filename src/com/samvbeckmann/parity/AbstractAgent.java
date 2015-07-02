@@ -1,7 +1,7 @@
 package com.samvbeckmann.parity;
 
-import com.samvbeckmann.parity.basicProgram.Choices;
-import com.samvbeckmann.parity.basicProgram.States;
+import com.samvbeckmann.parity.demoProgram.BasicChoices;
+import com.samvbeckmann.parity.demoProgram.BasicStates;
 
 import java.util.ArrayList;
 
@@ -41,7 +41,7 @@ public abstract class AbstractAgent implements Cloneable
      * @param state The state of the agent in the interaction
      * @return A response to the interaction, in the form of a choice.
      */
-    protected abstract Choices interaction(States state);
+    protected abstract BasicChoices interaction(BasicStates state);
 
     /**
      * @return agent's opinion, range [0,1]

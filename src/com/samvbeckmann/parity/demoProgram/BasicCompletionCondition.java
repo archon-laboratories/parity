@@ -1,4 +1,4 @@
-package com.samvbeckmann.parity.basicProgram;
+package com.samvbeckmann.parity.demoProgram;
 
 import com.samvbeckmann.parity.ICompletionCondition;
 import com.samvbeckmann.parity.Population;

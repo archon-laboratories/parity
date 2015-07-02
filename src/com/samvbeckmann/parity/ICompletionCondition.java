@@ -1,6 +1,6 @@
 package com.samvbeckmann.parity;
 
-import com.samvbeckmann.parity.basicProgram.BasicCompletionCondition;
+import com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
 
 /**
  * Determines if the simulation has reached its end.

@@ -25,12 +25,9 @@ public class Population
     private Community[] communities;
 
     /**
-     * Default constructor
+     * The list of unique two-way connections in the population
      */
-    public Population()
-    {
-        timestep = 0;
-    }
+    private Connection[] connections;
 
     /**
      * @param communities Communities in the population
@@ -39,6 +36,7 @@ public class Population
     {
         timestep = 0;
         this.communities = communities;
+        connections = null;
     }
 
     /**
@@ -88,5 +86,20 @@ public class Population
      */
     void incrementTimestep() {
         timestep++;
+    }
+
+    /**
+     * Returns all of the unique connections in the population
+     */
+    public Connection[] getConnections() {
+        return connections;
+    }
+
+    /**
+     * Sets the connections
+     */
+    void setConnections(Connection[] connections)
+    {
+        this.connections = connections;
     }
 }

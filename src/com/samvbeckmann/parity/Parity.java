@@ -1,7 +1,7 @@
 package com.samvbeckmann.parity;
 
-import com.samvbeckmann.parity.basicProgram.Choices;
-import com.samvbeckmann.parity.basicProgram.States;
+import com.samvbeckmann.parity.demoProgram.BasicChoices;
+import com.samvbeckmann.parity.demoProgram.BasicStates;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public class Parity
 
         for (int i = 1; i <= primary.getNumTrials(); i++)
         {
-            Population initial = primary.scrambleData();
+            Population initial = primary.shuffleData();
 
             while (!condition.simulationComplete(initial))
             {
@@ -34,7 +34,7 @@ public class Parity
             averageTimestep += initial.getTimestep();
         }
 
-        System.out.printf("Simulation complete! Statistics:\nFinal opinion: %f\nTimestep: %f\nTime to complete: %.5fs",
+        System.out.printf("Simulation complete! Statistics:%nFinal opinion: %f%nTimestep: %f%nTime to complete: %.5fs",
                 averageOpinion / ((double) primary.getNumTrials()),
                 averageTimestep / ((double) primary.getNumTrials()),
                 (System.nanoTime() - startTime) / (Math.pow(10., 9)));
@@ -52,8 +52,8 @@ public class Parity
 
         for (Map.Entry<AbstractAgent, AbstractAgent> entry : interactions.entrySet())
         {
-            Choices column = entry.getKey().interaction(States.COLUMN);
-            Choices row = entry.getValue().interaction(States.ROW);
+            BasicChoices column = entry.getKey().interaction(BasicStates.COLUMN);
+            BasicChoices row = entry.getValue().interaction(BasicStates.ROW);
 
             entry.getKey().updateOpinions(handler.getColumnFeedback(column, row));
             entry.getValue().updateOpinions(handler.getRowFeedback(column, row));

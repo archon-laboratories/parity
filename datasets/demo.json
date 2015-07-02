@@ -1,14 +1,14 @@
 {
   "population": {
-    "numIterations": 10000000,
+    "numIterations": 10000,
     "numberCommunities": 4,
-    "completionCondition": "com.samvbeckmann.parity.basicProgram.BasicCompletionCondition",
-    "interactionHandler": "com.samvbeckmann.parity.basicProgram.BasicInteractionHandler",
+    "completionCondition": "com.samvbeckmann.parity.demoProgram.BasicCompletionCondition",
+    "interactionHandler": "com.samvbeckmann.parity.demoProgram.BasicInteractionHandler",
     "opinionCount": 1,
     "communities": [
       {
         "id": 0,
-        "numNeighbors": 2,
+        "numNeighbors": 3,
         "neighbours": [
           [
             2,
@@ -17,12 +17,16 @@
           [
             2,
             2
+          ],
+          [
+            2,
+            3
           ]
         ],
         "agentCount": 4,
         "agents": [
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 0,
             "opinions": [
@@ -30,7 +34,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 0,
             "opinions": [
@@ -38,7 +42,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 1,
             "opinions": [
@@ -46,7 +50,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 1,
             "opinions": [
@@ -71,7 +75,7 @@
         "agentCount": 4,
         "agents": [
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 0,
             "opinions": [
@@ -79,7 +83,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 0,
             "opinions": [
@@ -87,7 +91,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 1,
             "opinions": [
@@ -95,7 +99,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 1,
             "opinions": [
@@ -120,7 +124,7 @@
         "agentCount": 4,
         "agents": [
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 0,
             "opinions": [
@@ -128,7 +132,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 0,
             "opinions": [
@@ -136,7 +140,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 1,
             "opinions": [
@@ -144,7 +148,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 1,
             "opinions": [
@@ -169,7 +173,7 @@
         "agentCount": 4,
         "agents": [
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 0,
             "opinions": [
@@ -177,7 +181,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 0,
             "opinions": [
@@ -185,7 +189,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 0,
             "yPos": 1,
             "opinions": [
@@ -193,7 +197,7 @@
             ]
           },
           {
-            "sourceFile": "com.samvbeckmann.parity.basicProgram.BasicAgent",
+            "sourceFile": "com.samvbeckmann.parity.demoProgram.BasicAgent",
             "xPos": 1,
             "yPos": 1,
             "opinions": [

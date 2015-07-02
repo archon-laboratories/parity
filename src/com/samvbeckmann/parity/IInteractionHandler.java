@@ -1,7 +1,7 @@
 package com.samvbeckmann.parity;
 
-import com.samvbeckmann.parity.basicProgram.BasicInteractionHandler;
-import com.samvbeckmann.parity.basicProgram.Choices;
+import com.samvbeckmann.parity.demoProgram.BasicInteractionHandler;
+import com.samvbeckmann.parity.demoProgram.BasicChoices;
 
 import java.util.Map;
 
@@ -36,7 +36,7 @@ public interface IInteractionHandler
      *
      * @return the feedback the agent will receive
      */
-    int getColumnFeedback(Choices columnPlayer, Choices rowPlayer);
+    int getColumnFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer);
 
     /**
      * Gives feedback to the row player based on its choice.
@@ -49,5 +49,5 @@ public interface IInteractionHandler
      *
      * @return the feedback the agent will receive
      */
-    int getRowFeedback(Choices columnPlayer, Choices rowPlayer);
+    int getRowFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer);
 }
