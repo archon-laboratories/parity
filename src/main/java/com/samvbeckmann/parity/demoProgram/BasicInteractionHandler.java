@@ -59,7 +59,7 @@ public class BasicInteractionHandler implements IInteractionHandler
      */
     public Map<AbstractAgent, AbstractAgent> determineInteractions(Population currentPop)
     {
-        Connection[] connections = InteractionHelper.getConnectionsFromPopulation(currentPop);
+        Connection[] connections = currentPop.getConnections();
         Map<AbstractAgent, AbstractAgent> map = new HashMap<>();
 
         insertCrossCommunityInteractions(map, connections);
