@@ -86,4 +86,10 @@ public class BasicInteractionHandler implements IInteractionHandler
     {
         return getColumnFeedback(columnPlayer, rowPlayer);
     }
+
+    @Override
+    public String getName()
+    {
+        return "Basic Interaction Handler";
+    }
 }

@@ -17,4 +17,12 @@ public interface ICompletionCondition
      * @return true if simulation should end, otherwise false
      */
     boolean simulationComplete(Population population);
+
+    /**
+     * Gets a human readable name for display to users in the GUI.
+     * Called once, upon initialization of the GUI.
+     *
+     * @return Human readable name for the CompletionCondition.
+     */
+    String getName();
 }

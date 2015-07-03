@@ -52,6 +52,14 @@ public abstract class AbstractAgent implements Cloneable
     protected abstract BasicChoices interaction(BasicStates state);
 
     /**
+     * Gets a human readable name for display to users in the GUI.
+     * Called once, upon initialization of the GUI.
+     *
+     * @return Human readable name for the Agent.
+     */
+    public abstract String getName();
+
+    /**
      * @return agent's opinion, range [0,1]
      */
     public double getOpinion()

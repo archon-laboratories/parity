@@ -21,4 +21,10 @@ public class BasicCompletionCondition implements ICompletionCondition
 
         return netOpinion <= .05 || netOpinion >= .95 || population.getTimestep() > 100;
     }
+
+    @Override
+    public String getName()
+    {
+        return "Basic Completion Condition";
+    }
 }

@@ -41,6 +41,12 @@ public class BasicAgent extends AbstractAgent
         return prevChoice;
     }
 
+    @Override
+    public String getName()
+    {
+        return "Basic Agent";
+    }
+
     /**
      * The method that handles updating the agent's opinion, given the interaction handler's feedback.
      *

@@ -57,6 +57,21 @@ public class MainApp extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        ParityRegistry.initializeRegistry();
+
+        for (ReflectionWrapper wrapper : ParityRegistry.getAgents())
+        {
+            System.out.println("Agent: " + wrapper.getName() + " :: " + wrapper.getClasspath());
+        }
+        for (ReflectionWrapper wrapper : ParityRegistry.getInteractionHandlers())
+        {
+            System.out.println("Interaction Handler: " + wrapper.getName() + " :: " + wrapper.getClasspath());
+        }
+        for (ReflectionWrapper wrapper : ParityRegistry.getCompletionConditions())
+        {
+            System.out.println("Completion Condition: " + wrapper.getName() + " :: " + wrapper.getClasspath());
+        }
+
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle(Reference.NAME);
         this.primaryStage.setMinWidth(600);

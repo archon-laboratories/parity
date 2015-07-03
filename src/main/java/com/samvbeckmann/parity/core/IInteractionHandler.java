@@ -47,4 +47,12 @@ public interface IInteractionHandler
      * @return the feedback the agent will receive
      */
     int getRowFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer);
+
+    /**
+     * Gets a human readable name for display to users in the GUI.
+     * Called once, upon initialization of the GUI.
+     *
+     * @return Human readable name for the InteractionHandler.
+     */
+    String getName();
 }
