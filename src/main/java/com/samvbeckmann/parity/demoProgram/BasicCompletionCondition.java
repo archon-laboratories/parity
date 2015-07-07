@@ -6,6 +6,7 @@ import com.samvbeckmann.parity.core.Population;
 /**
  * Sample implementation of {@link ICompletionCondition}
  * Use / extend this or make your own.
+ * @deprecated
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */

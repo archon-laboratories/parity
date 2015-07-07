@@ -1,9 +1,10 @@
 package com.samvbeckmann.parity;
 
 /**
- * parity, class made on 2015-07-02
+ * Enum of possible arguments for registering classes.
+ * See {@link ParitySubscribe} for usage.
  *
- * @author Sam Beckmann
+ * @author Sam Beckmann & Nate Beckemeyer
  */
 public enum RegisterType
 {

@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * parity, class made on 6/23/2015.
+ * Initializes the GUI portion of Parity.
  *
- * @author Sam Beckmann
+ * @author Sam Beckmann & Nate Beckemeyer
  */
 public class MainApp extends Application
 {
@@ -41,7 +41,7 @@ public class MainApp extends Application
         communityData.add(new AgentModel("Q-Learner", 1.0));
         communityData.add(new AgentModel("Q-Learner", 1.0));
         communityData.add(new AgentModel("Q-Learner", 0.0));
-        communityData.add(new AgentModel("Q-Learner", 0.0));
+        communityData.add(new AgentModel("Q-Learner", 0.0)); /* TODO Remove when table populates */
     }
 
     public static void main(String[] args)
@@ -58,19 +58,6 @@ public class MainApp extends Application
     public void start(Stage primaryStage) throws Exception
     {
         ParityRegistry.initializeRegistry();
-
-        for (ReflectionWrapper wrapper : ParityRegistry.getAgents())
-        {
-            System.out.println("Agent: " + wrapper.getName() + " :: " + wrapper.getClasspath());
-        }
-        for (ReflectionWrapper wrapper : ParityRegistry.getInteractionHandlers())
-        {
-            System.out.println("Interaction Handler: " + wrapper.getName() + " :: " + wrapper.getClasspath());
-        }
-        for (ReflectionWrapper wrapper : ParityRegistry.getCompletionConditions())
-        {
-            System.out.println("Completion Condition: " + wrapper.getName() + " :: " + wrapper.getClasspath());
-        }
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle(Reference.NAME);

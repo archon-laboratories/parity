@@ -6,15 +6,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * parity, class made on 2015-07-02
+ * Annotation that allows extensions of Parity
+ * to register their classes.
  *
- * @author Sam Beckmann
+ * @author Sam Beckmann & Nate Beckemeyer
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ParitySubscribe
 {
-    public @interface RegisterClasses
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    @interface RegisterClasses
     {
         RegisterType value();
     }

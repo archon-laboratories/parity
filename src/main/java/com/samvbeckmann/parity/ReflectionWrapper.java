@@ -1,9 +1,10 @@
 package com.samvbeckmann.parity;
 
 /**
- * parity, class made on 2015-07-02
+ * Contains a String and Classpath.
+ * Used to contain information about a registered class.
  *
- * @author Sam Beckmann
+ * @author Sam Beckmann & Nate Beckemeyer
  */
 public class ReflectionWrapper
 {

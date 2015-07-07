@@ -1,16 +1,37 @@
 package com.samvbeckmann.parity.reference;
 
 /**
- * parity, class made on 2015-06-26
+ * Strings for Messages, with the intention of being displayed to the user.
  *
- * @author Sam Beckmann
+ * @author Sam Beckmann & Nate Beckemeyer
  */
 public final class Messages
 {
+    /**
+     * Messages displayed to user by GUI alerts.
+     */
     public final class Alerts
     {
         public static final String DELETE_CONFIRM = "Deletion Confirmation";
         public static final String DELETE_CONFIRM_MESSAGE = "Do you want to delete this agent?";
+    }
+
+    /**
+     * Messages printed to console when parity encounters an error.
+     * Not intended to be seen in daily operation.
+     */
+    public final class Errors
+    {
+        public static final String REGISTER_METHOD_ERROR = "Method %s in class %s not added. Note, this method should return a List<Class>\n";
+
+        public static final String REGISTER_AGENT_CLASS_ERROR = "Class %s not added. Note, this class should extend AbstractAgent.\n";
+        public static final String REGISTER_AGENT_ERROR = "Error in agent register %s : %s\n";
+
+        public static final String REGISTER_HANDLER_CLASS_ERROR = "Class %s not added. Note, this class should extend IInteractionHandler.\n";
+        public static final String REGISTER_HANDLER_ERROR = "Error in interaction handler register %s : %s\n";
+
+        public static final String REGISTER_COMPLETION_CLASS_ERROR = "Class %s not added. Note, this class should extend ICompletionCondition.\n";
+        public static final String REGISTER_COMPLETION_ERROR = "Error in completion condition register %s : %s\n";
     }
 
 }

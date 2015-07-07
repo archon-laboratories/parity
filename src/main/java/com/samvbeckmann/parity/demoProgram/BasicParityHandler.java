@@ -8,10 +8,11 @@ import java.util.List;
 
 /**
  * parity, class made on 2015-07-02
+ * @deprecated
  *
  * @author Sam Beckmann
  */
-@ParitySubscribe
+//@ParitySubscribe
 public class BasicParityHandler
 {
     @ParitySubscribe.RegisterClasses(RegisterType.INTERACTION_HANDLER)

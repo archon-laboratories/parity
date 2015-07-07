@@ -3,8 +3,11 @@ package com.samvbeckmann.parity;
 import com.samvbeckmann.parity.core.AbstractAgent;
 import com.samvbeckmann.parity.core.ICompletionCondition;
 import com.samvbeckmann.parity.core.IInteractionHandler;
+import com.samvbeckmann.parity.reference.ConfigValues;
+import com.samvbeckmann.parity.reference.Messages;
 import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -15,9 +18,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * parity, class made on 2015-07-02
+ * Creates a global registry of available
+ * agents, completion conditions, and interaction handlers.
  *
- * @author Sam Beckmann
+ * @author Sam Beckmann & Nate Beckemeyer
  */
 public final class ParityRegistry
 {
@@ -27,7 +31,7 @@ public final class ParityRegistry
 
     static void initializeRegistry()
     {
-        Reflections reflections = new Reflections("com.samvbeckmann.parity.demoProgram");
+        Reflections reflections = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forJavaClassPath()));
 
         Set<Class<?>> handlers = reflections.getTypesAnnotatedWith(ParitySubscribe.class);
 
@@ -58,6 +62,16 @@ public final class ParityRegistry
                 }
             }
         }
+
+        if (ConfigValues.printRegistryToConsole || ConfigValues.debugMode)
+        {
+            for (ReflectionWrapper wrapper : ParityRegistry.getAgents())
+                System.out.println("Agent: " + wrapper.getName() + " :: " + wrapper.getClasspath());
+            for (ReflectionWrapper wrapper : ParityRegistry.getInteractionHandlers())
+                System.out.println("Interaction Handler: " + wrapper.getName() + " :: " + wrapper.getClasspath());
+            for (ReflectionWrapper wrapper : ParityRegistry.getCompletionConditions())
+                System.out.println("Completion Condition: " + wrapper.getName() + " :: " + wrapper.getClasspath());
+        }
     }
 
     private static boolean registerAgent(Class handler, Method agentMethod)
@@ -81,18 +95,18 @@ public final class ParityRegistry
                         return true;
                     } else
                     {
-                        System.out.println("Class " + agentClass.getName() + " not added. Note, this class should extend AbstractAgent."); // TODO
+                        System.out.printf(Messages.Errors.REGISTER_AGENT_CLASS_ERROR, agentClass.getName());
                     }
                 }
             } else
             {
-                System.out.println("Method " + agentMethod + " in class" + handler + " not added. Note, this method should return a List<Class>"); // TODO
+                System.out.printf(Messages.Errors.REGISTER_METHOD_ERROR, agentMethod, handler);
 
             }
 
         } catch (Exception e)
         {
-            System.err.println("Uh Oh."); // TODO
+            System.err.printf(Messages.Errors.REGISTER_AGENT_ERROR, handler, agentMethod);
             e.printStackTrace();
         }
 
@@ -129,18 +143,18 @@ public final class ParityRegistry
                         return true;
                     } else
                     {
-                        System.out.println("Class " + handlerClass.getName() + " not added. Note, this class should implement IInteractionHandler."); // TODO
+                        System.out.printf(Messages.Errors.REGISTER_HANDLER_CLASS_ERROR, handlerClass.getName());
                     }
                 }
             } else
             {
-                System.out.println("Method " + handlerMethod + " in class" + handler + " not added. Note, this method should return a List<Class>"); // TODO
+                System.out.printf(Messages.Errors.REGISTER_METHOD_ERROR, handlerMethod, handler);
 
             }
 
         } catch (Exception e)
         {
-            System.err.println("Uh Oh."); // TODO
+            System.err.printf(Messages.Errors.REGISTER_HANDLER_ERROR, handler, handlerMethod);
             e.printStackTrace();
         }
 
@@ -176,18 +190,18 @@ public final class ParityRegistry
                             return true;
                         } else
                         {
-                            System.out.println("Class " + conditionClass.getName() + " not added. Note, this class should implement IInteractionHandler."); // TODO
+                            System.out.printf(Messages.Errors.REGISTER_COMPLETION_CLASS_ERROR, conditionClass.getName());
                         }
                     }
                 }
             } else
             {
-                System.out.println("Method " + conditionMethod + " in class" + handler + " not added. Note, this method should return a List<Class>"); // TODO
+                System.out.printf(Messages.Errors.REGISTER_METHOD_ERROR, conditionMethod, handler);
 
             }
         } catch (Exception e)
         {
-            System.err.println("Uh Oh."); // TODO
+            System.err.printf(Messages.Errors.REGISTER_COMPLETION_ERROR, handler, conditionMethod);
             e.printStackTrace();
         }
 

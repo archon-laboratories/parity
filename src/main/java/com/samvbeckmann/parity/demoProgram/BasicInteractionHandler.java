@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * A sample implementation of {@link IInteractionHandler}.
  * Use/extend this, or make your own.
+ * @deprecated
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */

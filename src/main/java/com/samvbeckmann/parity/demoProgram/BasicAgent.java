@@ -6,6 +6,7 @@ import com.samvbeckmann.parity.core.Population;
 /**
  * A sample implementation of {@link AbstractAgent}. For this example, we will treat 1 is right, 0 as left.
  * Use/extend this, or make your own.
+ * @deprecated
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */
