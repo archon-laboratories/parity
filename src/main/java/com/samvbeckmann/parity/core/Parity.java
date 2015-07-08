@@ -6,38 +6,42 @@ import com.samvbeckmann.parity.demoProgram.BasicStates;
 import java.util.Map;
 
 /**
- * Created by Nate Beckemeyer and Sam Beckmmann
+ * Created by Nate Beckemeyer and Sam Beckmann
  */
 public class Parity
 {
+
     public static void main(String[] args)
     {
 
-        long startTime = System.nanoTime();
-        double averageOpinion = 0;
-        double averageTimestep = 0;
-        Dataset primary = new Dataset("src/main/datasets/demo.json");
-        ICompletionCondition condition = primary.getCompletionCondition();
-        IInteractionHandler handler = primary.getInteractionHandler();
-
-        for (int i = 1; i <= primary.getNumTrials(); i++)
+        for (String arg : args)
         {
-            Population initial = primary.shuffleData();
+            long startTime = System.nanoTime();
+            double averageOpinion = 0;
+            double averageTimestep = 0;
+            Dataset primary = new Dataset(arg);
+            ICompletionCondition condition = primary.getCompletionCondition();
+            IInteractionHandler handler = primary.getInteractionHandler();
 
-            while (!condition.simulationComplete(initial))
+            for (int i = 1; i <= primary.getNumTrials(); i++)
             {
-                performInteractions(handler, initial);
-                initial.incrementTimestep();
+                Population initial = primary.shuffleData();
+
+                while (!condition.simulationComplete(initial))
+                {
+                    performInteractions(handler, initial);
+                    initial.incrementTimestep();
+                }
+
+                averageOpinion += initial.getAverageOpinion();
+                averageTimestep += initial.getTimestep();
             }
 
-            averageOpinion += initial.getAverageOpinion();
-            averageTimestep += initial.getTimestep();
+            System.out.printf("Simulation complete! Statistics:%nFinal opinion: %f%nTimestep: %f%nTime to complete: %.5fs%n%n",
+                    averageOpinion / ((double) primary.getNumTrials()),
+                    averageTimestep / ((double) primary.getNumTrials()),
+                    (System.nanoTime() - startTime) / (Math.pow(10., 9)));
         }
-
-        System.out.printf("Simulation complete! Statistics:%nFinal opinion: %f%nTimestep: %f%nTime to complete: %.5fs",
-                averageOpinion / ((double) primary.getNumTrials()),
-                averageTimestep / ((double) primary.getNumTrials()),
-                (System.nanoTime() - startTime) / (Math.pow(10., 9)));
     }
 
     /**
@@ -52,8 +56,10 @@ public class Parity
 
         for (Map.Entry<AbstractAgent, AbstractAgent> entry : interactions.entrySet())
         {
-            BasicChoices column = (BasicChoices) entry.getKey().interaction(BasicStates.COLUMN);
-            BasicChoices row = (BasicChoices) entry.getValue().interaction(BasicStates.ROW);
+            AbstractAgent columnPlayer = entry.getKey();
+            AbstractAgent rowPlayer = entry.getValue();
+            Object column = columnPlayer.interaction();
+            Object row = rowPlayer.interaction();
 
             entry.getKey().updateOpinions(handler.getColumnFeedback(column, row));
             entry.getValue().updateOpinions(handler.getRowFeedback(column, row));

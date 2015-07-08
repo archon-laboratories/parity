@@ -1,5 +1,6 @@
 package com.samvbeckmann.parity.demoProgram;
 
+import com.samvbeckmann.parity.ParitySubscribe;
 import com.samvbeckmann.parity.core.AbstractAgent;
 import com.samvbeckmann.parity.core.Population;
 
@@ -10,6 +11,7 @@ import com.samvbeckmann.parity.core.Population;
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */
+@ParitySubscribe
 public class BasicAgent extends AbstractAgent
 {
 
@@ -29,10 +31,10 @@ public class BasicAgent extends AbstractAgent
     }
 
     /**
-     * @param state The state of the agent in the interaction
      * @return The choice that the agent makes in the interaction
      */
-    public BasicChoices interaction(BasicStates state)
+    @Override
+    public BasicChoices interaction()
     {
         if (Population.rnd.nextDouble() > getOpinion())
             prevChoice = BasicChoices.LEFT;
@@ -77,6 +79,6 @@ public class BasicAgent extends AbstractAgent
         }
 
         // Just some clipping, for nice pretty numbers.
-        // opinions[0] = Math.round(opinions[0]*100)/100.;
+        opinions[0] = Math.round(opinions[0]*100)/100.;
     }
 }

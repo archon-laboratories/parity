@@ -41,12 +41,12 @@ public abstract class AbstractAgent implements Cloneable
     }
 
     /**
-     * Defines how an agent responds in an interaction.
+     * Defines how an agent responds in an interaction. If you wish to pass information to the agent, you must
+     * store it inside of the agent itself.
      *
-     * @param state The state of the agent in the interaction
      * @return A response to the interaction, in the form of a choice.
      */
-    protected abstract Object interaction(Object state);
+    protected abstract Object interaction();
 
     /**
      * Gets a human readable name for display to users in the GUI.

@@ -4,6 +4,7 @@ import com.samvbeckmann.parity.core.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A sample implementation of {@link IInteractionHandler}.
@@ -73,7 +74,7 @@ public class BasicInteractionHandler implements IInteractionHandler
      * @param rowPlayer    The choice of the Row Player
      * @return If their actions align, reinforce the behavior (1). Else, discourage it. (-1)
      */
-    public int getColumnFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer)
+    public int getColumnFeedback(Object columnPlayer, Object rowPlayer)
     {
         return columnPlayer == rowPlayer ? POSITIVE_REWARD : NEGATIVE_REWARD;
     }
@@ -83,7 +84,7 @@ public class BasicInteractionHandler implements IInteractionHandler
      * @param rowPlayer    The choice of the Row Player
      * @return If their actions align, reinforce the behavior (1). Else, discourage it. (-1)
      */
-    public int getRowFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer)
+    public int getRowFeedback(Object columnPlayer, Object rowPlayer)
     {
         return getColumnFeedback(columnPlayer, rowPlayer);
     }

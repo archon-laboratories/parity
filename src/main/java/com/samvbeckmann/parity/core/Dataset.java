@@ -35,8 +35,6 @@ public class Dataset
      */
     public Dataset(String filename)
     {
-        interactionHandler = new BasicInteractionHandler();
-        completionCondition = new BasicCompletionCondition();
         initialAgentOpinions = new HashMap<>();
 
         boolean fileFound = false;
@@ -343,10 +341,12 @@ public class Dataset
 
                 case "completionCondition":
                     completionCondition = getCondition(reader.nextString());
+                    assert completionCondition != null;
                     break;
 
                 case "interactionHandler":
                     interactionHandler = getHandler(reader.nextString());
+                    assert interactionHandler != null;
                     break;
 
                 case "opinionCount":
