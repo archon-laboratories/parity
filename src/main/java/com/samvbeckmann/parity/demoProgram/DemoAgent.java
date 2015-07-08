@@ -12,12 +12,12 @@ import com.samvbeckmann.parity.core.Population;
  * @author Nate Beckemeyer & Sam Beckmann
  */
 @ParitySubscribe
-public class BasicAgent extends AbstractAgent
+public class DemoAgent extends AbstractAgent
 {
 
-    BasicChoices prevChoice;
+    DemoChoices prevChoice;
 
-    public BasicAgent()
+    public DemoAgent()
     {
         this(.5);
     }
@@ -25,7 +25,7 @@ public class BasicAgent extends AbstractAgent
     /**
      * @param startingOpinion Sets the starting opinion of the agent
      */
-    public BasicAgent(double startingOpinion)
+    public DemoAgent(double startingOpinion)
     {
         setOpinion(startingOpinion);
     }
@@ -34,12 +34,12 @@ public class BasicAgent extends AbstractAgent
      * @return The choice that the agent makes in the interaction
      */
     @Override
-    public BasicChoices interaction()
+    public DemoChoices interaction()
     {
         if (Population.rnd.nextDouble() > getOpinion())
-            prevChoice = BasicChoices.LEFT;
+            prevChoice = DemoChoices.LEFT;
         else
-            prevChoice = BasicChoices.RIGHT;
+            prevChoice = DemoChoices.RIGHT;
 
         return prevChoice;
     }
@@ -60,14 +60,14 @@ public class BasicAgent extends AbstractAgent
         switch (feedback)
         {
             case 1:
-                if (prevChoice == BasicChoices.RIGHT)
+                if (prevChoice == DemoChoices.RIGHT)
                     opinions[0] = opinions[0] < 1. ? opinions[0] + .05 : opinions[0];
                 else // Only two choices in this basic example
                     opinions[0] = opinions[0] > 0. ? opinions[0] - .05 : opinions[0];
                 break;
 
             case -1:
-                if (prevChoice == BasicChoices.RIGHT)
+                if (prevChoice == DemoChoices.RIGHT)
                     opinions[0] = opinions[0] > 0. ? opinions[0] - .05 : opinions[0];
                 else // Only two choices in this basic example
                     opinions[0] = opinions[0] < 1. ? opinions[0] + .05 : opinions[0];

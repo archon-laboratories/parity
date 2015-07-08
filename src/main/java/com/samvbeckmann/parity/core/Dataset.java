@@ -1,8 +1,6 @@
 package com.samvbeckmann.parity.core;
 
 import com.google.gson.stream.JsonReader;
-import com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
-import com.samvbeckmann.parity.demoProgram.BasicInteractionHandler;
 import com.samvbeckmann.parity.utilities.InteractionHelper;
 import com.samvbeckmann.parity.utilities.Shuffler;
 

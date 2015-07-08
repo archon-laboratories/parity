@@ -1,11 +1,11 @@
 package com.samvbeckmann.parity.core;
 
-import com.samvbeckmann.parity.demoProgram.BasicCompletionCondition;
+import com.samvbeckmann.parity.demoProgram.DemoCompletionCondition;
 
 /**
  * Determines if the simulation has reached its end.
  * An implementation needs to be chosen for each simulation.
- * A sample implementation can be found at {@link BasicCompletionCondition}
+ * A sample implementation can be found at {@link DemoCompletionCondition}
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */
