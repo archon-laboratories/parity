@@ -10,7 +10,7 @@ import com.samvbeckmann.parity.core.Population;
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */
-public class BasicCompletionCondition implements ICompletionCondition
+public class DemoCompletionCondition implements ICompletionCondition
 {
     /**
      * @param population Population being tested

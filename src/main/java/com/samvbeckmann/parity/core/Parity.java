@@ -1,8 +1,5 @@
 package com.samvbeckmann.parity.core;
 
-import com.samvbeckmann.parity.demoProgram.BasicChoices;
-import com.samvbeckmann.parity.demoProgram.BasicStates;
-
 import java.util.Map;
 
 /**

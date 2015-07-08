@@ -13,13 +13,13 @@ import java.util.List;
  * @author Sam Beckmann
  */
 //@ParitySubscribe
-public class BasicParityHandler
+public class DemoParityHandler
 {
     @ParitySubscribe.RegisterClasses(RegisterType.INTERACTION_HANDLER)
     public List<Class> registerInteractionHandlers()
     {
         List<Class> interactionHandlers = new ArrayList<>();
-        interactionHandlers.add(BasicInteractionHandler.class);
+        interactionHandlers.add(DemoInteractionHandler.class);
         return interactionHandlers;
     }
 
@@ -27,7 +27,7 @@ public class BasicParityHandler
     public List<Class> registerCompletionConditions()
     {
         List<Class> completionConditions = new ArrayList<>();
-        completionConditions.add(BasicCompletionCondition.class);
+        completionConditions.add(DemoCompletionCondition.class);
         return completionConditions;
     }
 
@@ -35,7 +35,7 @@ public class BasicParityHandler
     public List<Class> registerAgents()
     {
         List<Class> agents = new ArrayList<>();
-        agents.add(BasicAgent.class);
+        agents.add(DemoAgent.class);
         return agents;
     }
 }

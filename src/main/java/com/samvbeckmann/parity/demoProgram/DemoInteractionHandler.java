@@ -13,7 +13,7 @@ import java.util.Objects;
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */
-public class BasicInteractionHandler implements IInteractionHandler
+public class DemoInteractionHandler implements IInteractionHandler
 {
     public static final int POSITIVE_REWARD = 1;
     public static final int NEGATIVE_REWARD = -1;
