@@ -1,6 +1,5 @@
 package com.samvbeckmann.parity.core;
 
-import com.samvbeckmann.parity.demoProgram.BasicChoices;
 import com.samvbeckmann.parity.demoProgram.BasicInteractionHandler;
 
 import java.util.Map;
@@ -25,7 +24,7 @@ public interface IInteractionHandler
     Map<AbstractAgent, AbstractAgent> determineInteractions(Population p);
 
     /**
-     * Gives feedback to the column player based on its choice.
+     * Gives feedback to the column (first) player based on its choice.
      * Positive feedback reinforces the choice, negative discourages it.
      * In general, higher numbers make a more meaningful effect, though
      * this is left to the discretion of the agent.
@@ -34,10 +33,10 @@ public interface IInteractionHandler
      * @param rowPlayer    The choice of the Row Player
      * @return the feedback the agent will receive
      */
-    int getColumnFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer);
+    int getColumnFeedback(Object columnPlayer, Object rowPlayer);
 
     /**
-     * Gives feedback to the row player based on its choice.
+     * Gives feedback to the row (second) player based on its choice.
      * Positive feedback reinforces the choice, negative discourages it.
      * In general, higher numbers make a more meaningful effect, though
      * this is left to the discretion of the agent.
@@ -46,7 +45,7 @@ public interface IInteractionHandler
      * @param rowPlayer    The choice of the Row Player
      * @return the feedback the agent will receive
      */
-    int getRowFeedback(BasicChoices columnPlayer, BasicChoices rowPlayer);
+    int getRowFeedback(Object columnPlayer, Object rowPlayer);
 
     /**
      * Gets a human readable name for display to users in the GUI.

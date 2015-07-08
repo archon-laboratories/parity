@@ -192,16 +192,16 @@ public class Dataset
     }
 
     /**
-     * Parses the neighbors of a community
+     * Parses the neighbours of a community
      *
-     * @param numNeighbors The number of neighbors
+     * @param numNeighbours The number of neighbours
      * @return The {@link Connection}s of the community
      * @throws IOException
      */
-    private Connection[] parseNeighbors(int numNeighbors, int thisId_) throws IOException
+    private Connection[] parseNeighbours(int numNeighbours, int thisId_) throws IOException
     {
         int neighborCount = 0;
-        Connection[] neighbours = new Connection[numNeighbors];
+        Connection[] neighbours = new Connection[numNeighbours];
 
         reader.beginArray();
         while (reader.hasNext())
@@ -251,7 +251,7 @@ public class Dataset
         reader.beginObject();
 
         int id_ = -1;
-        int numNeighbors = 0;
+        int numNeighbours = 0;
         int agentCount = 0;
         int interactionsAvailable = -1;
 
@@ -266,13 +266,13 @@ public class Dataset
                     id_ = reader.nextInt();
                     break;
 
-                case "numNeighbors":
-                    numNeighbors = reader.nextInt();
+                case "numNeighbours":
+                    numNeighbours = reader.nextInt();
                     break;
 
                 case "neighbours":
                     assert interactionsAvailable >= 0;
-                    communities[id_].setNeighbours(parseNeighbors(numNeighbors, id_));
+                    communities[id_].setNeighbours(parseNeighbours(numNeighbours, id_));
                     break;
 
                 case "agentCount":
@@ -396,6 +396,9 @@ public class Dataset
         for (Community comm : communities)
         {
             ArrayList<Connection> newNeighbours = new ArrayList<>();
+            if (comm.getNeighbours() == null)
+                return;
+
             for (Connection neighbour : comm.getNeighbours())
                 if (neighbour.getNeighbourCommunity().getConnectionByCommunity(comm) != null)
                 {
@@ -450,9 +453,10 @@ public class Dataset
 
     /**
      * Shuffles the array of communities within the population. Within each community, agent locations are also shuffled.
-     * It also shuffles the order of the connections retrieved by the population.
-     * This does nothing more than change the order in which communities are examined or read; if sloppy code will
-     * prefer the first community it finds (such as lower index), this method will change which community that is.
+     * The order of the connections retrieved by the population is shuffled.
+     *
+     * This does nothing more than change the order in which communities are examined or read; if code is sloppy, this
+     * will prefer the first community it finds (such as lower index), this method will change which community that is.
      */
     public Population shuffleData()
     {

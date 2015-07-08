@@ -46,7 +46,7 @@ public class Community
     }
 
     /**
-     * Checks a community to see if it's in the array of neighbors
+     * Checks a community to see if it's in the array of neighbours
      *
      * @param community The community being looked for
      * @return The Connection to that community, or null if there is none

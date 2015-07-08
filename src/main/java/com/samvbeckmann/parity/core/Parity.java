@@ -52,8 +52,8 @@ public class Parity
 
         for (Map.Entry<AbstractAgent, AbstractAgent> entry : interactions.entrySet())
         {
-            BasicChoices column = entry.getKey().interaction(BasicStates.COLUMN);
-            BasicChoices row = entry.getValue().interaction(BasicStates.ROW);
+            BasicChoices column = (BasicChoices) entry.getKey().interaction(BasicStates.COLUMN);
+            BasicChoices row = (BasicChoices) entry.getValue().interaction(BasicStates.ROW);
 
             entry.getKey().updateOpinions(handler.getColumnFeedback(column, row));
             entry.getValue().updateOpinions(handler.getRowFeedback(column, row));

@@ -1,6 +1,6 @@
 {
   "population": {
-    "numIterations": 10000,
+    "numIterations": 1000000,
     "numberCommunities": 4,
     "completionCondition": "com.samvbeckmann.parity.demoProgram.BasicCompletionCondition",
     "interactionHandler": "com.samvbeckmann.parity.demoProgram.BasicInteractionHandler",
@@ -8,7 +8,7 @@
     "communities": [
       {
         "id": 0,
-        "numNeighbors": 3,
+        "numNeighbours": 3,
         "neighbours": [
           [
             2,
@@ -61,7 +61,7 @@
       },
       {
         "id": 1,
-        "numNeighbors": 2,
+        "numNeighbours": 2,
         "neighbours": [
           [
             2,
@@ -110,7 +110,7 @@
       },
       {
         "id": 2,
-        "numNeighbors": 2,
+        "numNeighbours": 2,
         "neighbours": [
           [
             2,
@@ -159,7 +159,7 @@
       },
       {
         "id": 3,
-        "numNeighbors": 2,
+        "numNeighbours": 2,
         "neighbours": [
           [
             1,
