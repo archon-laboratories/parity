@@ -9,10 +9,17 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -33,15 +40,7 @@ public class MainApp extends Application
 
     public MainApp()
     {
-        communityData.add(new AgentModel("Basic Agent", 0.5)); /* Dummy Data for Testing */
-        communityData.add(new AgentModel("Basic Agent", 0.5));
-        communityData.add(new AgentModel("Basic Agent", 1.0));
-        communityData.add(new AgentModel("Basic Agent", 0.0));
-        communityData.add(new AgentModel("Q-Learner", 0.5));
-        communityData.add(new AgentModel("Q-Learner", 1.0));
-        communityData.add(new AgentModel("Q-Learner", 1.0));
-        communityData.add(new AgentModel("Q-Learner", 0.0));
-        communityData.add(new AgentModel("Q-Learner", 0.0)); /* TODO Remove when table populates */
+        // NOOP
     }
 
     public static void main(String[] args)
@@ -110,6 +109,7 @@ public class MainApp extends Application
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void showConfigurationSettings()
     {
         try
@@ -118,8 +118,22 @@ public class MainApp extends Application
             loader.setLocation(MainApp.class.getResource(Names.FXMLPaths.CONFIGURATION_VIEW));
             BorderPane configurationSettings = loader.load();
 
+            GridPane grid = (GridPane) ((VBox) configurationSettings.getTop()).getChildren().get(2);
+
+            ComboBox<ReflectionWrapper> interactionHandlers = (ComboBox<ReflectionWrapper>) grid.getChildren().get(1);
+            ComboBox<ReflectionWrapper> completionConditions = (ComboBox<ReflectionWrapper>) grid.getChildren().get(3);
+
+            interactionHandlers.setItems(ParityRegistry.getInteractionHandlers());
+            completionConditions.setItems(ParityRegistry.getCompletionConditions());
+
+            AnchorPane pane = new AnchorPane();
+            configurationSettings.setCenter(pane);
+            pane.getChildren().add(createDraggableCircle(50, 50));
+
             SplitPane split = (SplitPane) rootLayout.getCenter();
             split.getItems().add(configurationSettings);
+
+            pane.getChildren().add(createDraggableCircle(pane.getWidth() / 2, pane.getHeight() / 2));
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -159,11 +173,56 @@ public class MainApp extends Application
         }
     }
 
+    private Circle createDraggableCircle(double x, double y)
+    {
+        final double circleRadius = 20;
+
+        Circle circle = new Circle(x, y, circleRadius);
+        circle.setFill(Color.DEEPSKYBLUE);
+        Wrapper<Point2D> mouseLocation = new Wrapper<>();
+
+        circle.setOnDragDetected(event ->
+        {
+            circle.getParent().setCursor(Cursor.CLOSED_HAND);
+            mouseLocation.value = new Point2D(event.getSceneX(), event.getSceneY());
+        });
+
+        circle.setOnMouseReleased(event ->
+        {
+            circle.getParent().setCursor(Cursor.DEFAULT);
+            mouseLocation.value = null;
+        });
+
+        circle.setOnMouseDragged(event ->
+        {
+            if (mouseLocation.value != null)
+            {
+                double deltaX = event.getSceneX() - mouseLocation.value.getX();
+                double deltaY = event.getSceneY() - mouseLocation.value.getY();
+                double newX = circle.getCenterX() + deltaX;
+                double newY = circle.getCenterY() + deltaY;
+                circle.setCenterX(newX);
+                circle.setCenterY(newY);
+                mouseLocation.value = new Point2D(event.getSceneX(), event.getSceneY());
+            }
+        });
+
+        circle.setOnContextMenuRequested(event ->
+                circle.setFill(Color.BLUE));
+
+        return circle;
+    }
+
     /**
      * @return The main stage.
      */
     public Stage getPrimaryStage()
     {
         return primaryStage;
+    }
+
+    static class Wrapper<T>
+    {
+        T value;
     }
 }

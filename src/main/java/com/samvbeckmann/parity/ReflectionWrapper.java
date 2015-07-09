@@ -22,6 +22,7 @@ public class ReflectionWrapper
         return classpath;
     }
 
+    @SuppressWarnings("unused")
     public void setClasspath(String classpath)
     {
         this.classpath = classpath;
@@ -35,5 +36,11 @@ public class ReflectionWrapper
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
     }
 }

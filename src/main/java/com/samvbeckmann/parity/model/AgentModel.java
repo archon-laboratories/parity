@@ -1,5 +1,6 @@
 package com.samvbeckmann.parity.model;
 
+import com.samvbeckmann.parity.ReflectionWrapper;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,7 +13,7 @@ import javafx.beans.property.StringProperty;
  */
 public class AgentModel
 {
-    private StringProperty classpath;
+    private ReflectionWrapper wrapper;
     private DoubleProperty opinion;
 
     public AgentModel()
@@ -20,25 +21,20 @@ public class AgentModel
         this(null, 0.5);
     }
 
-    public AgentModel(String classpath, double opinion)
+    public AgentModel(ReflectionWrapper wrapper, double opinion)
     {
-        this.classpath = new SimpleStringProperty(classpath);
+        this.wrapper = wrapper;
         this.opinion = new SimpleDoubleProperty(opinion);
     }
 
     public String getClasspath()
     {
-        return classpath.get();
+        return wrapper.getClasspath();
     }
 
-    public void setClasspath(String classpath)
+    public StringProperty getName()
     {
-        this.classpath.set(classpath);
-    }
-
-    public StringProperty classpathProperty()
-    {
-        return classpath;
+        return new SimpleStringProperty(wrapper.getName());
     }
 
     public double getOpinion()

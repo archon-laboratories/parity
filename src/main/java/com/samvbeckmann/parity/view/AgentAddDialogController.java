@@ -1,5 +1,7 @@
 package com.samvbeckmann.parity.view;
 
+import com.samvbeckmann.parity.ParityRegistry;
+import com.samvbeckmann.parity.ReflectionWrapper;
 import com.samvbeckmann.parity.model.AgentModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,7 +17,7 @@ import javafx.stage.Stage;
 public class AgentAddDialogController
 {
     @FXML
-    private ComboBox comboBox;
+    private ComboBox<ReflectionWrapper> comboBox;
     @FXML
     private TextField opinionField;
     @FXML
@@ -42,6 +44,7 @@ public class AgentAddDialogController
         this.agents = agents;
         opinionField.setText("");
         numberAddField.setText("");
+        comboBox.setItems(ParityRegistry.getAgents());
     }
 
     public boolean isOkClicked()
@@ -56,11 +59,11 @@ public class AgentAddDialogController
         {
             for (int i = 0; i < Integer.parseInt(numberAddField.getText()); i++)
             {
-                agents.add(new AgentModel("Basic Agent", Double.parseDouble(opinionField.getText())));
-
-                okClicked = true;
-                dialogStage.close();
+                agents.add(new AgentModel(comboBox.getValue(), Double.parseDouble(opinionField.getText())));
             }
+
+            okClicked = true;
+            dialogStage.close();
         }
     }
 
@@ -73,6 +76,8 @@ public class AgentAddDialogController
     private boolean isInputValid()
     {
         String errorMessage = "";
+        if (comboBox.getValue() == null)
+            errorMessage += "Not a valid agent.\n";
         try
         {
             double value = Double.parseDouble(opinionField.getText());

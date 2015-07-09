@@ -38,7 +38,7 @@ public class CommunityViewController
     @FXML
     private void initialize()
     {
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().classpathProperty());
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getName());
         opinionColumn.setCellValueFactory(cellData -> cellData.getValue().opinionProperty().asObject());
     }
 

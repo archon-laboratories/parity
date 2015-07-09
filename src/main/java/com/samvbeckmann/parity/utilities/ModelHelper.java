@@ -15,7 +15,7 @@ public class ModelHelper
      * @param agent AgentModel
      * @return String of formatted agent stats
      */
-    public static String getAgentStatsAsString(AgentModel agent)
+    public static String getAgentStatsAsString(AgentModel agent) // TODO generify
     {
         String s = "";
         s += agent.getClasspath();

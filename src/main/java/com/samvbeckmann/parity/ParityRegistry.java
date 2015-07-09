@@ -5,6 +5,8 @@ import com.samvbeckmann.parity.core.ICompletionCondition;
 import com.samvbeckmann.parity.core.IInteractionHandler;
 import com.samvbeckmann.parity.reference.ConfigValues;
 import com.samvbeckmann.parity.reference.Messages;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
@@ -13,7 +15,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -25,9 +26,9 @@ import java.util.Set;
  */
 public final class ParityRegistry
 {
-    private static List<ReflectionWrapper> agents = new ArrayList<>();
-    private static List<ReflectionWrapper> interactionHandlers = new ArrayList<>();
-    private static List<ReflectionWrapper> completionConditions = new ArrayList<>();
+    private static ObservableList<ReflectionWrapper> agents = FXCollections.observableArrayList();
+    private static ObservableList<ReflectionWrapper> interactionHandlers = FXCollections.observableArrayList();
+    private static ObservableList<ReflectionWrapper> completionConditions = FXCollections.observableArrayList();
 
     static void initializeRegistry()
     {
@@ -226,17 +227,17 @@ public final class ParityRegistry
         return typeArgClass.equals(Class.class);
     }
 
-    public static List<ReflectionWrapper> getAgents()
+    public static ObservableList<ReflectionWrapper> getAgents()
     {
         return agents;
     }
 
-    public static List<ReflectionWrapper> getInteractionHandlers()
+    public static ObservableList<ReflectionWrapper> getInteractionHandlers()
     {
         return interactionHandlers;
     }
 
-    public static List<ReflectionWrapper> getCompletionConditions()
+    public static ObservableList<ReflectionWrapper> getCompletionConditions()
     {
         return completionConditions;
     }
