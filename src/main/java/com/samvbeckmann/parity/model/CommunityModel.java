@@ -1,5 +1,6 @@
 package com.samvbeckmann.parity.model;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -10,6 +11,11 @@ import javafx.collections.ObservableList;
 public class CommunityModel
 {
     ObservableList<AgentModel> agents;
+    
+    public CommunityModel()
+    {
+        this.agents = FXCollections.observableArrayList();
+    }
 
     public CommunityModel(ObservableList<AgentModel> agents)
     {

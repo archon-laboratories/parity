@@ -45,8 +45,12 @@ public class CommunityViewController
     public void setMainApp(MainApp mainApp)
     {
         this.mainApp = mainApp;
+        agentTable.setItems(mainApp.getActiveCommunity().getAgents());
+    }
 
-        agentTable.setItems(mainApp.getCommunityData());
+    public void updateCommunity()
+    {
+        agentTable.setItems(mainApp.getActiveCommunity().getAgents());
     }
 
     @FXML
@@ -77,7 +81,7 @@ public class CommunityViewController
         {
             for (AgentModel agent : newAgents)
             {
-                mainApp.getCommunityData().add(agent);
+                mainApp.getActiveCommunity().getAgents().add(agent);
             }
         }
     }

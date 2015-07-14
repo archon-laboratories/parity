@@ -1,19 +1,20 @@
 package com.samvbeckmann.parity;
 
 import com.samvbeckmann.parity.model.AgentModel;
+import com.samvbeckmann.parity.model.CommunityModel;
+import com.samvbeckmann.parity.model.CommunityNode;
 import com.samvbeckmann.parity.reference.Names;
 import com.samvbeckmann.parity.reference.Reference;
 import com.samvbeckmann.parity.view.AgentAddDialogController;
 import com.samvbeckmann.parity.view.CommunityViewController;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -35,8 +36,9 @@ public class MainApp extends Application
 {
     private Stage primaryStage;
     private BorderPane rootLayout;
+    private CommunityViewController communityController;
 
-    private ObservableList<AgentModel> communityData = FXCollections.observableArrayList();
+    private static CommunityModel activeCommunity = new CommunityModel();
 
     public MainApp()
     {
@@ -48,9 +50,9 @@ public class MainApp extends Application
         launch(args);
     }
 
-    public ObservableList<AgentModel> getCommunityData()
+    public CommunityModel getActiveCommunity()
     {
-        return communityData;
+        return activeCommunity;
     }
 
     @Override
@@ -103,6 +105,7 @@ public class MainApp extends Application
 
             CommunityViewController controller = loader.getController();
             controller.setMainApp(this);
+            this.communityController = controller;
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -177,7 +180,7 @@ public class MainApp extends Application
     {
         final double circleRadius = 20;
 
-        Circle circle = new Circle(x, y, circleRadius);
+        CommunityNode circle = new CommunityNode(x, y, circleRadius);
         circle.setFill(Color.DEEPSKYBLUE);
         Wrapper<Point2D> mouseLocation = new Wrapper<>();
 
@@ -209,6 +212,15 @@ public class MainApp extends Application
 
         circle.setOnContextMenuRequested(event ->
                 circle.setFill(Color.BLUE));
+
+        circle.setOnMouseClicked(event ->
+        {
+            if (event.getButton().equals(MouseButton.PRIMARY))
+            {
+                activeCommunity = circle.getCommunity();
+                communityController.updateCommunity();
+            }
+        });
 
         return circle;
     }
