@@ -27,9 +27,9 @@ public class CommunityNode extends Circle
         super(radius, fill);
     }
 
-    public CommunityNode()
-    {
-    }
+//    public CommunityNode()
+//    {
+//    }
 
     public CommunityNode(double centerX, double centerY, double radius)
     {

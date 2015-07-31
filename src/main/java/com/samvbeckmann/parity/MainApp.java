@@ -3,6 +3,7 @@ package com.samvbeckmann.parity;
 import com.samvbeckmann.parity.model.AgentModel;
 import com.samvbeckmann.parity.model.CommunityModel;
 import com.samvbeckmann.parity.model.CommunityNode;
+import com.samvbeckmann.parity.reference.Messages;
 import com.samvbeckmann.parity.reference.Names;
 import com.samvbeckmann.parity.reference.Reference;
 import com.samvbeckmann.parity.view.AgentAddDialogController;
@@ -12,8 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -64,6 +65,7 @@ public class MainApp extends Application
         this.primaryStage.setTitle(Reference.NAME);
         this.primaryStage.setMinWidth(600);
         this.primaryStage.setMinHeight(500);
+        this.primaryStage.getIcons().add(new Image("logo.png"));
 
         initRootLayout();
         showConfigurationSettings();
@@ -131,12 +133,25 @@ public class MainApp extends Application
 
             AnchorPane pane = new AnchorPane();
             configurationSettings.setCenter(pane);
-            pane.getChildren().add(createDraggableCircle(50, 50));
+//            Rectangle rectangle = new Rectangle();
+//            rectangle.setTranslateY(10);
+//            rectangle.setTranslateX(10);
+//            rectangle.setFill(new Color(1.0, 1.0, 1.0, 1.0));
+//            rectangle.setStroke(new Color(0.3, 0.3, 0.3, 1.0));
+//            rectangle.setArcHeight(10);
+//            rectangle.setArcWidth(10);
+//            rectangle.heightProperty().bind(pane.heightProperty().subtract(20));
+//            rectangle.widthProperty().bind(pane.widthProperty().subtract(20));
+//            pane.getChildren().add(rectangle);
+            Button newCommunity = new Button();
+            newCommunity.setText(Messages.UI.NEW_COMMUNITY);
+            newCommunity.setLayoutX(10);
+            newCommunity.setLayoutY(10);
+            pane.getChildren().add(newCommunity);
 
             SplitPane split = (SplitPane) rootLayout.getCenter();
             split.getItems().add(configurationSettings);
 
-            pane.getChildren().add(createDraggableCircle(pane.getWidth() / 2, pane.getHeight() / 2));
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -176,7 +191,7 @@ public class MainApp extends Application
         }
     }
 
-    private Circle createDraggableCircle(double x, double y)
+    private Circle createDraggableCircle(double x, double y) // TODO put someplace reasonable
     {
         final double circleRadius = 20;
 
@@ -204,8 +219,15 @@ public class MainApp extends Application
                 double deltaY = event.getSceneY() - mouseLocation.value.getY();
                 double newX = circle.getCenterX() + deltaX;
                 double newY = circle.getCenterY() + deltaY;
-                circle.setCenterX(newX);
-                circle.setCenterY(newY);
+
+                BorderPane mainScene = (BorderPane) this.primaryStage.getScene().getRoot();
+                SplitPane split = (SplitPane) mainScene.getCenter();
+                BorderPane settings = (BorderPane) split.getItems().get(0);
+
+                if (newX > 30 && newX < settings.getWidth() - 30)
+                    circle.setCenterX(newX);
+                if (newY > 30 && newY < settings.getHeight() - 185)
+                    circle.setCenterY(newY);
                 mouseLocation.value = new Point2D(event.getSceneX(), event.getSceneY());
             }
         });
