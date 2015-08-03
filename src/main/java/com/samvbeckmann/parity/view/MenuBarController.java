@@ -1,5 +1,6 @@
 package com.samvbeckmann.parity.view;
 
+import com.samvbeckmann.parity.MainApp;
 import javafx.fxml.FXML;
 
 /**
@@ -9,6 +10,9 @@ import javafx.fxml.FXML;
  */
 public class MenuBarController
 {
+    /* Reference to the main application */
+    private MainApp mainApp;
+
     public MenuBarController()
     {
 
@@ -25,6 +29,12 @@ public class MenuBarController
     {
         // call saveAsTemp
         System.out.println("Made it to handler!");
+        System.out.println(mainApp != null ? "Main app set" : "Error!");
         // run temp file.
+    }
+
+    public void setMainApp(MainApp mainApp)
+    {
+        this.mainApp = mainApp;
     }
 }

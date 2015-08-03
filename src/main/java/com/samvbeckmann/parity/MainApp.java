@@ -8,6 +8,7 @@ import com.samvbeckmann.parity.reference.Names;
 import com.samvbeckmann.parity.reference.Reference;
 import com.samvbeckmann.parity.view.AgentAddDialogController;
 import com.samvbeckmann.parity.view.CommunityViewController;
+import com.samvbeckmann.parity.view.MenuBarController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -39,8 +40,7 @@ public class MainApp extends Application
     private Stage primaryStage;
     private BorderPane rootLayout;
     private CommunityViewController communityController;
-
-    private static CommunityModel activeCommunity = new CommunityModel();
+    private CommunityModel activeCommunity = new CommunityModel();
 
     public MainApp()
     {
@@ -55,6 +55,12 @@ public class MainApp extends Application
     public CommunityModel getActiveCommunity()
     {
         return activeCommunity;
+    }
+
+    public void updateActiveCommunity(CommunityModel activeCommunity)
+    {
+        this.activeCommunity = activeCommunity;
+        communityController.updateCommunity();
     }
 
     @Override
@@ -84,6 +90,10 @@ public class MainApp extends Application
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource(Names.FXMLPaths.ROOT_LAYOUT));
             rootLayout = loader.load();
+
+            // Set up controller
+            MenuBarController controller = loader.getController();
+            controller.setMainApp(this);
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);

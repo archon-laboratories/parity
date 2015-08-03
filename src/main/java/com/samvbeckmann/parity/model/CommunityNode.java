@@ -1,8 +1,11 @@
 package com.samvbeckmann.parity.model;
 
+import com.samvbeckmann.parity.MainApp;
 import com.samvbeckmann.parity.ParityRegistry;
+import com.samvbeckmann.parity.view.CommunityNodeController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
@@ -16,9 +19,10 @@ public class CommunityNode extends Circle
 {
     private CommunityModel community = new CommunityModel();
 
-    public CommunityNode(CommunityModel community, double radius)
+    public CommunityNode(CommunityModel community, double radius, MainApp mainApp)
     {
         super(radius);
+        CommunityNodeController.configureHandlers(this, mainApp);
         this.community = community;
     }
 
@@ -33,15 +37,23 @@ public class CommunityNode extends Circle
 
     public CommunityNode(double centerX, double centerY, double radius)
     {
-        super(centerX, centerY, radius);
-        ObservableList<AgentModel> testAgents = FXCollections.observableArrayList();
-        testAgents.add(new AgentModel(ParityRegistry.getAgents().get(0), 0.5));
-        community = new CommunityModel(testAgents);
+        this(centerX, centerY, radius, new CommunityModel());
+//        testAgents.add(new AgentModel(ParityRegistry.getAgents().get(0), 0.5));
+//        community = new CommunityModel(testAgents);
+    }
+
+    public CommunityNode(double centerX, double centerY, double radius, CommunityModel community)
+    {
+        this(centerX, centerY, radius, Color.DEEPSKYBLUE, community);
     }
 
     public CommunityNode(double centerX, double centerY, double radius, Paint fill)
     {
-        super(centerX, centerY, radius, fill);
+        this(centerX, centerY, radius, fill, new CommunityModel());
+    }
+
+    public CommunityNode(double centerX, double centerY, double radius, Paint fill, CommunityModel community)
+    {
     }
 
     public CommunityModel getCommunity()
@@ -53,4 +65,7 @@ public class CommunityNode extends Circle
     {
         this.community = community;
     }
+
+
+
 }
