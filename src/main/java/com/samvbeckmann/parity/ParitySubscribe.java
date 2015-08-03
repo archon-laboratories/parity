@@ -14,11 +14,4 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ParitySubscribe
-{
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.METHOD)
-    @interface RegisterClasses
-    {
-        RegisterType value();
-    }
-}
+{}

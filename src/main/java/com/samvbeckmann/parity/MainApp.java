@@ -13,8 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -59,13 +60,13 @@ public class MainApp extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        ParityRegistry.initializeRegistry();
+        ParityRegistry.populateRegistry();
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle(Reference.NAME);
         this.primaryStage.setMinWidth(600);
         this.primaryStage.setMinHeight(500);
-        this.primaryStage.getIcons().add(new Image("logo.png"));
+        //this.primaryStage.getIcons().add(new Image("logo.png"));
 
         initRootLayout();
         showConfigurationSettings();
@@ -225,9 +226,13 @@ public class MainApp extends Application
                 BorderPane settings = (BorderPane) split.getItems().get(0);
 
                 if (newX > 30 && newX < settings.getWidth() - 30)
+                {
                     circle.setCenterX(newX);
+                }
                 if (newY > 30 && newY < settings.getHeight() - 185)
+                {
                     circle.setCenterY(newY);
+                }
                 mouseLocation.value = new Point2D(event.getSceneX(), event.getSceneY());
             }
         });
