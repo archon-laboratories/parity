@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
-            prefWidth="900.0" xmlns="http://javafx.com/javafx/8">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.samvbeckmann.parity.view.MenuBarController">
     <top>
         <ToolBar prefHeight="40.0" prefWidth="500.0" BorderPane.alignment="CENTER">
             <items>
-                <Button mnemonicParsing="false" text="New"/>
-                <Button mnemonicParsing="false" text="Copy"/>
-                <Button mnemonicParsing="false" text="Save"/>
-                <Button mnemonicParsing="false" text="Save As"/>
-                <Button mnemonicParsing="false" text="Load"/>
-                <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="15.0"/>
-                <Button mnemonicParsing="false" text="Info"/>
-                <Button mnemonicParsing="false" text="Settings"/>
-                <Button mnemonicParsing="false" text="Cat"/>
-                <Pane minWidth="-Infinity" prefHeight="30.0" prefWidth="0.0" HBox.hgrow="ALWAYS"/>
-                <Button mnemonicParsing="false" text="Run Queue"/>
-                <Button mnemonicParsing="false" text="Add to Queue"/>
-                <Button mnemonicParsing="false" text="Run Configuration"/>
+                <Button mnemonicParsing="false" text="New" />
+                <Button mnemonicParsing="false" text="Copy" />
+                <Button mnemonicParsing="false" text="Save" />
+                <Button mnemonicParsing="false" text="Save As" />
+                <Button mnemonicParsing="false" text="Load" />
+                <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="15.0" />
+                <Button mnemonicParsing="false" text="Info" />
+                <Button mnemonicParsing="false" text="Settings" />
+                <Button mnemonicParsing="false" text="Cat" />
+                <Pane minWidth="-Infinity" prefHeight="30.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                <Button mnemonicParsing="false" text="Run Queue" />
+                <Button mnemonicParsing="false" text="Add to Queue" />
+                <Button mnemonicParsing="false" onAction="#handleRunConfiguration" text="Run Configuration" />
             </items>
         </ToolBar>
     </top>
     <center>
-        <SplitPane prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="TOP_CENTER"/>
+        <SplitPane prefHeight="545.0" prefWidth="1020.0" BorderPane.alignment="TOP_CENTER" />
     </center>
 </BorderPane>
