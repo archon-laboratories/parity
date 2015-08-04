@@ -9,14 +9,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
 /**
- * parity, class made on 2015-07-31
+ * Configures the handlers for a {@link CommunityNode}
  *
- * @author Sam Beckmann
+ * @author Sam Beckmann & Nate Beckmeyer
  */
 public class CommunityNodeController
 {
-//    private CommunityNode
-
     public static void configureHandlers(CommunityNode community, MainApp mainApp)
     {
         community.setFill(Color.DEEPSKYBLUE);
