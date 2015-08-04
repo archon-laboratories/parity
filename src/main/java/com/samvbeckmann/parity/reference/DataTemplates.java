@@ -19,13 +19,14 @@ public class DataTemplates
      */
     public static final String populationTemplate =
             "{%n" +
-                    "\"population\": {%n" +
+                "\"population\": {%n" +
                     "\"numIterations\": %d,%n" +
                     "\"numberCommunities\": %d,%n" +
-                    "\"completionCondition\": %s,%n" +
-                    "\"interactionHandler\": %s,%n" +
+                    "\"completionCondition\": \"%s\",%n" +
+                    "\"interactionHandler\": \"%s\",%n" +
                     "\"opinionCount\": %d,%n" +
                     "\"communities\": [%n%s]" +
+                "}%n" +
             "}";
 
 
@@ -41,7 +42,7 @@ public class DataTemplates
             "{%n" +
                     "\"id\": %d,%n" +
                     "\"numNeighbours\": %d,%n" +
-                    "\"neighbours\": [%n%s]" +
+                    "\"neighbours\": [%n%s],%n" +
                     "\"agentCount\": %d,%n" +
                     "\"agents\": [%n%s]" +
             "}";
@@ -62,7 +63,7 @@ public class DataTemplates
      */
     public static final String agentTemplate =
             "{%n" +
-                    "\"sourceFile\": %s,%n" +
+                    "\"sourceFile\": \"%s\",%n" +
                     "\"xPos\": %d,%n" +
                     "\"yPos\": %d,%n" +
                     "\"opinions\": [%n%s]" +
@@ -73,4 +74,11 @@ public class DataTemplates
      * The ith opinion <br/>
      */
     public static final String opinionTemplate = "%f";
+
+    /**
+     * Order: <br/>
+     * Average Opinion <br/>
+     * Final Timestep
+     */
+    public static final String resultTemplate = "%f %d%n";
 }

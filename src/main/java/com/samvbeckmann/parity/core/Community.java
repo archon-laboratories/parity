@@ -56,7 +56,9 @@ public class Community
         for (Connection neighbour : neighbours)
         {
             if (neighbour.getNeighbourCommunity().equals(community))
+            {
                 return neighbour;
+            }
         }
 
         return null;
@@ -100,7 +102,10 @@ public class Community
         {
             availability.remove(index);
             return agents[index];
-        } else return null;
+        } else
+        {
+            return null;
+        }
     }
 
     /**
@@ -138,7 +143,9 @@ public class Community
     {
         double total = 0;
         for (AbstractAgent agent : agents)
+        {
             total += agent.getOpinion();
+        }
         return total / ((double) agents.length);
     }
 

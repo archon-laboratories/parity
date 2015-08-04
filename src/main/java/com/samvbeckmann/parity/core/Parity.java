@@ -48,6 +48,12 @@ public class Parity
 
             if (stage == null)
             {
+                for (int i = 0; i < averageOpinions.length; i++)
+                {
+                    averageOpinion += averageOpinions[i];
+                    averageTimestep += timesteps[i];
+                }
+
                 System.out.printf(
                         "Simulation complete! Statistics for %d trials:%nFinal opinion: %f%nTimestep: %f%nTime to " +
                                 "complete: %.5fs%n%n",

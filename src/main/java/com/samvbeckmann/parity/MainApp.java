@@ -273,20 +273,25 @@ public class MainApp extends Application
         return primaryStage;
     }
 
-    public Community[] getCommunities() {
-
+    //TODO implement these
+    public Community[] getCommunities()
+    {
+        return null;
     }
 
-    public ICompletionCondition getCompletionCondition() {
-
+    public ICompletionCondition getCompletionCondition()
+    {
+        return null;
     }
 
-    public IInteractionHandler getInteractionHandler() {
-
+    public IInteractionHandler getInteractionHandler()
+    {
+        return null;
     }
 
-    public int getNumIterations() {
-
+    public int getNumIterations()
+    {
+        return 0;
     }
 
     static class Wrapper<T>

@@ -31,14 +31,6 @@ public class DataSaver
             {
                 chooser.setInitialDirectory(toSave.getParentFile());
             }
-
-            if (toSave.createNewFile())
-            {
-                System.out.println("File " + toSave.getAbsolutePath() + " created successfully!");
-            } else
-            {
-                System.out.println("Did not create file " + toSave.getAbsolutePath());
-            }
         }
         return toSave;
     }
@@ -55,7 +47,7 @@ public class DataSaver
                 returnStr += ",";
             }
 
-            returnStr += "%n";
+            returnStr += String.format("%n");
         }
 
         return returnStr;
@@ -66,7 +58,7 @@ public class DataSaver
         String returnStr = "";
         for (int i = 0; i < agents.length; i++)
         {
-            returnStr += String.format(DataTemplates.agentTemplate, agents[i].getClass(),
+            returnStr += String.format(DataTemplates.agentTemplate, agents[i].getClass().getName(),
                     i, i, transcribeOpinions(agents[i]));
 
             if (i < agents.length - 1)
@@ -74,7 +66,7 @@ public class DataSaver
                 returnStr += ",";
             }
 
-            returnStr += "%n";
+            returnStr += String.format("%n");
         }
 
         return returnStr;
@@ -103,7 +95,7 @@ public class DataSaver
                 returnStr += ",";
             }
 
-            returnStr += "%n";
+            returnStr += String.format("%n");
         }
 
         return returnStr;
@@ -123,7 +115,7 @@ public class DataSaver
                 returnStr += ",";
             }
 
-            returnStr += "%n";
+            returnStr += String.format("%n");
         }
         return returnStr;
     }
@@ -132,28 +124,32 @@ public class DataSaver
     {
         FileWriter writer = new FileWriter(location);
         String fileContents = String.format(DataTemplates.populationTemplate, mainApp.getNumIterations(),
-                mainApp.getCommunities().length, mainApp.getCompletionCondition().getClass(),
-                mainApp.getInteractionHandler().getClass(), 1, transcribeCommunities(mainApp.getCommunities()));
+                mainApp.getCommunities().length, mainApp.getCompletionCondition().getClass().getName(),
+                mainApp.getInteractionHandler().getClass().getName(), 1,
+                transcribeCommunities(mainApp.getCommunities()));
         writer.write(fileContents);
+        writer.close();
     }
 
     /**
      * Saves the results of the run.
      *
-     * @return The success of the save
+     * @return The location of the file
      */
-    public static boolean saveResults(Stage stage)
+    public static File saveResults(Stage stage)
     {
+        File toSave;
         try
         {
-            File toSave = getFileLocation(stage);
+            toSave = getFileLocation(stage);
             FileWriter writer = new FileWriter(toSave);
 
             double[] opinions = Parity.getOpinions();
             int[] timesteps = Parity.getTimesteps();
+
             for (int i = 0; i < Parity.getNumberTrials(); i++)
             {
-                writer.write(opinions[i] + " " + timesteps[i] + "%n");
+                writer.write(String.format(DataTemplates.resultTemplate, opinions[i], timesteps[i]));
             }
 
             writer.close();
@@ -161,40 +157,42 @@ public class DataSaver
         } catch (IOException e)
         {
             e.printStackTrace();
-            return false;
+            return null;
         }
 
-        return true;
+        return toSave;
     }
 
     /**
      * Saves the information from the GUI. A "save as" function.
      *
-     * @return The success of the save
+     * @return The new file; null if failure.
      */
-    public static boolean saveAsDataset(MainApp mainApp)
+    public static File saveAsDataset(MainApp mainApp)
     {
+        File toSave;
         Stage stage = mainApp.getPrimaryStage();
         try
         {
-            File toSave = getFileLocation(stage);
+            toSave = getFileLocation(stage);
             saveConfigData(mainApp, toSave);
         } catch (IOException e)
         {
             e.printStackTrace();
-            return false;
+            return null;
         }
-        return true;
+        return toSave;
     }
 
     /**
      * Saves the configuration into a temp file so that it can be run.
      *
-     * @param mainApp
-     * @return The success of the save.
+     * @param mainApp The main class of the program
+     * @return The temp file; null if failure.
      */
-    public static boolean saveAsTemp(MainApp mainApp)
+    public static File saveAsTemp(MainApp mainApp)
     {
+        File temp;
         try
         {
             // Empty and create the directory
@@ -203,29 +201,33 @@ public class DataSaver
             {
                 if (tempDir.exists())
                 {
-                    tempDir.delete();
+                    for (File cur : tempDir.listFiles())
+                    {
+                        cur.delete();
+                    }
+                } else
+                {
+                    tempDir.mkdir();
                 }
-                tempDir.mkdir();
-                tempDir.deleteOnExit();
                 tempCreatedThisRun = true;
             }
 
             // Create a new temp file
             int count = 0;
-            File temp;
             do
             {
-                temp = new File("temp_" + count);
+                temp = new File("temp/temp_" + count + ".json");
                 count++;
             } while (temp.exists());
 
-            temp.createNewFile();
+            if (!temp.createNewFile())
+                return null;
             saveConfigData(mainApp, temp);
         } catch (IOException e)
         {
             e.printStackTrace();
-            return false;
+            return null;
         }
-        return true;
+        return temp;
     }
 }
