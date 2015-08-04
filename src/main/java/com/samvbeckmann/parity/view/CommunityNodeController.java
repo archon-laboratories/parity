@@ -45,8 +45,9 @@ public class CommunityNodeController
 
                 if (newX > 30 && newX < pane.getWidth() - 30)
                     community.setCenterX(newX);
-                if (newY > 30 && newY < pane.getHeight() - 30)
+                if (newY > 80 && newY < pane.getHeight() - 30)
                     community.setCenterY(newY);
+
                 mouseLocation.value = new Point2D(event.getSceneX(), event.getSceneY());
             }
         });

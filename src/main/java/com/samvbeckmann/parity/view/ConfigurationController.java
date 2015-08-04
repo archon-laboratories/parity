@@ -38,7 +38,8 @@ public class ConfigurationController
     @FXML
     public void handleRemoveCommunity()
     {
-        // NOOP
+        CommunityNode activeNode = mainApp.getActiveCommunity().getNode();
+        populationPane.getChildren().remove(activeNode);
     }
 
 

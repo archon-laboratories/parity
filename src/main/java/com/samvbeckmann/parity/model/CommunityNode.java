@@ -12,7 +12,7 @@ import javafx.scene.shape.Circle;
  */
 public class CommunityNode extends Circle
 {
-    private CommunityModel community = new CommunityModel();
+    private CommunityModel community;
 
     public CommunityNode(double centerX, double centerY, double radius, Paint fill, MainApp mainApp)
     {
@@ -27,6 +27,7 @@ public class CommunityNode extends Circle
                          MainApp mainApp)
     {
         super(centerX, centerY, radius, fill);
+        community.setNode(this);
         CommunityNodeController.configureHandlers(this, mainApp);
         this.community = community;
     }

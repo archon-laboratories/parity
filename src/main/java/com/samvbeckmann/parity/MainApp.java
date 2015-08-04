@@ -142,7 +142,6 @@ public class MainApp extends Application
             interactionHandlers.setItems(ParityRegistry.getInteractionHandlers());
             completionConditions.setItems(ParityRegistry.getCompletionConditions());
 
-            AnchorPane pane = (AnchorPane) configurationSettings.getCenter();
 //            Rectangle rectangle = new Rectangle(); // TODO: Make rectangle purely visible, not affecting logic
 //            rectangle.setTranslateY(10);
 //            rectangle.setTranslateX(10);
@@ -153,6 +152,8 @@ public class MainApp extends Application
 //            rectangle.heightProperty().bind(pane.heightProperty().subtract(20));
 //            rectangle.widthProperty().bind(pane.widthProperty().subtract(20));
 //            pane.getChildren().add(rectangle);
+
+            AnchorPane pane = (AnchorPane) configurationSettings.getCenter();
 
             ConfigurationController controller = loader.getController();
             controller.setMainAppAndPane(this, pane);

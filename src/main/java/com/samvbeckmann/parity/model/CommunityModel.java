@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 public class CommunityModel
 {
     ObservableList<AgentModel> agents;
+    CommunityNode node;
     
     public CommunityModel()
     {
@@ -30,5 +31,15 @@ public class CommunityModel
     public void setAgents(ObservableList<AgentModel> agents)
     {
         this.agents = agents;
+    }
+
+    public CommunityNode getNode()
+    {
+        return node;
+    }
+
+    public void setNode(CommunityNode node)
+    {
+        this.node = node;
     }
 }
