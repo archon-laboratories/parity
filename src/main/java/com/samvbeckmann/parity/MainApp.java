@@ -59,6 +59,8 @@ public class MainApp extends Application
 
     public void updateActiveCommunity(CommunityModel activeCommunity)
     {
+        CommunityNode oldNode = this.activeCommunity.getNode();
+        if (oldNode != null) oldNode.setFill(Color.DEEPSKYBLUE);
         this.activeCommunity = activeCommunity;
         communityController.updateCommunity();
     }

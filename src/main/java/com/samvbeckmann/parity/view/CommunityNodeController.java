@@ -60,6 +60,7 @@ public class CommunityNodeController
             if (event.getButton().equals(MouseButton.PRIMARY))
             {
                 mainApp.updateActiveCommunity(community.getCommunity());
+                community.setFill(Color.MEDIUMSEAGREEN);
             }
         });
     }
