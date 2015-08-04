@@ -1,6 +1,7 @@
 package com.samvbeckmann.parity.view;
 
 import com.samvbeckmann.parity.MainApp;
+import com.samvbeckmann.parity.core.DataSaver;
 import javafx.fxml.FXML;
 
 /**
@@ -10,7 +11,6 @@ import javafx.fxml.FXML;
  */
 public class MenuBarController
 {
-    /* Reference to the main application */
     private MainApp mainApp;
 
     public MenuBarController()
@@ -27,10 +27,9 @@ public class MenuBarController
     @FXML
     public void handleRunConfiguration()
     {
-        // call saveAsTemp
         System.out.println("Made it to handler!");
         System.out.println(mainApp != null ? "Main app set" : "Error!");
-        // run temp file.
+        //DataSaver.saveAsTemp(mainApp);
     }
 
     public void setMainApp(MainApp mainApp)

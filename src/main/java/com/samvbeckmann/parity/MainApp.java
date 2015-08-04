@@ -1,5 +1,8 @@
 package com.samvbeckmann.parity;
 
+import com.samvbeckmann.parity.core.Community;
+import com.samvbeckmann.parity.core.ICompletionCondition;
+import com.samvbeckmann.parity.core.IInteractionHandler;
 import com.samvbeckmann.parity.model.AgentModel;
 import com.samvbeckmann.parity.model.CommunityModel;
 import com.samvbeckmann.parity.model.CommunityNode;
@@ -268,6 +271,22 @@ public class MainApp extends Application
     public Stage getPrimaryStage()
     {
         return primaryStage;
+    }
+
+    public Community[] getCommunities() {
+
+    }
+
+    public ICompletionCondition getCompletionCondition() {
+
+    }
+
+    public IInteractionHandler getInteractionHandler() {
+
+    }
+
+    public int getNumIterations() {
+
     }
 
     static class Wrapper<T>
