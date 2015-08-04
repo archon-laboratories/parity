@@ -41,6 +41,9 @@ public final class Messages
         public static final String REGISTER_COMPLETION_CLASS_ERROR =
                 "Class %s not added. Note, this class should extend ICompletionCondition.\n";
         public static final String REGISTER_COMPLETION_ERROR = "Error in completion condition register %s : %s\n";
+
+        public static final String REGISTER_CLASS_DOES_NOT_EXTEND = "Class %s does not extend Basic Agent, does "
+                + "not implement IInteractionHandler nor ICompletionCondition.%n";
     }
 
 }

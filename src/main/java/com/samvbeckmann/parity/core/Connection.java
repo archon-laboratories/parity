@@ -13,6 +13,7 @@ public class Connection
      * If accessed directly through a community (community.getNeighbours()), thisCommunity is the community that
      * references the connection
      * For example, if B is a neighbour of A, then A is thisCommunity in A's neighbour list.
+     * As a corollary, B is thisCommunity in B's neighbourlist.
      */
     private Community thisCommunity;
 

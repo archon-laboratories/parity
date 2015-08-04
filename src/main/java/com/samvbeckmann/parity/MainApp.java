@@ -1,5 +1,8 @@
 package com.samvbeckmann.parity;
 
+import com.samvbeckmann.parity.core.Community;
+import com.samvbeckmann.parity.core.ICompletionCondition;
+import com.samvbeckmann.parity.core.IInteractionHandler;
 import com.samvbeckmann.parity.model.AgentModel;
 import com.samvbeckmann.parity.model.CommunityModel;
 import com.samvbeckmann.parity.model.CommunityNode;
@@ -15,8 +18,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -68,13 +72,13 @@ public class MainApp extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        ParityRegistry.initializeRegistry();
+        ParityRegistry.populateRegistry();
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle(Reference.NAME);
         this.primaryStage.setMinWidth(600);
         this.primaryStage.setMinHeight(500);
-        this.primaryStage.getIcons().add(new Image("logo.png"));
+        //this.primaryStage.getIcons().add(new Image("logo.png"));
 
         initRootLayout();
         showConfigurationSettings();

@@ -1,13 +1,11 @@
 package com.samvbeckmann.parity.core;
 
-import com.samvbeckmann.parity.demoProgram.DemoInteractionHandler;
-
 import java.util.Map;
 
 /**
  * Defines which agents interact with each other on a given timestep,
  * and gives feedback to the agents based on their responses.
- * A sample implementation can be found at {@link DemoInteractionHandler}
+ * A sample implementation can be found in our extension.
  *
  * @author Nate Beckemeyer & Sam Beckmann
  */

@@ -10,18 +10,9 @@
         "id": 0,
         "numNeighbours": 3,
         "neighbours": [
-          [
-            2,
-            1
-          ],
-          [
-            2,
-            2
-          ],
-          [
-            2,
-            3
-          ]
+          [2, 1],
+          [2, 2],
+          [2, 3]
         ],
         "agentCount": 4,
         "agents": [
