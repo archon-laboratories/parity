@@ -2,18 +2,11 @@ package com.samvbeckmann.parity.view;
 
 import com.samvbeckmann.parity.MainApp;
 import com.samvbeckmann.parity.model.CommunityNode;
-import com.samvbeckmann.parity.model.ConnectionModel;
-import com.samvbeckmann.parity.reference.Names;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * Configures the handlers for a {@link CommunityNode}

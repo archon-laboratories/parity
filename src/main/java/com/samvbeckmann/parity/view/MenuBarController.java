@@ -28,6 +28,54 @@ public class MenuBarController
     }
 
     @FXML
+    public void handleNew()
+    {
+        // NOOP
+    }
+
+    @FXML
+    public void handleSave()
+    {
+        // NOOP
+    }
+
+    @FXML
+    public void handleSaveAs()
+    {
+        // NOOP
+    }
+
+    @FXML
+    public void handleLoad()
+    {
+        // NOOP
+    }
+
+    @FXML
+    public void handleInfo()
+    {
+        // NOOP
+    }
+
+    @FXML
+    public void handleSettings()
+    {
+        // NOOP
+    }
+
+    @FXML
+    public void handleRunQueue()
+    {
+        // NOOP
+    }
+
+    @FXML
+    public void handleAddQueue()
+    {
+        // NOOP
+    }
+
+    @FXML
     public void handleRunConfiguration()
     {
         File tempFile = DataSaver.saveAsTemp(mainApp);
@@ -36,6 +84,8 @@ public class MenuBarController
             Parity.main(new String[]{tempFile.getAbsolutePath()}, mainApp.getPrimaryStage());
         }
     }
+
+
 
     public void setMainApp(MainApp mainApp)
     {

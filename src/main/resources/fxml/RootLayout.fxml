@@ -8,18 +8,16 @@
     <top>
         <ToolBar prefHeight="40.0" prefWidth="500.0" BorderPane.alignment="CENTER">
             <items>
-                <Button mnemonicParsing="false" text="New" />
-                <Button mnemonicParsing="false" text="Copy" />
-                <Button mnemonicParsing="false" text="Save" />
-                <Button mnemonicParsing="false" text="Save As" />
-                <Button mnemonicParsing="false" text="Load" />
+                <Button mnemonicParsing="false" onAction="#handleNew" text="New" />
+                <Button mnemonicParsing="false" onAction="#handleSave" text="Save" />
+                <Button mnemonicParsing="false" onAction="#handleSaveAs" text="Save As" />
+                <Button mnemonicParsing="false" onAction="#handleLoad" text="Load" />
                 <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="15.0" />
-                <Button mnemonicParsing="false" text="Info" />
-                <Button mnemonicParsing="false" text="Settings" />
-                <Button mnemonicParsing="false" text="Cat" />
+                <Button mnemonicParsing="false" onAction="#handleInfo" text="Info" />
+                <Button mnemonicParsing="false" onAction="#handleSettings" text="Settings" />
                 <Pane minWidth="-Infinity" prefHeight="30.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
-                <Button mnemonicParsing="false" text="Run Queue" />
-                <Button mnemonicParsing="false" text="Add to Queue" />
+                <Button mnemonicParsing="false" onAction="#handleRunQueue" text="Run Queue" />
+                <Button mnemonicParsing="false" onAction="#handleAddQueue" text="Add to Queue" />
                 <Button mnemonicParsing="false" onAction="#handleRunConfiguration" text="Run Configuration" />
             </items>
         </ToolBar>
