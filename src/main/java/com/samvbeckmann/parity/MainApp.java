@@ -227,6 +227,7 @@ public class MainApp extends Application
 
     }
 
+    // TODO: Implement these
     public Community[] getCommunities()
     {
         return null;

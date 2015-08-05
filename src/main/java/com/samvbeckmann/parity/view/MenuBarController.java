@@ -2,7 +2,10 @@ package com.samvbeckmann.parity.view;
 
 import com.samvbeckmann.parity.MainApp;
 import com.samvbeckmann.parity.core.DataSaver;
+import com.samvbeckmann.parity.core.Parity;
 import javafx.fxml.FXML;
+
+import java.io.File;
 
 /**
  * parity, class made on 2015-07-31
@@ -27,9 +30,11 @@ public class MenuBarController
     @FXML
     public void handleRunConfiguration()
     {
-        System.out.println("Made it to handler!");
-        System.out.println(mainApp != null ? "Main app set" : "Error!");
-        //DataSaver.saveAsTemp(mainApp);
+        File tempFile = DataSaver.saveAsTemp(mainApp);
+        if (tempFile != null)
+        {
+            Parity.main(new String[]{tempFile.getAbsolutePath()}, mainApp.getPrimaryStage());
+        }
     }
 
     public void setMainApp(MainApp mainApp)
