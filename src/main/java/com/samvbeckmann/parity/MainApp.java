@@ -6,28 +6,20 @@ import com.samvbeckmann.parity.core.IInteractionHandler;
 import com.samvbeckmann.parity.model.AgentModel;
 import com.samvbeckmann.parity.model.CommunityModel;
 import com.samvbeckmann.parity.model.CommunityNode;
-import com.samvbeckmann.parity.reference.Messages;
 import com.samvbeckmann.parity.reference.Names;
 import com.samvbeckmann.parity.reference.Reference;
-import com.samvbeckmann.parity.view.AgentAddDialogController;
-import com.samvbeckmann.parity.view.CommunityViewController;
-import com.samvbeckmann.parity.view.ConfigurationController;
-import com.samvbeckmann.parity.view.MenuBarController;
+import com.samvbeckmann.parity.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
-import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
-import javafx.scene.input.MouseButton;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -78,7 +70,7 @@ public class MainApp extends Application
         this.primaryStage.setTitle(Reference.NAME);
         this.primaryStage.setMinWidth(600);
         this.primaryStage.setMinHeight(500);
-        //this.primaryStage.getIcons().add(new Image("logo.png"));
+        this.primaryStage.getIcons().add(new Image("logo.png")); // TODO import image
 
         initRootLayout();
         showConfigurationSettings();
@@ -204,6 +196,55 @@ public class MainApp extends Application
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void showConnectionAddDialogue(CommunityModel activeCommunity, CommunityModel passiveCommunity)
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource(Names.FXMLPaths.CONNECTION_ADD_DIALOGUE));
+            AnchorPane page = loader.load();
+
+            Stage dialogueStage = new Stage();
+            dialogueStage.setTitle("Add/Edit Connection");
+            dialogueStage.initModality(Modality.WINDOW_MODAL);
+            dialogueStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogueStage.setScene(scene);
+
+            ConnectionAddDialogueController controller = loader.getController();
+            controller.setDialogueStage(dialogueStage);
+            controller.setConnections(activeCommunity, passiveCommunity);
+
+            dialogueStage.showAndWait();
+
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Community[] getCommunities()
+    {
+        return null;
+    }
+
+    public ICompletionCondition getCompletionCondition()
+    {
+        return null;
+    }
+
+    public IInteractionHandler getInteractionHandler()
+    {
+        return null;
+    }
+
+    public int getNumIterations()
+    {
+        return 0;
     }
 
     /**

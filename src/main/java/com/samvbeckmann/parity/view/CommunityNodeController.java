@@ -2,11 +2,18 @@ package com.samvbeckmann.parity.view;
 
 import com.samvbeckmann.parity.MainApp;
 import com.samvbeckmann.parity.model.CommunityNode;
+import com.samvbeckmann.parity.model.ConnectionModel;
+import com.samvbeckmann.parity.reference.Names;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Configures the handlers for a {@link CommunityNode}
@@ -15,7 +22,7 @@ import javafx.scene.paint.Color;
  */
 public class CommunityNodeController
 {
-    public static void configureHandlers(CommunityNode community, MainApp mainApp)
+    public void configureHandlers(CommunityNode community, MainApp mainApp)
     {
         community.setFill(Color.DEEPSKYBLUE);
         Wrapper<Point2D> mouseLocation = new Wrapper<>();
@@ -53,7 +60,13 @@ public class CommunityNodeController
         });
 
         community.setOnContextMenuRequested(event ->
-                community.setFill(Color.BLUE));
+        {
+            CommunityNode activeCommunity = mainApp.getActiveCommunity().getNode();
+            if (!activeCommunity.equals(community))
+            {
+                mainApp.showConnectionAddDialogue(activeCommunity.getCommunity(), community.getCommunity());
+            }
+        });
 
         community.setOnMouseClicked(event ->
         {

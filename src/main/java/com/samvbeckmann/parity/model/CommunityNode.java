@@ -28,7 +28,7 @@ public class CommunityNode extends Circle
     {
         super(centerX, centerY, radius, fill);
         community.setNode(this);
-        CommunityNodeController.configureHandlers(this, mainApp);
+        new CommunityNodeController().configureHandlers(this, mainApp);
         this.community = community;
     }
 
