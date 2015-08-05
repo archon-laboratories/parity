@@ -8,9 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * parity, class made on 2015-08-04
+ * Controller class for the dialogue box to add/edit connections.
  *
- * @author Sam Beckmann
+ * @author Sam Beckmann & Nate Beckemeyer
  */
 public class ConnectionAddDialogueController
 {
@@ -19,8 +19,6 @@ public class ConnectionAddDialogueController
 
     private CommunityModel activeCommunity;
     private CommunityModel passiveCommunity;
-    //    private ConnectionModel activeConnection;
-//    private ConnectionModel passiveConnection;
     private boolean isEditing;
     private Stage dialogueStage;
 
@@ -44,8 +42,6 @@ public class ConnectionAddDialogueController
         isEditing = connection != null;
         if (isEditing)
         {
-//            this.activeConnection = connection;
-//            this.passiveConnection = this.passiveCommunity.getConnectionTo(activeCommunity);
             this.numConnectionsField.setText(Integer.toString(connection.getNumConnections()));
         }
     }
@@ -90,7 +86,7 @@ public class ConnectionAddDialogueController
             if (value < 0) throw new NumberFormatException();
         } catch (NumberFormatException e)
         {
-            errorMessage += "Not a valid number of connections";
+            errorMessage += "Not a valid number of connections"; // TODO: Move to messages
         }
         if (errorMessage.length() == 0)
         {

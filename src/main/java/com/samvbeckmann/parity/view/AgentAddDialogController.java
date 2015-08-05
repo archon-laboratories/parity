@@ -10,9 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * Dialog to add new Agents to the community.
+ * Controller class for the dialog box
+ * to add new Agents to the community.
  *
- * @author Sam Beckmann
+ * @author Sam Beckmann & Nate Beckemeyer
  */
 public class AgentAddDialogController
 {
