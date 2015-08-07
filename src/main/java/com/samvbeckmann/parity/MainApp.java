@@ -1,8 +1,6 @@
 package com.samvbeckmann.parity;
 
 import com.samvbeckmann.parity.core.Community;
-import com.samvbeckmann.parity.core.ICompletionCondition;
-import com.samvbeckmann.parity.core.IInteractionHandler;
 import com.samvbeckmann.parity.model.AgentModel;
 import com.samvbeckmann.parity.model.CommunityModel;
 import com.samvbeckmann.parity.model.CommunityNode;
@@ -12,13 +10,10 @@ import com.samvbeckmann.parity.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,6 +32,7 @@ public class MainApp extends Application
     private BorderPane rootLayout;
     private CommunityViewController communityController;
     private CommunityModel activeCommunity = new CommunityModel();
+    private ConfigurationController configurationController;
 
     public MainApp()
     {
@@ -70,7 +66,7 @@ public class MainApp extends Application
         this.primaryStage.setTitle(Reference.NAME);
         this.primaryStage.setMinWidth(600);
         this.primaryStage.setMinHeight(500);
-        this.primaryStage.getIcons().add(new Image("logo.png")); // TODO import image
+        this.primaryStage.getIcons().add(new Image("logo.png"));
 
         initRootLayout();
         showConfigurationSettings();
@@ -132,14 +128,6 @@ public class MainApp extends Application
             loader.setLocation(MainApp.class.getResource(Names.FXMLPaths.CONFIGURATION_VIEW));
             BorderPane configurationSettings = loader.load();
 
-            GridPane grid = (GridPane) ((VBox) configurationSettings.getTop()).getChildren().get(2);
-
-            ComboBox<ReflectionWrapper> interactionHandlers = (ComboBox<ReflectionWrapper>) grid.getChildren().get(1);
-            ComboBox<ReflectionWrapper> completionConditions = (ComboBox<ReflectionWrapper>) grid.getChildren().get(3);
-
-            interactionHandlers.setItems(ParityRegistry.getInteractionHandlers());
-            completionConditions.setItems(ParityRegistry.getCompletionConditions());
-
 //            Rectangle rectangle = new Rectangle(); // TODO: Make rectangle purely visible, not affecting logic
 //            rectangle.setTranslateY(10);
 //            rectangle.setTranslateX(10);
@@ -154,7 +142,10 @@ public class MainApp extends Application
             AnchorPane pane = (AnchorPane) configurationSettings.getCenter();
 
             ConfigurationController controller = loader.getController();
+            controller.populateComboBoxes();
             controller.setMainAppAndPane(this, pane);
+
+            this.configurationController = controller;
 
             SplitPane split = (SplitPane) rootLayout.getCenter();
             split.getItems().add(configurationSettings);
@@ -227,25 +218,28 @@ public class MainApp extends Application
 
     }
 
-    // TODO: Implement these
+    // TODO: Implement this
     public Community[] getCommunities()
     {
         return null;
     }
 
-    public ICompletionCondition getCompletionCondition()
+    public String getCompletionCondition()
     {
-        return null;
+        return configurationController.getActiveCompletionCondition();
     }
 
-    public IInteractionHandler getInteractionHandler()
+    public String getInteractionHandler()
     {
-        return null;
+        return configurationController.getActiveInteractionHandler();
     }
 
+    /**
+     * @return -1 if invalid entry, else number of trials.
+     */
     public int getNumIterations()
     {
-        return 0;
+        return configurationController.getNumIterations();
     }
 
     /**

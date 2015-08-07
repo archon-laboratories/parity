@@ -46,7 +46,7 @@ public class MenuBarController
     }
 
     @FXML
-    public void handleLoad()
+    public void handleOpen()
     {
         // NOOP
     }

@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1089.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.samvbeckmann.parity.view.MenuBarController">
     <top>
         <ToolBar prefHeight="40.0" prefWidth="500.0" BorderPane.alignment="CENTER">
             <items>
                 <Button mnemonicParsing="false" onAction="#handleNew" text="New" />
+                <Button mnemonicParsing="false" onAction="#handleOpen" text="Open" />
                 <Button mnemonicParsing="false" onAction="#handleSave" text="Save" />
                 <Button mnemonicParsing="false" onAction="#handleSaveAs" text="Save As" />
-                <Button mnemonicParsing="false" onAction="#handleLoad" text="Load" />
                 <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="15.0" />
                 <Button mnemonicParsing="false" onAction="#handleInfo" text="Info" />
                 <Button mnemonicParsing="false" onAction="#handleSettings" text="Settings" />

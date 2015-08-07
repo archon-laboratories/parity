@@ -3,6 +3,8 @@ package com.samvbeckmann.parity.view;
 import com.samvbeckmann.parity.ParityRegistry;
 import com.samvbeckmann.parity.ReflectionWrapper;
 import com.samvbeckmann.parity.model.AgentModel;
+import com.samvbeckmann.parity.reference.Messages;
+import com.samvbeckmann.parity.reference.Names;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -43,8 +45,8 @@ public class AgentAddDialogController
     public void setList(java.util.List<AgentModel> agents)
     {
         this.agents = agents;
-        opinionField.setText("");
-        numberAddField.setText("");
+        opinionField.setText(Names.EMPTY_STRING);
+        numberAddField.setText(Names.EMPTY_STRING);
         comboBox.setItems(ParityRegistry.getAgents());
     }
 
@@ -76,16 +78,16 @@ public class AgentAddDialogController
 
     private boolean isInputValid()
     {
-        String errorMessage = "";
+        String errorMessage = Names.EMPTY_STRING;
         if (comboBox.getValue() == null)
-            errorMessage += "Not a valid agent.\n";
+            errorMessage += Messages.Errors.INVALID_AGENT;
         try
         {
             double value = Double.parseDouble(opinionField.getText());
             if (value < 0 || value > 1) throw new NumberFormatException();
         } catch (NumberFormatException e)
         {
-            errorMessage += "Not a valid opinion.\n";
+            errorMessage += Messages.Errors.INVALID_OPINION;
         }
         try
         {
@@ -93,7 +95,7 @@ public class AgentAddDialogController
             if (number <= 0) throw new NumberFormatException();
         } catch (NumberFormatException e)
         {
-            errorMessage += "Not a valid number of agents to add.\n";
+            errorMessage += Messages.Errors.INVALID_NUM_AGENTS;
         }
         if (errorMessage.length() == 0)
         {
@@ -102,8 +104,8 @@ public class AgentAddDialogController
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please Correct Invalid Fields");
+            alert.setTitle(Messages.Errors.INVALID_FIELDS);
+            alert.setHeaderText(Messages.Errors.INVALID_FIELDS_HEADER);
             alert.setContentText(errorMessage);
 
             alert.showAndWait();

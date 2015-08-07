@@ -22,7 +22,6 @@ public class ReflectionWrapper
         return classpath;
     }
 
-    @SuppressWarnings("unused")
     public void setClasspath(String classpath)
     {
         this.classpath = classpath;

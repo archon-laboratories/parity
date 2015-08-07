@@ -8,6 +8,6 @@ package com.samvbeckmann.parity.reference;
 public final class Reference
 {
     public static final String NAME = "Parity";
-    public static final String VERSION = "0.1";
+    public static final String VERSION = "0.0.0";
     public static final String AUTHORS = "Sam Beckmann and Nate Beckemeyer";
 }

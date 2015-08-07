@@ -7,6 +7,8 @@ package com.samvbeckmann.parity.reference;
  */
 public final class Names
 {
+    public static final String EMPTY_STRING = "";
+
     public final class FXMLPaths
     {
         private static final String PACKAGE_PREFIX = "/fxml/";

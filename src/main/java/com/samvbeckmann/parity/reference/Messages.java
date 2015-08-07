@@ -16,34 +16,23 @@ public final class Messages
         public static final String DELETE_CONFIRM_MESSAGE = "Do you want to delete this agent?";
     }
 
-    public final class UI
-    {
-        public static final String NEW_COMMUNITY = "New Community";
-    }
-
     /**
      * Messages printed to console when parity encounters an error.
      * Not intended to be seen in daily operation.
      */
     public final class Errors
     {
-        public static final String REGISTER_METHOD_ERROR =
-                "Method %s in class %s not added. Note, this method should return a List<Class>\n";
-
-        public static final String REGISTER_AGENT_CLASS_ERROR =
-                "Class %s not added. Note, this class should extend AbstractAgent.\n";
-        public static final String REGISTER_AGENT_ERROR = "Error in agent register %s : %s\n";
-
-        public static final String REGISTER_HANDLER_CLASS_ERROR =
-                "Class %s not added. Note, this class should extend IInteractionHandler.\n";
-        public static final String REGISTER_HANDLER_ERROR = "Error in interaction handler register %s : %s\n";
-
-        public static final String REGISTER_COMPLETION_CLASS_ERROR =
-                "Class %s not added. Note, this class should extend ICompletionCondition.\n";
-        public static final String REGISTER_COMPLETION_ERROR = "Error in completion condition register %s : %s\n";
-
-        public static final String REGISTER_CLASS_DOES_NOT_EXTEND = "Class %s does not extend Basic Agent, does "
+        /* Reflection */
+        public static final String REGISTER_CLASS_DOES_NOT_EXTEND = "Class %s does not extend Abstract Agent, does "
                 + "not implement IInteractionHandler nor ICompletionCondition.%n";
+
+        /* Invalid Fields */
+        public static final String INVALID_FIELDS = "Invalid Fields";
+        public static final String INVALID_FIELDS_HEADER = "Please Correct Invalid Fields";
+        public static final String INVALID_NUM_TRIALS = "Not a valid number of trials";
+        public static final String INVALID_AGENT = "Not a valid agent.%n";
+        public static final String INVALID_OPINION = "That's not an opinion for you to have.%n";
+        public static final String INVALID_NUM_AGENTS = "Not a valid number of agents to add.%n";
     }
 
 }
