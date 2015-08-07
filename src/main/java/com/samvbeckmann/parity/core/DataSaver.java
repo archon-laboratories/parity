@@ -6,6 +6,7 @@ import com.samvbeckmann.parity.reference.DataTemplates;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -120,12 +121,12 @@ public class DataSaver
         return returnStr;
     }
 
-    private static void saveConfigData(MainApp mainApp, File location) throws IOException
+    private static void saveConfigData(MainApp mainApp, File saveFile) throws IOException
     {
-        FileWriter writer = new FileWriter(location);
+        FileWriter writer = new FileWriter(saveFile);
         String fileContents = String.format(DataTemplates.populationTemplate, mainApp.getNumIterations(),
-                mainApp.getCommunities().length, mainApp.getCompletionCondition().getClass().getName(),
-                mainApp.getInteractionHandler().getClass().getName(), 1,
+                mainApp.getCommunities().length, mainApp.getCompletionCondition(),
+                mainApp.getInteractionHandler(), 1,
                 transcribeCommunities(mainApp.getCommunities()));
         writer.write(fileContents);
         writer.close();
@@ -185,6 +186,30 @@ public class DataSaver
     }
 
     /**
+     * Saves the information from the GUI. A "save as" function.
+     *
+     * @return The new file; null if failure.
+     */
+    public static File saveAsDataset(MainApp mainApp, File toSave)
+    {
+        try
+        {
+            if (toSave == null)
+            {
+                saveAsDataset(mainApp);
+            } else
+            {
+                saveConfigData(mainApp, toSave);
+            }
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        return toSave;
+    }
+
+    /**
      * Saves the configuration into a temp file so that it can be run.
      *
      * @param mainApp The main class of the program
@@ -221,7 +246,9 @@ public class DataSaver
             } while (temp.exists());
 
             if (!temp.createNewFile())
+            {
                 return null;
+            }
             saveConfigData(mainApp, temp);
         } catch (IOException e)
         {

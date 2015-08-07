@@ -221,7 +221,7 @@ public class MainApp extends Application
     // TODO: Implement this
     public Community[] getCommunities()
     {
-        return null;
+        return new Community [] {new Community()};
     }
 
     public String getCompletionCondition()

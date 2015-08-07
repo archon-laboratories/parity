@@ -2,6 +2,7 @@ package com.samvbeckmann.parity.core;
 
 import com.samvbeckmann.parity.utilities.IndexHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -160,5 +161,14 @@ public class Community
             opinions[i] = agents[i].getOpinion();
         }
         return opinions;
+    }
+
+    /**
+     * Make sure that things are instantiated, even if they do not do anything/exist.
+     */
+    public Community() {
+        neighbours = new Connection[0];
+        agents = new AbstractAgent[0];
+        availability = new ArrayList<>();
     }
 }
